@@ -113,7 +113,7 @@ class _QuestionState extends State<Question> {
                       }
                       if (selectedGender == "Female") {
                         Navigator.pushNamed(context, FemaleQuestions.routeName);
-                      } else {
+                      } else if (selectedGender == "Male") {
                         Navigator.pushNamed(context, Question2.routeName);
                       }
                     },
