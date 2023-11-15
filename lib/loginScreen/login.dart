@@ -64,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                           Navigator.pushNamed(context, Question.routeName);
                         }
                       },
-                      child: Text('Login', style: TextStyle(fontSize: 20)),
+                      child: Text('Login', style: TextStyle(fontSize: 16)),
                       style: ButtonStyle(
                           shape: MaterialStatePropertyAll(
                               RoundedRectangleBorder(

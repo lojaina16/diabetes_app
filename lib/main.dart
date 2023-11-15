@@ -3,6 +3,7 @@ import 'package:diabetes_app/questionScreens/quesions_screen.dart';
 import 'package:diabetes_app/questionScreens/questions2_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'homeScreen/categories.dart';
 import 'loginScreen/login.dart';
 import 'loginScreen/register.dart';
 
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
         LoginScreen.routeName: (context) => LoginScreen(),
         Question.routeName: (context) => Question(),
         Question2.routeName: (context) => Question2(),
-        FemaleQuestions.routeName: (context) => FemaleQuestions()
+        FemaleQuestions.routeName: (context) => FemaleQuestions(),
+        HomeScreen.routeName: (context) => HomeScreen(),
       },
     );
   }

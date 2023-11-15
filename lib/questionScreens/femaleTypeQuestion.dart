@@ -1,3 +1,4 @@
+import 'package:diabetes_app/homeScreen/categories.dart';
 import 'package:flutter/material.dart';
 
 import 'customDownDrop.dart';
@@ -47,7 +48,7 @@ class _QuestionState extends State<FemaleQuestions> {
                 ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState?.validate() ?? false) {
-                        return;
+                        Navigator.pushNamed(context, HomeScreen.routeName);
                       }
                     },
                     child: Text("Submit")),

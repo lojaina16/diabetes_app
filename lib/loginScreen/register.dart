@@ -94,7 +94,7 @@ class RegisterScreen extends StatelessWidget {
                         Navigator.pushNamed(context, LoginScreen.routeName);
                       }
                     },
-                    child: Text('Login', style: TextStyle(fontSize: 20)),
+                    child: Text('Login', style: TextStyle(fontSize: 16)),
                     style: ButtonStyle(
                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12))),
@@ -113,7 +113,7 @@ class RegisterScreen extends StatelessWidget {
                         },
                         child: Text(
                           'Login',
-                          style: TextStyle(fontSize: 18, color: Colors.black),
+                          style: TextStyle(fontSize: 20, color: Colors.black),
                         ))
                   ],
                 ),

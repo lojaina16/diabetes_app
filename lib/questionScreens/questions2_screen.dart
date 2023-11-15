@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../homeScreen/categories.dart';
 import 'customDownDrop.dart';
-import 'custom_textfield.dart';
 
 class Question2 extends StatefulWidget {
   static const String routeName = "question2";
@@ -16,7 +16,6 @@ class _Question2State extends State<Question2> {
   String? selectedAns2;
   String? selectedAns3;
   String? selectedAns4;
-  String? selectedAns5;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -44,16 +43,15 @@ class _Question2State extends State<Question2> {
               children: [
                 //SizedBox(height: 20),
 
-                CustomTextField(labelText: "A", type: TextInputType.number),
+                CustomDownDrop(value: selectedAns1, txt: "A"),
                 CustomDownDrop(value: selectedAns2, txt: "B"),
                 CustomDownDrop(value: selectedAns3, txt: "C"),
                 CustomDownDrop(value: selectedAns4, txt: "D"),
-                CustomDownDrop(value: selectedAns4, txt: "E"),
 
                 ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState?.validate() ?? false) {
-                        return;
+                        Navigator.pushNamed(context, HomeScreen.routeName);
                       }
                     },
                     child: Text("Submit")),
