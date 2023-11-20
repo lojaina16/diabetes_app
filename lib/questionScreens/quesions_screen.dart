@@ -25,6 +25,10 @@ class _QuestionState extends State<Question> {
   String? selectedAns8;
   String? selectedAns9;
   String? selectedAns10;
+  String? selectedAns11;
+  String? selectedAns12;
+  String? selectedAns13;
+  bool isVisible = false;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -45,79 +49,121 @@ class _QuestionState extends State<Question> {
           )),
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: SingleChildScrollView(
-          child: Form(
-            key: formKey,
-            child: Column(
-              children: [
-                CustomTextField(
-                    labelText: "Enter Your Age", type: TextInputType.number),
-                Padding(
-                  padding: const EdgeInsets.all(30),
-                  child: DropdownButtonFormField<String>(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Please answer the question";
-                      }
-                    },
-                    decoration: InputDecoration(
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
-                        labelText: "Choose your gender",
-                        enabledBorder: OutlineInputBorder(
+        child: Scrollbar(
+          thumbVisibility: true,
+          trackVisibility: true,
+          interactive: true,
+          child: SingleChildScrollView(
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  CustomTextField(
+                      labelText: "Enter Your Age", type: TextInputType.number),
+                  Padding(
+                    padding: const EdgeInsets.all(30),
+                    child: DropdownButtonFormField<String>(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please answer the question";
+                        }
+                      },
+                      decoration: InputDecoration(
+                          errorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
-                            borderSide:
-                                BorderSide(color: Colors.indigoAccent))),
-                    value: selectedGender,
-                    items: gender
-                        .map((gen) => DropdownMenuItem<String>(
-                            value: gen, child: Text(gen)))
-                        .toList(),
-                    onChanged: (gen) => setState(() => selectedGender = gen),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          labelText: "Choose your gender",
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide:
+                                  BorderSide(color: Colors.indigoAccent))),
+                      value: selectedGender,
+                      items: gender
+                          .map((gen) => DropdownMenuItem<String>(
+                              value: gen, child: Text(gen)))
+                          .toList(),
+                      onChanged: (gen) => setState(() => selectedGender = gen),
+                    ),
                   ),
-                ),
-                CustomDownDrop(
-                    value: selectedAns1, txt: "Do you feel extreme thirst?"),
-                CustomDownDrop(
-                    value: selectedAns2,
-                    txt: "Do you have a sudden weight loss?"),
-                CustomDownDrop(
-                    value: selectedAns3, txt: "Do you feel extreme hunger?"),
-                CustomDownDrop(
-                    value: selectedAns4,
-                    txt: "increased or frequent urination?"),
-                CustomDownDrop(
-                    value: selectedAns5, txt: "Do you have partial paresis"),
-                CustomDownDrop(
-                    value: selectedAns6, txt: "Do you have hair loss?"),
-                CustomDownDrop(
-                    value: selectedAns7, txt: "Do you have mood changes?"),
-                CustomDownDrop(
-                    value: selectedAns8,
-                    txt: "Do your cuts take longer to heal?"),
-                CustomDownDrop(
-                    value: selectedAns9, txt: "Do you suffer from itching?"),
-                CustomDownDrop(
-                    value: selectedAns10, txt: "Do you have muscle stiffness?"),
-                ElevatedButton(
-                    onPressed: () {
-                      if (formKey.currentState?.validate() ?? false) {
-                        Navigator.pushNamed(context, Question2.routeName);
-                      }
-                      if (selectedGender == "Female") {
-                        Navigator.pushNamed(context, FemaleQuestions.routeName);
-                      } else if (selectedGender == "Male") {
-                        Navigator.pushNamed(context, Question2.routeName);
-                      }
-                    },
-                    child: Text("Submit")),
-              ],
+                  Column(
+                    children: [
+                      Visibility(
+                        visible: selectedGender == "Female"
+                            ? isVisible = true
+                            : selectedGender == "Male"
+                                ? isVisible = false
+                                : isVisible,
+                        child: Container(
+                          child: Column(
+                            children: [
+                              CustomDownDrop(
+                                  value: selectedAns11,
+                                  txt: "Are you pregnant now?"),
+                              CustomDownDrop(
+                                  value: selectedAns12,
+                                  txt: "Do you have previous pregnancies"),
+                              CustomDownDrop(
+                                  value: selectedAns13,
+                                  txt:
+                                      "Are you affected by high blood pressure when you were pregnant?"),
+                            ],
+                          ),
+                        ),
+                      ),
+                      CustomDownDrop(
+                          value: selectedAns1,
+                          txt: "Do you feel extreme thirst?"),
+                      CustomDownDrop(
+                          value: selectedAns2,
+                          txt: "Do you have a sudden weight loss?"),
+                      CustomDownDrop(
+                          value: selectedAns3,
+                          txt: "Do you feel extreme hunger?"),
+                      CustomDownDrop(
+                          value: selectedAns4,
+                          txt: "increased or frequent urination?"),
+                      CustomDownDrop(
+                          value: selectedAns5,
+                          txt: "Do you have partial paresis"),
+                      CustomDownDrop(
+                          value: selectedAns6, txt: "Do you have hair loss?"),
+                      CustomDownDrop(
+                          value: selectedAns7,
+                          txt: "Do you have mood changes?"),
+                      CustomDownDrop(
+                          value: selectedAns8,
+                          txt: "Do your cuts take longer to heal?"),
+                      CustomDownDrop(
+                          value: selectedAns9,
+                          txt: "Do you suffer from itching?"),
+                      CustomDownDrop(
+                          value: selectedAns10,
+                          txt: "Do you have muscle stiffness?"),
+                    ],
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            Navigator.pushNamed(context, Question2.routeName);
+                            if (selectedGender == "Female") {
+                              Navigator.pushNamed(
+                                  context, FemaleQuestions.routeName);
+                            } else if (selectedGender == "Male") {
+                              Navigator.pushNamed(context, Question2.routeName);
+                            }
+                          }
+                        },
+                        child: Text("Submit")),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
