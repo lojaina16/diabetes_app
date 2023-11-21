@@ -9,6 +9,7 @@ class CustomTextFromField extends StatelessWidget {
   TextInputAction textAction;
   bool isObscure;
   IconData? suffixIcon;
+  TextEditingController controller;
 
   CustomTextFromField(
       {this.suffixIcon,
@@ -16,6 +17,7 @@ class CustomTextFromField extends StatelessWidget {
       required this.labelText,
       required this.validator,
       required this.icon,
+      required this.controller,
       this.keyboardTybe = TextInputType.text,
       this.isObscure = false,
       this.textAction = TextInputAction.next});
@@ -47,12 +49,11 @@ class CustomTextFromField extends StatelessWidget {
             focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(color: Colors.red))),
-
         keyboardType: keyboardTybe,
         textInputAction: textAction,
         keyboardAppearance: Brightness.light,
         style: TextStyle(color: Colors.black, fontSize: 20),
-        //  controller: controller,
+        controller: controller,
         validator: validator,
         obscureText: isObscure,
       ),

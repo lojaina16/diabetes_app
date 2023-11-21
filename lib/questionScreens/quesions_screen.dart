@@ -1,9 +1,10 @@
+import 'package:diabetes_app/model/user_info.dart';
 import 'package:diabetes_app/questionScreens/questions2_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../firebase_utils.dart';
 import 'customDownDrop.dart';
 import 'custom_textfield.dart';
-import 'femaleTypeQuestion.dart';
 
 class Question extends StatefulWidget {
   static const String routeName = "questionScreen";
@@ -30,6 +31,9 @@ class _QuestionState extends State<Question> {
   String? selectedAns13;
   bool isVisible = false;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  var ageController = TextEditingController();
+  var genderController = TextEditingController();
+  var weightController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +63,13 @@ class _QuestionState extends State<Question> {
               child: Column(
                 children: [
                   CustomTextField(
-                      labelText: "Enter Your Age", type: TextInputType.number),
+                      labelText: "Enter Your Age",
+                      type: TextInputType.number,
+                      controller: ageController),
+                  CustomTextField(
+                      labelText: "Enter Your Weight",
+                      type: TextInputType.number,
+                      controller: weightController),
                   Padding(
                     padding: const EdgeInsets.all(30),
                     child: DropdownButtonFormField<String>(
@@ -87,7 +97,10 @@ class _QuestionState extends State<Question> {
                           .map((gen) => DropdownMenuItem<String>(
                               value: gen, child: Text(gen)))
                           .toList(),
-                      onChanged: (gen) => setState(() => selectedGender = gen),
+                      onChanged: (gen) => setState(() {
+                        //selectedGender = gen;
+                        genderController.text = gen!;
+                      }),
                     ),
                   ),
                   Column(
@@ -96,8 +109,8 @@ class _QuestionState extends State<Question> {
                         visible: selectedGender == "Female"
                             ? isVisible = true
                             : selectedGender == "Male"
-                                ? isVisible = false
-                                : isVisible,
+                            ? isVisible = false
+                            : isVisible,
                         child: Container(
                           child: Column(
                             children: [
@@ -110,7 +123,7 @@ class _QuestionState extends State<Question> {
                               CustomDownDrop(
                                   value: selectedAns13,
                                   txt:
-                                      "Are you affected by high blood pressure when you were pregnant?"),
+                                  "Are you affected by high blood pressure when you were pregnant?"),
                             ],
                           ),
                         ),
@@ -151,13 +164,7 @@ class _QuestionState extends State<Question> {
                     child: ElevatedButton(
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
-                            Navigator.pushNamed(context, Question2.routeName);
-                            if (selectedGender == "Female") {
-                              Navigator.pushNamed(
-                                  context, FemaleQuestions.routeName);
-                            } else if (selectedGender == "Male") {
-                              Navigator.pushNamed(context, Question2.routeName);
-                            }
+                            addInfo();
                           }
                         },
                         child: Text("Submit")),
@@ -169,5 +176,15 @@ class _QuestionState extends State<Question> {
         ),
       ),
     );
+  }
+
+  void addInfo() {
+    UserInfo info = UserInfo(
+        age: ageController.text,
+        gender: genderController.text,
+        weight: weightController.text);
+    FirebaseUtils.addUserInfoToFireStore(info).then((value) {
+      Navigator.pushNamed(context, Question2.routeName);
+    });
   }
 }

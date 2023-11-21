@@ -3,14 +3,19 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   String labelText;
   TextInputType type = TextInputType.number;
+  TextEditingController controller;
 
-  CustomTextField({required this.labelText, this.type = TextInputType.text});
+  CustomTextField(
+      {required this.labelText,
+      this.type = TextInputType.text,
+      required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(30),
       child: TextFormField(
+        controller: controller,
         validator: (value) {
           if (value == null || value.isEmpty) {
             return "Please answer the question";

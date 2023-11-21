@@ -1,12 +1,29 @@
+import 'package:diabetes_app/questionScreens/quesions_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../dialog_utils.dart';
 import 'custom_text_field.dart';
 import 'login.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   RegisterScreen({super.key});
 
   static const String routeName = 'register screen';
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  var nameControlller = TextEditingController();
+
+  var emailControlller = TextEditingController();
+
+  var passwordControlller = TextEditingController();
+
+  var MobileNumberControlller = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -22,11 +39,11 @@ class RegisterScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(height: MediaQuery.of(context).size.height * 0.2),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.3),
                 Center(
                     child: Text(
                   'Register',
-                  style: TextStyle(color: Colors.black, fontSize: 30),
+                  style: TextStyle(fontSize: 30),
                 )),
                 Center(
                   child: Text('Create a new account',
@@ -35,6 +52,7 @@ class RegisterScreen extends StatelessWidget {
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 // Text('Username',style: TextStyle(color: Colors.white,fontSize:21,fontWeight: FontWeight.normal ),),
                 CustomTextFromField(
+                  controller: nameControlller,
                   hintText: 'Enter your Username',
                   labelText: 'User Name',
                   icon: Icons.person,
@@ -46,6 +64,7 @@ class RegisterScreen extends StatelessWidget {
                   },
                 ),
                 CustomTextFromField(
+                  controller: emailControlller,
                   hintText: 'Enter your email',
                   labelText: 'Email Address',
                   icon: Icons.email,
@@ -58,6 +77,7 @@ class RegisterScreen extends StatelessWidget {
                   },
                 ),
                 CustomTextFromField(
+                  controller: MobileNumberControlller,
                   hintText: 'Enter your mobile number',
                   labelText: 'Mobile Number',
                   icon: Icons.call,
@@ -70,7 +90,7 @@ class RegisterScreen extends StatelessWidget {
                   },
                 ),
                 CustomTextFromField(
-                  textAction: TextInputAction.done,
+                  controller: passwordControlller,
                   hintText: 'Enter your password',
                   suffixIcon: Icons.visibility_off,
                   labelText: 'Password',
@@ -90,11 +110,9 @@ class RegisterScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(9.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        Navigator.pushNamed(context, LoginScreen.routeName);
-                      }
+                      Register();
                     },
-                    child: Text('Login', style: TextStyle(fontSize: 16)),
+                    child: Text('Login', style: TextStyle(fontSize: 20)),
                     style: ButtonStyle(
                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12))),
@@ -113,7 +131,7 @@ class RegisterScreen extends StatelessWidget {
                         },
                         child: Text(
                           'Login',
-                          style: TextStyle(fontSize: 20, color: Colors.black),
+                          style: TextStyle(fontSize: 18),
                         ))
                   ],
                 ),
@@ -121,5 +139,47 @@ class RegisterScreen extends StatelessWidget {
         ),
       ))
     ]));
+  }
+
+  void Register() async {
+    if (_formKey.currentState?.validate() == true) {
+      DialogUtils.showLoading(context, 'loading...');
+
+      try {
+        final credential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailControlller.text,
+          password: passwordControlller.text,
+        );
+        DialogUtils.hideLoading(context);
+        DialogUtils.showMessage(context, 'Register Successfully',
+            title: 'Success',
+            postActionName: "ok",
+            barrierDismissible: false, postAction: () {
+          Navigator.pushNamed(context, Question.routeName);
+        });
+
+        print('register successfully');
+        print(credential.user?.uid ?? '');
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          DialogUtils.hideLoading(context);
+          DialogUtils.showMessage(context, 'The password provided is too weak.',
+              title: 'Error', postActionName: "ok", barrierDismissible: false);
+          print('The password provided is too weak.');
+        } else if (e.code == 'email-already-in-use') {
+          DialogUtils.hideLoading(context);
+          DialogUtils.showMessage(
+              context, 'The account already exists for that email.',
+              title: 'Error', postActionName: "ok", barrierDismissible: false);
+          print('The account already exists for that email.');
+        }
+      } catch (e) {
+        DialogUtils.hideLoading(context);
+        DialogUtils.showMessage(context, e.toString(),
+            title: 'Error', postActionName: "ok", barrierDismissible: false);
+        print(e);
+      }
+    }
   }
 }
