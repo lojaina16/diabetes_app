@@ -2,7 +2,6 @@ import 'package:diabetes_app/loginScreen/register.dart';
 import 'package:diabetes_app/questionScreens/quesions_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../dialog_utils.dart';
 import 'custom_text_field.dart';
 
@@ -74,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         Login();
                       },
-                      child: Text('Login', style: TextStyle(fontSize: 20)),
+                      child: Text('Login', style: TextStyle(fontSize: 16)),
                       style: ButtonStyle(
                           shape: MaterialStatePropertyAll(
                               RoundedRectangleBorder(
@@ -109,21 +108,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(34.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Image(
-                            image: AssetImage(
-                                'assets/images/Google__G__Logo 1.png')),
-                        Image(
-                            image:
-                                AssetImage('assets/images/facebook (1).png')),
-                        Image(image: AssetImage('assets/images/instagram.png')),
-                      ],
-                    ),
-                  )
                 ],
               ),
             ),

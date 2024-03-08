@@ -1,10 +1,12 @@
 import 'package:diabetes_app/model/user_info.dart';
-import 'package:diabetes_app/questionScreens/questions2_screen.dart';
+import 'package:diabetes_app/questionScreens/custom_container.dart';
+import 'package:diabetes_app/questionScreens/output_screen1.dart';
 import 'package:flutter/material.dart';
-
 import '../firebase_utils.dart';
-import 'customDownDrop.dart';
 import 'custom_textfield.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'output_screen2.dart';
 
 class Question extends StatefulWidget {
   static const String routeName = "questionScreen";
@@ -14,54 +16,44 @@ class Question extends StatefulWidget {
 }
 
 class _QuestionState extends State<Question> {
-  List<String> gender = ["Male", "Female"];
+  List<String> gender = ["Male", "Female", "Other"];
+  List<String> answer = ["Yes", "No"];
+  List<String> smokingAnswer = ["Never", "Former", "Current"];
   String? selectedGender;
   String? selectedAns1;
   String? selectedAns2;
   String? selectedAns3;
-  String? selectedAns4;
-  String? selectedAns5;
-  String? selectedAns6;
-  String? selectedAns7;
-  String? selectedAns8;
-  String? selectedAns9;
-  String? selectedAns10;
-  String? selectedAns11;
-  String? selectedAns12;
-  String? selectedAns13;
-  bool isVisible = false;
+
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   var ageController = TextEditingController();
   var genderController = TextEditingController();
   var weightController = TextEditingController();
+  var hypertensionController = TextEditingController();
+  var heartDiseaseController = TextEditingController();
+  var smokingHistoryController = TextEditingController();
+  var bmiController = TextEditingController();
+  var a1cTestController = TextEditingController();
+  var bloodGlucoseLevelController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text(
-            "Diabetes detection questions",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          centerTitle: true,
-          toolbarHeight: 150,
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(100),
-            ),
-          )),
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: Scrollbar(
-          thumbVisibility: true,
-          trackVisibility: true,
-          interactive: true,
-          child: SingleChildScrollView(
-            child: Form(
-              key: formKey,
+        child: SingleChildScrollView(
+          child: Form(
+            key: formKey,
+            child: Center(
               child: Column(
                 children: [
+                  SizedBox(height: 20),
+                  Text("Diabetes",
+                      style: GoogleFonts.dmSerifDisplay(
+                          fontSize: 24, color: Color(0xff5063BF))),
+                  Text("Detection",
+                      style: GoogleFonts.dmSerifDisplay(
+                          fontSize: 24, color: Color(0xff5063BF))),
+                  SizedBox(height: 20),
                   CustomTextField(
                       labelText: "Enter Your Age",
                       type: TextInputType.number,
@@ -70,104 +62,76 @@ class _QuestionState extends State<Question> {
                       labelText: "Enter Your Weight",
                       type: TextInputType.number,
                       controller: weightController),
-                  Padding(
-                    padding: const EdgeInsets.all(30),
-                    child: DropdownButtonFormField<String>(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please answer the question";
-                        }
-                      },
-                      decoration: InputDecoration(
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          labelText: "Choose your gender",
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide:
-                                  BorderSide(color: Colors.indigoAccent))),
-                      value: selectedGender,
-                      items: gender
-                          .map((gen) => DropdownMenuItem<String>(
-                              value: gen, child: Text(gen)))
-                          .toList(),
-                      onChanged: (gen) => setState(() {
-                        //selectedGender = gen;
-                        genderController.text = gen!;
-                      }),
-                    ),
+                  CustomTextField(
+                      labelText: "Enter Your BMI",
+                      type: TextInputType.number,
+                      controller: bmiController),
+                  CustomTextField(
+                      labelText: "Enter Your result of A1C Test",
+                      type: TextInputType.number,
+                      controller: a1cTestController),
+                  CustomTextField(
+                      labelText: "Enter Your Blood Glucose Level",
+                      type: TextInputType.number,
+                      controller: bloodGlucoseLevelController),
+                  CustomContainer(txt: "Choose your gender"),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      addRadioButton(0, 'Male'),
+                      addRadioButton(1, 'Female'),
+                      addRadioButton(2, 'Other'),
+                    ],
                   ),
                   Column(
                     children: [
-                      Visibility(
-                        visible: selectedGender == "Female"
-                            ? isVisible = true
-                            : selectedGender == "Male"
-                            ? isVisible = false
-                            : isVisible,
-                        child: Container(
-                          child: Column(
-                            children: [
-                              CustomDownDrop(
-                                  value: selectedAns11,
-                                  txt: "Are you pregnant now?"),
-                              CustomDownDrop(
-                                  value: selectedAns12,
-                                  txt: "Do you have previous pregnancies"),
-                              CustomDownDrop(
-                                  value: selectedAns13,
-                                  txt:
-                                  "Are you affected by high blood pressure when you were pregnant?"),
-                            ],
-                          ),
-                        ),
+                      CustomContainer(txt: "what is your Smoking History?"),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          addRadioButton4(0, 'Never'),
+                          addRadioButton4(1, 'Former'),
+                          addRadioButton4(2, 'Current')
+                        ],
                       ),
-                      CustomDownDrop(
-                          value: selectedAns1,
-                          txt: "Do you feel extreme thirst?"),
-                      CustomDownDrop(
-                          value: selectedAns2,
-                          txt: "Do you have a sudden weight loss?"),
-                      CustomDownDrop(
-                          value: selectedAns3,
-                          txt: "Do you feel extreme hunger?"),
-                      CustomDownDrop(
-                          value: selectedAns4,
-                          txt: "increased or frequent urination?"),
-                      CustomDownDrop(
-                          value: selectedAns5,
-                          txt: "Do you have partial paresis"),
-                      CustomDownDrop(
-                          value: selectedAns6, txt: "Do you have hair loss?"),
-                      CustomDownDrop(
-                          value: selectedAns7,
-                          txt: "Do you have mood changes?"),
-                      CustomDownDrop(
-                          value: selectedAns8,
-                          txt: "Do your cuts take longer to heal?"),
-                      CustomDownDrop(
-                          value: selectedAns9,
-                          txt: "Do you suffer from itching?"),
-                      CustomDownDrop(
-                          value: selectedAns10,
-                          txt: "Do you have muscle stiffness?"),
+                      CustomContainer(txt: "Do you have hypertension?"),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          addRadioButton2(0, 'Yes'),
+                          addRadioButton2(1, 'No'),
+                        ],
+                      ),
+                      CustomContainer(txt: "Do you have a heart disease?"),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          addRadioButton3(0, 'Yes'),
+                          addRadioButton3(1, 'No'),
+                        ],
+                      ),
                     ],
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.5,
+                  Padding(
+                    padding: const EdgeInsets.all(20),
                     child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xff5063BF)),
                         onPressed: () {
-                          if (formKey.currentState!.validate()) {
-                            addInfo();
+                          if (formKey.currentState?.validate() ?? false) {
+                            if (a1cTestController.text == "5.7") {
+                              //Navigator.pushNamed(context, OutputScreen2.routeName);
+                              addInfo();
+                            } else if (a1cTestController.text == "6.5") {
+                              //Navigator.pushNamed(context, OutputScreen1.routeName);
+                              addInfo();
+                            }
                           }
                         },
-                        child: Text("Submit")),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("Detect"),
+                        )),
                   ),
                 ],
               ),
@@ -180,11 +144,98 @@ class _QuestionState extends State<Question> {
 
   void addInfo() {
     UserInfo info = UserInfo(
-        age: ageController.text,
-        gender: genderController.text,
-        weight: weightController.text);
+      age: ageController.text,
+      gender: genderController.text,
+      weight: weightController.text,
+      hypertension: hypertensionController.text,
+      heartDisease: heartDiseaseController.text,
+      bloodGlucoseLevel: bloodGlucoseLevelController.text,
+      smokingHistory: smokingHistoryController.text,
+      a1cTest: a1cTestController.text,
+      bmi: bmiController.text,
+    );
     FirebaseUtils.addUserInfoToFireStore(info).then((value) {
-      Navigator.pushNamed(context, Question2.routeName);
+      //Navigator.pushNamed(context, Question2.routeName);
     });
+  }
+
+  Row addRadioButton(int btnValue, String title) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Radio(
+          activeColor: Colors.blue,
+          value: gender[btnValue],
+          groupValue: selectedGender,
+          onChanged: (value) {
+            setState(() {
+              selectedGender = value;
+              genderController.text = value!;
+            });
+          },
+        ),
+        Text(title)
+      ],
+    );
+  }
+
+  Row addRadioButton2(int btnValue, String title) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Radio(
+          activeColor: selectedAns1 == "Yes" ? Colors.blue : Colors.red,
+          value: answer[btnValue],
+          groupValue: selectedAns1,
+          onChanged: (value) {
+            setState(() {
+              selectedAns1 = value;
+              hypertensionController.text = value!;
+            });
+          },
+        ),
+        Text(title)
+      ],
+    );
+  }
+
+  Row addRadioButton3(int btnValue, String title) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Radio(
+          activeColor: selectedAns2 == "Yes" ? Colors.blue : Colors.red,
+          value: answer[btnValue],
+          groupValue: selectedAns2,
+          onChanged: (value) {
+            setState(() {
+              selectedAns2 = value;
+              heartDiseaseController.text = value!;
+            });
+          },
+        ),
+        Text(title)
+      ],
+    );
+  }
+
+  Row addRadioButton4(int btnValue, String title) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Radio(
+          activeColor: Colors.blue,
+          value: smokingAnswer[btnValue],
+          groupValue: selectedAns3,
+          onChanged: (value) {
+            setState(() {
+              selectedAns3 = value;
+              smokingHistoryController.text = value!;
+            });
+          },
+        ),
+        Text(title)
+      ],
+    );
   }
 }

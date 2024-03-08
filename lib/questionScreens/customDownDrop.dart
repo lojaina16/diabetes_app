@@ -24,22 +24,24 @@ class _CustomDownDropState extends State<CustomDownDrop> {
           }
         },
         decoration: InputDecoration(
+            filled: true,
+            fillColor: Color(0xff9bbcea),
             errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(24),
               borderSide: BorderSide(color: Colors.red),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(24),
               borderSide: BorderSide(color: Colors.red),
             ),
             labelStyle: TextStyle(fontSize: 15),
             labelText: widget.txt,
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: Colors.indigoAccent)),
+                borderRadius: BorderRadius.circular(24),
+                borderSide: BorderSide(color: Colors.transparent)),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.indigoAccent),
+              borderRadius: BorderRadius.circular(24),
+              borderSide: BorderSide(color: Colors.transparent),
             )),
         value: widget.value,
         items: ans

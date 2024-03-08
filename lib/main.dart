@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:diabetes_app/questionScreens/femaleTypeQuestion.dart';
+import 'package:diabetes_app/homeScreen/emergencyCall_screen.dart';
+import 'package:diabetes_app/homeScreen/medication/medicationScreen.dart';
+import 'package:diabetes_app/questionScreens/output_screen1.dart';
+import 'package:diabetes_app/questionScreens/output_screen2.dart';
 import 'package:diabetes_app/questionScreens/quesions_screen.dart';
-import 'package:diabetes_app/questionScreens/questions2_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'firebase_options.dart';
 import 'homeScreen/categories.dart';
+import 'homeScreen/healthRecord/healthrecord_screen.dart';
 import 'loginScreen/login.dart';
 import 'loginScreen/register.dart';
 
@@ -27,14 +29,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: LoginScreen.routeName,
+      initialRoute: Question.routeName,
       routes: {
         RegisterScreen.routeName: (context) => RegisterScreen(),
         LoginScreen.routeName: (context) => LoginScreen(),
         Question.routeName: (context) => Question(),
-        Question2.routeName: (context) => Question2(),
-        FemaleQuestions.routeName: (context) => FemaleQuestions(),
+        OutputScreen1.routeName: (context) => OutputScreen1(),
         HomeScreen.routeName: (context) => HomeScreen(),
+        OutputScreen2.routeName: (context) => OutputScreen2(),
+        HealthRecord.routeName: (context) => HealthRecord(),
+        EmergencyCall.routeName: (context) => EmergencyCall(),
+        MedicationFollowUp.routeName: (context) => MedicationFollowUp()
       },
     );
   }

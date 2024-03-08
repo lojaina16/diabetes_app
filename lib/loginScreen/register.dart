@@ -112,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     onPressed: () {
                       Register();
                     },
-                    child: Text('Login', style: TextStyle(fontSize: 20)),
+                    child: Text('Login', style: TextStyle(fontSize: 16)),
                     style: ButtonStyle(
                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12))),

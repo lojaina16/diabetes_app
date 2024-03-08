@@ -1,5 +1,7 @@
+import 'package:diabetes_app/homeScreen/emergencyCall_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'healthRecord/healthrecord_screen.dart';
 import 'imageWidget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -9,13 +11,15 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 100,
+        centerTitle: true,
+        backgroundColor: Color(0xff5063BF),
+        toolbarHeight: 80,
         elevation: 0,
         shape: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.transparent),
             borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(18),
-                bottomRight: Radius.circular(18))),
+                bottomLeft: Radius.circular(50),
+                bottomRight: Radius.circular(50))),
         title: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text("Diabetes App",
@@ -30,51 +34,54 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                  height: 100,
-                  width: double.infinity,
-                  color: Colors.blue,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Icon(Icons.account_circle_outlined, size: 40),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Text("Diabetes App",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                  )),
+              IconButton(onPressed: () {}, icon: Icon(Icons.person_2_rounded)),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(10),
+                child: Text(
+                  "Name",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Text(
+                  "Name@Email.com",
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20),
                 child: Row(
                   children: [
-                    Icon(Icons.settings),
+                    Icon(
+                      Icons.settings,
+                      color: Color(0xff7588E4),
+                      size: 40,
+                    ),
                     SizedBox(
                       width: 5,
                     ),
                     Text("Settings",
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 20,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold)),
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(20),
                 child: Row(
                   children: [
-                    Icon(Icons.info),
+                    Icon(
+                      Icons.info,
+                      color: Color(0xff7588E4),
+                      size: 40,
+                    ),
                     SizedBox(
                       width: 5,
                     ),
-                    Text("About Application",
+                    Text("About App",
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
@@ -96,70 +103,37 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Text(
-                " How Can We \n Help You ? ",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 24),
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Color(0xffEFEFEF),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: Row(
-                  children: <Widget>[
-                    Icon(Icons.search),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "Search",
-                      style: TextStyle(color: Colors.grey, fontSize: 19),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Text(
-                "Pick Your \n Category ",
-                style: TextStyle(
-                  color: Colors.black.withOpacity(0.8),
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
               SingleChildScrollView(
                   child: Container(
                       margin: EdgeInsets.all(3),
                       child: SingleChildScrollView(
                         child: Column(children: [
                           Row(children: [
-                            ImageWidget("2", "Emergency Calls"),
+                            ImageWidget("emergency", "Emergency Calls",
+                                EmergencyCall.routeName),
                             SizedBox(
                               width: 2,
                             ),
-                            ImageWidget("4", "Health Records")
+                            ImageWidget("health", "Health Records",
+                                HealthRecord.routeName)
                           ]),
                           Row(children: [
-                            ImageWidget("6", "Physical Activates"),
+                            ImageWidget("activity", "Physical Activates",
+                                HealthRecord.routeName),
                             SizedBox(
                               width: 2,
                             ),
-                            ImageWidget("8", "Nutrition Plan")
+                            ImageWidget(
+                                "dr", "Ask Your Doctor", HealthRecord.routeName)
                           ]),
                           Row(children: [
-                            ImageWidget("10", "Medication Follow-up "),
+                            ImageWidget("plan", "Nutrition Plan ",
+                                HealthRecord.routeName),
                             SizedBox(
                               width: 2,
                             ),
-                            ImageWidget("12", "Ask Your Doctor ")
+                            ImageWidget("medication", "Medication Follow-up ",
+                                HealthRecord.routeName)
                           ]),
                         ]),
                       )))
