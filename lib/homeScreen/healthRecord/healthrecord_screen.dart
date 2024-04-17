@@ -15,16 +15,16 @@ class _HealthRecordState extends State<HealthRecord> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Color(0xff5063BF),
+          backgroundColor: const Color(0xff5063BF),
           toolbarHeight: 80,
           elevation: 0,
-          shape: OutlineInputBorder(
+          shape: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.transparent),
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(50),
                   bottomRight: Radius.circular(50))),
-          title: Padding(
-            padding: const EdgeInsets.all(8.0),
+          title: const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Text("Health Record",
                 style: TextStyle(
                     color: Colors.white,
@@ -37,19 +37,19 @@ class _HealthRecordState extends State<HealthRecord> {
             children: [
               Card(
                 shape: RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.white70, width: 1),
+                  side: const BorderSide(color: Colors.white70, width: 1),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                margin: EdgeInsets.all(30),
+                margin: const EdgeInsets.all(30),
                 child: ListTile(
-                  title: Text("Condition: Type 2"),
+                  title: const Text("Condition: Type 2"),
                   isThreeLine: true,
-                  subtitle: Text("Blood Type: O+  \n"
+                  subtitle: const Text("Blood Type: O+  \n"
                       "Weight: 55 kg\n"
                       "Gender: Female\n"
                       "Age: 21"),
                   trailing: IconButton(
-                    icon: Icon(Icons.edit),
+                    icon: const Icon(Icons.edit),
                     onPressed: () {},
                   ),
                 ),
@@ -58,31 +58,31 @@ class _HealthRecordState extends State<HealthRecord> {
                 children: [
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.all(5),
-                      padding: EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(10),
                       decoration: ShapeDecoration(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
-                          color: Color(0xff5F6583FF)),
+                          color: const Color(0xff5F6583FF)),
                       child: Column(
                         children: [
-                          Text(
+                          const Text(
                             "Blood Sugar Level",
                             style: TextStyle(fontWeight: FontWeight.w500),
                           ),
                           Container(
-                            margin: EdgeInsets.all(5),
+                            margin: const EdgeInsets.all(5),
                             height: 150,
                             width: 150,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100),
                               border: Border.all(
                                 width: 7,
-                                color: Color(0xff5063BF),
+                                color: const Color(0xff5063BF),
                                 style: BorderStyle.solid,
                               ),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 "140 mg/dl",
                                 style: TextStyle(
@@ -92,28 +92,28 @@ class _HealthRecordState extends State<HealthRecord> {
                             ),
                           ),
                           ElevatedButton(
-                              onPressed: () {}, child: Text("Change"))
+                              onPressed: () {}, child: const Text("Change"))
                         ],
                       ),
                     ),
                   ),
-                  VerticalDivider(thickness: 5),
+                  const VerticalDivider(thickness: 5),
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.all(5),
-                      padding: EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(10),
                       decoration: ShapeDecoration(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
-                          color: Color(0xff5F6583FF)),
+                          color: const Color(0xff5F6583FF)),
                       child: Column(
                         children: [
-                          Text(
+                          const Text(
                             "Your Target Goal",
                             style: TextStyle(fontWeight: FontWeight.w500),
                           ),
                           Container(
-                            margin: EdgeInsets.all(5),
+                            margin: const EdgeInsets.all(5),
                             height: 150,
                             width: 150,
                             decoration: BoxDecoration(
@@ -124,7 +124,7 @@ class _HealthRecordState extends State<HealthRecord> {
                                 style: BorderStyle.solid,
                               ),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 "80 mg/dl",
                                 style: TextStyle(
@@ -134,7 +134,7 @@ class _HealthRecordState extends State<HealthRecord> {
                             ),
                           ),
                           ElevatedButton(
-                              onPressed: () {}, child: Text("Change"))
+                              onPressed: () {}, child: const Text("Change"))
                         ],
                       ),
                     ),
@@ -145,20 +145,20 @@ class _HealthRecordState extends State<HealthRecord> {
                 children: [
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.all(5),
-                      padding: EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(10),
                       decoration: ShapeDecoration(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
-                          color: Color(0xff5F6583FF)),
+                          color: const Color(0xff5F6583FF)),
                       child: Column(
                         children: [
-                          Text(
+                          const Text(
                             "HbA1c Test",
                             style: TextStyle(fontWeight: FontWeight.w500),
                           ),
                           Container(
-                            margin: EdgeInsets.all(5),
+                            margin: const EdgeInsets.all(5),
                             height: 150,
                             width: 150,
                             decoration: BoxDecoration(
@@ -169,7 +169,7 @@ class _HealthRecordState extends State<HealthRecord> {
                                 style: BorderStyle.solid,
                               ),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 " 6.5 % ",
                                 style: TextStyle(
@@ -180,7 +180,7 @@ class _HealthRecordState extends State<HealthRecord> {
                             ),
                           ),
                           ElevatedButton(
-                              onPressed: () {}, child: Text("Change"))
+                              onPressed: () {}, child: const Text("Change"))
                         ],
                       ),
                     ),

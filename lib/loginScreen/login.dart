@@ -6,7 +6,7 @@ import '../dialog_utils.dart';
 import 'custom_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   static const String routeName = 'login screen';
 
@@ -15,9 +15,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  var emailControlller = TextEditingController();
+  var emailController = TextEditingController();
 
-  var passwordControlller = TextEditingController();
+  var passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -32,16 +32,16 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 children: [
                   SizedBox(height: MediaQuery.of(context).size.height * 0.3),
-                  Center(
+                  const Center(
                       child: Text(
                     'Welcome',
                     style: TextStyle(fontSize: 30),
                   )),
-                  Text('Login to your account',
+                  const Text('Login to your account',
                       style: TextStyle(color: Colors.grey, fontSize: 25)),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   CustomTextFromField(
-                    controller: emailControlller,
+                    controller: emailController,
                     hintText: 'Enter your email',
                     labelText: 'Email Address',
                     icon: Icons.email,
@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   CustomTextFromField(
-                    controller: passwordControlller,
+                    controller: passwordController,
                     hintText: 'Enter your password',
                     labelText: 'Password',
                     suffixIcon: Icons.visibility_off,
@@ -71,21 +71,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: const EdgeInsets.all(20.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        Login();
+                        login();
                       },
-                      child: Text('Login', style: TextStyle(fontSize: 16)),
                       style: ButtonStyle(
                           shape: MaterialStatePropertyAll(
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12))),
-                          padding: MaterialStatePropertyAll(
+                          padding: const MaterialStatePropertyAll(
                               EdgeInsets.symmetric(
                                   vertical: 13, horizontal: 130))),
+                      child: const Text('Login', style: TextStyle(fontSize: 16)),
                     ),
                   ),
                   TextButton(
                       onPressed: () {},
-                      child: Text(
+                      child: const Text(
                         'Forgot Password?',
                         style: TextStyle(color: Colors.blue, fontSize: 15),
                       )),
@@ -94,14 +94,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Don't have an account?",
+                        const Text("Don't have an account?",
                             style: TextStyle(color: Colors.grey, fontSize: 16)),
                         TextButton(
                             onPressed: () {
                               Navigator.pushNamed(
                                   context, RegisterScreen.routeName);
                             },
-                            child: Text(
+                            child: const Text(
                               'Create Now',
                               style: TextStyle(fontSize: 18),
                             ))
@@ -117,14 +117,14 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void Login() async {
+  void login() async {
     if (_formKey.currentState?.validate() == true) {
       DialogUtils.showLoading(context, 'loading...');
       try {
         final credential = await FirebaseAuth.instance
             .signInWithEmailAndPassword(
-                email: emailControlller.text,
-                password: passwordControlller.text);
+                email: emailController.text,
+                password: passwordController.text);
         DialogUtils.hideLoading(context);
         DialogUtils.showMessage(
           context,

@@ -19,7 +19,7 @@ void main() async {
   );
   //await FirebaseFirestore.instance.disableNetwork();
   FirebaseFirestore.instance.settings =
-      Settings(cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
+      const Settings(cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
 
   runApp(MyApp());
 }
@@ -32,13 +32,13 @@ class MyApp extends StatelessWidget {
       initialRoute: Question.routeName,
       routes: {
         RegisterScreen.routeName: (context) => RegisterScreen(),
-        LoginScreen.routeName: (context) => LoginScreen(),
+        LoginScreen.routeName: (context) => const LoginScreen(),
         Question.routeName: (context) => Question(),
         OutputScreen1.routeName: (context) => OutputScreen1(),
         HomeScreen.routeName: (context) => HomeScreen(),
         OutputScreen2.routeName: (context) => OutputScreen2(),
-        HealthRecord.routeName: (context) => HealthRecord(),
-        EmergencyCall.routeName: (context) => EmergencyCall(),
+        HealthRecord.routeName: (context) => const HealthRecord(),
+        EmergencyCall.routeName: (context) => const EmergencyCall(),
         MedicationFollowUp.routeName: (context) => MedicationFollowUp()
       },
     );
