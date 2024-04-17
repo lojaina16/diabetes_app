@@ -1,4 +1,4 @@
-import 'package:diabetes_app/homeScreen/categories.dart';
+import 'package:dibates/homeScreen/categories.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';

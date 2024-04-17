@@ -54,9 +54,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCoG76ZnimY62Grb5wmsK7XuB1ENUQFf3w',
-    appId: '1:881671348163:android:99c42b35c3270dd209e776',
+    appId: '1:881671348163:android:327875b2165b0b2309e776',
     messagingSenderId: '881671348163',
     projectId: 'diabetes-app-eecf8',
     storageBucket: 'diabetes-app-eecf8.appspot.com',
   );
+
 }

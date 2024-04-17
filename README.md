@@ -1,4 +1,4 @@
-# diabetes_app
+# dibates
 
 A new Flutter project.
 

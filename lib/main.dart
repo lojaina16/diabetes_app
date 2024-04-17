@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:diabetes_app/homeScreen/emergencyCall_screen.dart';
-import 'package:diabetes_app/homeScreen/medication/medicationScreen.dart';
-import 'package:diabetes_app/questionScreens/output_screen1.dart';
-import 'package:diabetes_app/questionScreens/output_screen2.dart';
-import 'package:diabetes_app/questionScreens/quesions_screen.dart';
+import 'package:dibates/homeScreen/emergencyCall_screen.dart';
+import 'package:dibates/homeScreen/medication/medicationScreen.dart';
+import 'package:dibates/questionScreens/output_screen1.dart';
+import 'package:dibates/questionScreens/output_screen2.dart';
+import 'package:dibates/questionScreens/quesions_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
@@ -17,7 +17,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  //await FirebaseFirestore.instance.disableNetwork();
   FirebaseFirestore.instance.settings =
       const Settings(cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
 
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
       routes: {
         RegisterScreen.routeName: (context) => RegisterScreen(),
         LoginScreen.routeName: (context) => const LoginScreen(),
-        Question.routeName: (context) => Question(),
+        Question.routeName: (context) => const Question(),
         OutputScreen1.routeName: (context) => OutputScreen1(),
         HomeScreen.routeName: (context) => HomeScreen(),
         OutputScreen2.routeName: (context) => OutputScreen2(),

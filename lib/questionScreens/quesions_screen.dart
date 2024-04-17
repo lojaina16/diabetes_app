@@ -1,5 +1,5 @@
-import 'package:diabetes_app/model/user_info.dart';
-import 'package:diabetes_app/questionScreens/custom_container.dart';
+import 'package:dibates/model/user_info.dart';
+import 'package:dibates/questionScreens/custom_container.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -85,7 +85,8 @@ class _QuestionState extends State<Question> {
                   ),
                   Column(
                     children: [
-                      const CustomContainer(txt: "what is your Smoking History?"),
+                      const CustomContainer(
+                          txt: "what is your Smoking History?"),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
@@ -102,7 +103,8 @@ class _QuestionState extends State<Question> {
                           addRadioButton2(1, 'No'),
                         ],
                       ),
-                      const CustomContainer(txt: "Do you have a heart disease?"),
+                      const CustomContainer(
+                          txt: "Do you have a heart disease?"),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[

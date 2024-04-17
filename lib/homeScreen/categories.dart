@@ -1,4 +1,4 @@
-import 'package:diabetes_app/homeScreen/emergencyCall_screen.dart';
+import 'package:dibates/homeScreen/emergencyCall_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'healthRecord/healthrecord_screen.dart';
@@ -34,7 +34,8 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.person_2_rounded)),
+              IconButton(
+                  onPressed: () {}, icon: const Icon(Icons.person_2_rounded)),
               const Padding(
                 padding: EdgeInsets.all(10),
                 child: Text(

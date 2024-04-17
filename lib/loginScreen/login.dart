@@ -1,5 +1,5 @@
-import 'package:diabetes_app/loginScreen/register.dart';
-import 'package:diabetes_app/questionScreens/quesions_screen.dart';
+import 'package:dibates/loginScreen/register.dart';
+import 'package:dibates/questionScreens/quesions_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../dialog_utils.dart';
@@ -80,7 +80,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           padding: const MaterialStatePropertyAll(
                               EdgeInsets.symmetric(
                                   vertical: 13, horizontal: 130))),
-                      child: const Text('Login', style: TextStyle(fontSize: 16)),
+                      child:
+                          const Text('Login', style: TextStyle(fontSize: 16)),
                     ),
                   ),
                   TextButton(
@@ -123,8 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
       try {
         final credential = await FirebaseAuth.instance
             .signInWithEmailAndPassword(
-                email: emailController.text,
-                password: passwordController.text);
+                email: emailController.text, password: passwordController.text);
         DialogUtils.hideLoading(context);
         DialogUtils.showMessage(
           context,

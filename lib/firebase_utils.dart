@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:diabetes_app/model/user_info.dart';
+import 'package:dibates/model/user_info.dart';
 
 class FirebaseUtils {
   static CollectionReference<UserInfo> getTaskCollection() {
@@ -17,6 +17,4 @@ class FirebaseUtils {
     info.id = docRef.id; //auto id
     return docRef.set(info); // take info and put it in firebase
   }
-
-
 }

@@ -1,4 +1,4 @@
-import 'package:diabetes_app/questionScreens/quesions_screen.dart';
+import 'package:dibates/questionScreens/quesions_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
