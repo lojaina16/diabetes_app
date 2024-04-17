@@ -18,12 +18,5 @@ class FirebaseUtils {
     return docRef.set(info); // take info and put it in firebase
   }
 
-/*static Stream<QuerySnapshot<UserInfo>> getTasks(DateTime date) {
-    return getTaskCollection()
-        .where("dateTime",
-            isEqualTo: DateUtils.dateOnly(date).millisecondsSinceEpoch)
-        .snapshots();
-  }
 
-   */
 }

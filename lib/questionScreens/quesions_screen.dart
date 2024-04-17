@@ -1,15 +1,15 @@
 import 'package:diabetes_app/model/user_info.dart';
 import 'package:diabetes_app/questionScreens/custom_container.dart';
-import 'package:diabetes_app/questionScreens/output_screen1.dart';
 import 'package:flutter/material.dart';
-import '../firebase_utils.dart';
-import 'custom_textfield.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'output_screen2.dart';
+import '../firebase_utils.dart';
+import 'custom_textfield.dart';
 
 class Question extends StatefulWidget {
   static const String routeName = "questionScreen";
+
+  const Question({super.key});
 
   @override
   State<Question> createState() => _QuestionState();
@@ -46,14 +46,14 @@ class _QuestionState extends State<Question> {
             child: Center(
               child: Column(
                 children: [
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Text("Diabetes",
                       style: GoogleFonts.dmSerifDisplay(
-                          fontSize: 24, color: Color(0xff5063BF))),
+                          fontSize: 24, color: const Color(0xff5063BF))),
                   Text("Detection",
                       style: GoogleFonts.dmSerifDisplay(
-                          fontSize: 24, color: Color(0xff5063BF))),
-                  SizedBox(height: 20),
+                          fontSize: 24, color: const Color(0xff5063BF))),
+                  const SizedBox(height: 20),
                   CustomTextField(
                       labelText: "Enter Your Age",
                       type: TextInputType.number,
@@ -74,7 +74,7 @@ class _QuestionState extends State<Question> {
                       labelText: "Enter Your Blood Glucose Level",
                       type: TextInputType.number,
                       controller: bloodGlucoseLevelController),
-                  CustomContainer(txt: "Choose your gender"),
+                  const CustomContainer(txt: "Choose your gender"),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
@@ -85,7 +85,7 @@ class _QuestionState extends State<Question> {
                   ),
                   Column(
                     children: [
-                      CustomContainer(txt: "what is your Smoking History?"),
+                      const CustomContainer(txt: "what is your Smoking History?"),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
@@ -94,7 +94,7 @@ class _QuestionState extends State<Question> {
                           addRadioButton4(2, 'Current')
                         ],
                       ),
-                      CustomContainer(txt: "Do you have hypertension?"),
+                      const CustomContainer(txt: "Do you have hypertension?"),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
@@ -102,7 +102,7 @@ class _QuestionState extends State<Question> {
                           addRadioButton2(1, 'No'),
                         ],
                       ),
-                      CustomContainer(txt: "Do you have a heart disease?"),
+                      const CustomContainer(txt: "Do you have a heart disease?"),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
@@ -116,7 +116,7 @@ class _QuestionState extends State<Question> {
                     padding: const EdgeInsets.all(20),
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xff5063BF)),
+                            backgroundColor: const Color(0xff5063BF)),
                         onPressed: () {
                           if (formKey.currentState?.validate() ?? false) {
                             if (a1cTestController.text == "5.7") {
@@ -128,8 +128,8 @@ class _QuestionState extends State<Question> {
                             }
                           }
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Text("Detect"),
                         )),
                   ),

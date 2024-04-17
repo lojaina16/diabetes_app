@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         OutputScreen2.routeName: (context) => OutputScreen2(),
         HealthRecord.routeName: (context) => const HealthRecord(),
         EmergencyCall.routeName: (context) => const EmergencyCall(),
-        MedicationFollowUp.routeName: (context) => MedicationFollowUp()
+        MedicationFollowUp.routeName: (context) => const MedicationFollowUp()
       },
     );
   }

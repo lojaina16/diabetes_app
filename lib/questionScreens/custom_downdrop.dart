@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomDownDrop extends StatefulWidget {
-  String? value;
-  String txt;
+   final String value;
+  final String txt;
 
-  CustomDownDrop({required this.value, required this.txt});
+  const CustomDownDrop({super.key, required this.value, required this.txt});
 
   @override
   State<CustomDownDrop> createState() => _CustomDownDropState();
@@ -22,34 +22,36 @@ class _CustomDownDropState extends State<CustomDownDrop> {
           if (value == null || value.isEmpty) {
             return "Please answer the question";
           }
+          return null;
         },
         decoration: InputDecoration(
             filled: true,
-            fillColor: Color(0xff9bbcea),
+            fillColor: const Color(0xff9bbcea),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(24),
-              borderSide: BorderSide(color: Colors.red),
+              borderSide: const BorderSide(color: Colors.red),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(24),
-              borderSide: BorderSide(color: Colors.red),
+              borderSide: const BorderSide(color: Colors.red),
             ),
-            labelStyle: TextStyle(fontSize: 15),
+            labelStyle: const TextStyle(fontSize: 15),
             labelText: widget.txt,
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(24),
-                borderSide: BorderSide(color: Colors.transparent)),
+                borderSide: const BorderSide(color: Colors.transparent)),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(24),
-              borderSide: BorderSide(color: Colors.transparent),
+              borderSide: const BorderSide(color: Colors.transparent),
             )),
         value: widget.value,
         items: ans
             .map((answer) =>
                 DropdownMenuItem<String>(value: answer, child: Text(answer)))
             .toList(),
-        onChanged: (answer) => setState(() => widget.value = answer),
+        onChanged: (answer) => setState(() => ""),
       ),
     );
   }
 }
+//CustomTextFromField

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ImageWidget extends StatelessWidget {
-  String x;
-  String text;
-  String route;
+  final String text;
+  final String route;
+  final String x;
 
-  ImageWidget(this.x, this.text, this.route);
+  const ImageWidget(this.x, this.text, this.route, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +20,13 @@ class ImageWidget extends StatelessWidget {
           },
         ),
         Container(
-            margin: EdgeInsets.all(5),
-            padding: EdgeInsets.all(5),
-            color: Color.fromARGB(120, 0, 0, 0),
+            margin: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
+            color: const Color.fromARGB(120, 0, 0, 0),
             child: Text(
               text,
               textAlign: TextAlign.start,
-              style: TextStyle(
+              style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 15,
                   color: Colors.white),

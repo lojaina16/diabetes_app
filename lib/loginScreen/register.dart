@@ -68,7 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   hintText: 'Enter your email',
                   labelText: 'Email Address',
                   icon: Icons.email,
-                  keyboardTybe: TextInputType.emailAddress,
+                  keyboardType: TextInputType.emailAddress,
                   validator: (text) {
                     if (text == null || text.trim().isEmpty) {
                       return 'please enter email';
@@ -81,7 +81,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   hintText: 'Enter your mobile number',
                   labelText: 'Mobile Number',
                   icon: Icons.call,
-                  keyboardTybe: TextInputType.number,
+                  keyboardType: TextInputType.number,
                   validator: (text) {
                     if (text == null || text.trim().isEmpty) {
                       return 'please enter mobile number';

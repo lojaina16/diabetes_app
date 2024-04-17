@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     hintText: 'Enter your email',
                     labelText: 'Email Address',
                     icon: Icons.email,
-                    keyboardTybe: TextInputType.emailAddress,
+                    keyboardType: TextInputType.emailAddress,
                     validator: (text) {
                       if (text == null || text.trim().isEmpty) {
                         return 'please enter email';

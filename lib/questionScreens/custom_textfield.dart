@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextField extends StatelessWidget {
-  String labelText;
-  TextInputType type = TextInputType.number;
-  TextEditingController controller;
+ final  String labelText;
+  final TextInputType type ;
+  final TextEditingController controller;
 
-  CustomTextField(
+  const CustomTextField(
       {super.key, required this.labelText,
       this.type = TextInputType.text,
       required this.controller});
@@ -21,18 +21,19 @@ class CustomTextField extends StatelessWidget {
           if (value == null || value.isEmpty) {
             return "Please answer the question";
           }
+          return null;
         },
         keyboardType: type,
         decoration: InputDecoration(
-            fillColor: Color(0xff9bbcea),
+            fillColor: const Color(0xff9bbcea),
             filled: true,
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(24),
-              borderSide: BorderSide(color: Colors.red),
+              borderSide: const BorderSide(color: Colors.red),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(24),
-              borderSide: BorderSide(color: Colors.red),
+              borderSide: const BorderSide(color: Colors.red),
             ),
             label: Text(labelText,
                 style: GoogleFonts.poppins(
@@ -40,10 +41,10 @@ class CustomTextField extends StatelessWidget {
             //hintText: hintText,
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(24),
-                borderSide: BorderSide(color: Colors.transparent)),
+                borderSide: const BorderSide(color: Colors.transparent)),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(24),
-                borderSide: BorderSide(color: Colors.transparent))),
+                borderSide: const BorderSide(color: Colors.transparent))),
       ),
     );
   }
