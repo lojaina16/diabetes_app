@@ -1,4 +1,4 @@
-# dibates
+# diabetes
 
 A new Flutter project.
 

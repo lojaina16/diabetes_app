@@ -1,4 +1,4 @@
-import 'package:dibates/homeScreen/emergencyCall_screen.dart';
+import 'package:diabetes/homeScreen/emergencyCall_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'healthRecord/healthrecord_screen.dart';

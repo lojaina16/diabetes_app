@@ -1,5 +1,5 @@
-import 'package:dibates/loginScreen/register.dart';
-import 'package:dibates/questionScreens/quesions_screen.dart';
+import 'package:diabetes/loginScreen/register.dart';
+import 'package:diabetes/questionScreens/quesions_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../dialog_utils.dart';

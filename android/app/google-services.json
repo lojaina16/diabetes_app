@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:881671348163:android:99c42b35c3270dd209e776",
         "android_client_info": {
-          "package_name": "com.example.dibates"
+          "package_name": "com.example.diabetes"
         }
       },
       "oauth_client": [],
@@ -28,7 +28,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:881671348163:android:327875b2165b0b2309e776",
         "android_client_info": {
-          "package_name": "com.example.dibates"
+          "package_name": "com.example.diabetes"
         }
       },
       "oauth_client": [],

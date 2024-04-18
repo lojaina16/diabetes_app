@@ -1,5 +1,5 @@
-import 'package:dibates/model/user_info.dart';
-import 'package:dibates/questionScreens/custom_container.dart';
+import 'package:diabetes/model/user_info.dart';
+import 'package:diabetes/questionScreens/custom_container.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
