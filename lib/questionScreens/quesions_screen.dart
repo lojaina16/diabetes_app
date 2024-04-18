@@ -1,7 +1,6 @@
 import 'package:diabetes/model/user_info.dart';
 import 'package:diabetes/questionScreens/custom_container.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../firebase_utils.dart';
 import 'custom_textfield.dart';
@@ -47,12 +46,12 @@ class _QuestionState extends State<Question> {
               child: Column(
                 children: [
                   const SizedBox(height: 20),
-                  Text("Diabetes",
-                      style: GoogleFonts.dmSerifDisplay(
-                          fontSize: 24, color: const Color(0xff5063BF))),
-                  Text("Detection",
-                      style: GoogleFonts.dmSerifDisplay(
-                          fontSize: 24, color: const Color(0xff5063BF))),
+                  const Text("Diabetes",
+                      style: TextStyle(
+                          fontSize: 24, color: Color(0xff5063BF))),
+                  const Text("Detection",
+                      style: TextStyle(
+                          fontSize: 24, color: Color(0xff5063BF))),
                   const SizedBox(height: 20),
                   CustomTextField(
                       labelText: "Enter Your Age",

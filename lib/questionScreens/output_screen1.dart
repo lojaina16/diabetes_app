@@ -1,6 +1,5 @@
 import 'package:diabetes/homeScreen/categories.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 class OutputScreen1 extends StatelessWidget {
@@ -15,21 +14,21 @@ class OutputScreen1 extends StatelessWidget {
           children: [
             Lottie.asset("assets/lottie/warning.json",
                 width: 300, height: 300, fit: BoxFit.fill),
-            Text("positive",
-                style: GoogleFonts.jockeyOne(
+            const Text("positive",
+                style: TextStyle(
                     fontSize: 35,
                     color: Color(0xffE50000),
                     fontWeight: FontWeight.bold)),
             ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xff5066C0),
+                    backgroundColor: const Color(0xff5066C0),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(100)),
-                    fixedSize: Size(200, 80)),
+                    fixedSize: const Size(200, 80)),
                 onPressed: () {
                   Navigator.pushReplacementNamed(context, HomeScreen.routeName);
                 },
-                child: Text(
+                child: const Text(
                   "Next",
                   style: TextStyle(fontSize: 20),
                 ))

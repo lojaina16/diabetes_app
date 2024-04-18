@@ -41,7 +41,7 @@ class UserInfo {
 
   UserInfo.fromFireStore(Map<String, dynamic> data)
       : this(
-            id: data["id"] as String,
+            id: data["id"],
             gender: data["gender"],
             age: data["age"],
             weight: data["weight"],

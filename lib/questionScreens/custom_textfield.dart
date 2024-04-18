@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextField extends StatelessWidget {
  final  String labelText;
@@ -36,7 +35,7 @@ class CustomTextField extends StatelessWidget {
               borderSide: const BorderSide(color: Colors.red),
             ),
             label: Text(labelText,
-                style: GoogleFonts.poppins(
+                style: const TextStyle(
                     fontSize: 14, fontWeight: FontWeight.w400)),
             //hintText: hintText,
             enabledBorder: OutlineInputBorder(
