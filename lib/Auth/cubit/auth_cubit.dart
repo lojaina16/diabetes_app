@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:diabetes/Auth/cubit/auth_state.dart';
 import 'package:diabetes/core/cache_helper.dart';
 import 'package:diabetes/model/user_data.dart';
+import 'package:diabetes/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +34,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthLoginSuccessfully());
       }
     } on FirebaseAuthException catch (e) {
-      emit(AuthLoginError(error: e.message ?? ""));
+      emit(AuthLoginError(error: handleError(e.code)));
     }
   }
 
@@ -47,7 +48,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> googleSingUp() async {
     emit(AuthSingUpLoading());
     try {
-      GoogleSignIn googleUser = GoogleSignIn();
+      final GoogleSignIn googleUser = GoogleSignIn();
 
       if (await googleUser.isSignedIn()) {
         googleUser.currentUser?.clearAuthCache();
@@ -64,12 +65,17 @@ class AuthCubit extends Cubit<AuthState> {
         );
         final userCredential =
             await FirebaseAuth.instance.signInWithCredential(credential);
+        final model = UserModel(
+          email: user.email,
+          phone: "",
+          uid: userCredential.user?.uid ?? "",
+          name: user.displayName ?? "",
+        );
+        await sendUserData(model);
         saveUserData(userCredential);
         emit(AuthSingUpSuccessfully());
       }
     } catch (error) {
-      debugPrint(error.toString());
-
       emit(AuthSingUpError(error: error.toString()));
     }
   }
@@ -78,11 +84,44 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future register() async {
     emit(AuthSingUpLoading());
-    try{
-      final user = await firebaseAuth.
-    } on FirebaseAuthException catch (e){
-      emit(Auth);
+    try {
+      final user = await firebaseAuth.createUserWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
+
+      if (user.user != null) {
+        final model = UserModel(
+            name: nameController.text,
+            email: emailController.text,
+            phone: mobileNumberController.text,
+            uid: user.user?.uid ?? "");
+        await sendUserData(model);
+        await firebaseAuth.currentUser?.sendEmailVerification();
+        saveUserData(user);
+        emit(AuthSingUpSuccessfully());
+      }
+    } on FirebaseAuthException catch (e) {
+      emit(AuthSingUpError(error: handleError(e.code)));
     }
   }
+
+  String handleError(String code) {
+    switch (code) {
+      case "weak-password":
+        return "The password provided is too weak.";
+      case "email-already-in-use":
+        return "The account already exists for that email.";
+
+      case "user-not-found":
+        return "No user found for that email.";
+
+      case "wrong-password":
+        return "Wrong password provided for that user.";
+      default:
+        return "Server Damage";
+    }
+  }
+
+  Future sendUserData(UserModel model) async {
+    firebaseFirestore.collection("users").doc(model.uid).set(model.toMap());
+  }
 }
-brbrbbb
