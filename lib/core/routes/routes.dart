@@ -1,23 +1,24 @@
-import 'package:diabetes/homeScreen/categories.dart';
-import 'package:diabetes/homeScreen/emergencyCall_screen.dart';
-import 'package:diabetes/homeScreen/healthRecord/healthrecord_screen.dart';
-import 'package:diabetes/homeScreen/medication/medicationScreen.dart';
-import 'package:diabetes/Auth/pages/login.dart';
-import 'package:diabetes/Auth/pages/register.dart';
-import 'package:diabetes/questionScreens/output_screen1.dart';
-import 'package:diabetes/questionScreens/output_screen2.dart';
-import 'package:diabetes/questionScreens/quesions_screen.dart';
+import 'package:diabetes/features/Auth/pages/login.dart';
+import 'package:diabetes/features/Auth/pages/register.dart';
+import 'package:diabetes/features/Questions/presentation/cubit/questions_cubit.dart';
+import 'package:diabetes/features/Questions/presentation/pages/questions.dart';
+import 'package:diabetes/features/home/emergencyCall_screen.dart';
+import 'package:diabetes/features/home/healthRecord/healthrecord_screen.dart';
+import 'package:diabetes/features/home/medication/medicationScreen.dart';
+import 'package:diabetes/features/home/pages/home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Routes {
   static Map<String, Widget Function(BuildContext context)> routes =
       <String, WidgetBuilder>{
-    RegisterScreen.routeName: (context) => RegisterScreen(),
+    RegisterScreen.routeName: (context) => const RegisterScreen(),
     LoginScreen.routeName: (context) => const LoginScreen(),
-    Question.routeName: (context) => const Question(),
-    OutputScreen1.routeName: (context) => OutputScreen1(),
-    HomeScreen.routeName: (context) => HomeScreen(),
-    OutputScreen2.routeName: (context) => OutputScreen2(),
+    Questions.route: (context) => BlocProvider(
+          create: (context) => QuestionsCubit(),
+          child: const Questions(),
+        ),
+    HomeScreen.routeName: (context) => const HomeScreen(),
     HealthRecord.routeName: (context) => const HealthRecord(),
     EmergencyCall.routeName: (context) => const EmergencyCall(),
     MedicationFollowUp.routeName: (context) => const MedicationFollowUp()

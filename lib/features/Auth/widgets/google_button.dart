@@ -1,4 +1,4 @@
-import 'package:diabetes/Auth/cubit/auth_cubit.dart';
+import 'package:diabetes/features/Auth/cubit/auth_cubit.dart';
 import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/utils/assets_manager.dart';
 import 'package:diabetes/core/utils/color_manager.dart';

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:diabetes/Auth/cubit/auth_state.dart';
+import 'package:diabetes/features/Auth/cubit/auth_state.dart';
 import 'package:diabetes/core/cache_helper.dart';
 import 'package:diabetes/model/user_data.dart';
 import 'package:diabetes/model/user_model.dart';
@@ -34,6 +34,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthLoginSuccessfully());
       }
     } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
       emit(AuthLoginError(error: handleError(e.code)));
     }
   }
@@ -76,6 +77,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthSingUpSuccessfully());
       }
     } catch (error) {
+       debugPrint(error.toString());
       emit(AuthSingUpError(error: error.toString()));
     }
   }
@@ -100,6 +102,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthSingUpSuccessfully());
       }
     } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
       emit(AuthSingUpError(error: handleError(e.code)));
     }
   }
@@ -111,11 +114,13 @@ class AuthCubit extends Cubit<AuthState> {
       case "email-already-in-use":
         return "The account already exists for that email.";
 
-      case "user-not-found":
+      case "user-not-found"|| "invalid-credential":
         return "No user found for that email.";
 
       case "wrong-password":
         return "Wrong password provided for that user.";
+      case "invalid-email" :
+        return "The email address is badly formatted";
       default:
         return "Server Damage";
     }
@@ -124,4 +129,6 @@ class AuthCubit extends Cubit<AuthState> {
   Future sendUserData(UserModel model) async {
     firebaseFirestore.collection("users").doc(model.uid).set(model.toMap());
   }
+
+  
 }

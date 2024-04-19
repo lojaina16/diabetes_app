@@ -1,12 +1,15 @@
-import 'package:diabetes/Auth/cubit/auth_cubit.dart';
-import 'package:diabetes/Auth/cubit/auth_state.dart';
-import 'package:diabetes/Auth/widgets/google_button.dart';
 import 'package:diabetes/core/extensions/navigeation_on_context.dart';
 import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/extensions/snack_bar_on_context.dart';
 import 'package:diabetes/core/utils/loading.dart';
 import 'package:diabetes/core/utils/my_button.dart';
-import 'package:diabetes/homeScreen/categories.dart';
+import 'package:diabetes/features/Auth/cubit/auth_cubit.dart';
+import 'package:diabetes/features/Auth/cubit/auth_state.dart';
+import 'package:diabetes/features/Auth/widgets/google_button.dart';
+import 'package:diabetes/features/Questions/presentation/pages/questions.dart';
+import 'package:diabetes/features/home/cubit/home_cubit.dart';
+import 'package:diabetes/features/home/pages/home.dart';
+import 'package:diabetes/model/user_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,11 +24,15 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is AuthSingUpError) {
           context.showSnack(state.error, isError: true);
         } else if (state is AuthSingUpSuccessfully) {
-          context.nextPageWitheRemove(HomeScreen.routeName);
+          await HomeCubit.get(context)
+              .getUserData()
+              .whenComplete(() => context.nextPageWitheRemove(UserData.debatesType != null
+                      ? HomeScreen.routeName
+                      : Questions.route));
         }
       },
       builder: (context, state) {
@@ -102,7 +109,7 @@ class RegisterScreen extends StatelessWidget {
                   height: 0.06,
                   onTap: () {
                     if (cubit.formKeySingUp.currentState?.validate() ?? false) {
-                      cubit.login();
+                      cubit.register();
                     }
                   },
                   text: "Sing Up",

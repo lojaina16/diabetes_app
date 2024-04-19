@@ -1,28 +1,32 @@
+import 'package:diabetes/core/utils/color_manager.dart';
+import 'package:diabetes/features/home/model/home_category.dart';
 import 'package:flutter/material.dart';
 
 class ImageWidget extends StatelessWidget {
-  final String text;
-  final String route;
-  final String x;
+  final HomeCategory category;
 
-  const ImageWidget(this.x, this.text, this.route, {super.key});
+  const ImageWidget({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: Stack(
+    final image = category.image;
+    final text = category.text;
+    final route = category.route;
+
+    return Stack(
       alignment: Alignment.bottomRight,
       children: [
         InkWell(
-          child: Image.asset("assets/images/$x.png", width: 500),
+          child: Image.asset(
+            "assets/images/$image.png",
+          ),
           onTap: () {
             Navigator.pushNamed(context, route);
           },
         ),
         Container(
-            margin: const EdgeInsets.all(5),
             padding: const EdgeInsets.all(5),
-            color: const Color.fromARGB(120, 0, 0, 0),
+            color: AppColors.black2.withOpacity(0.7),
             child: Text(
               text,
               textAlign: TextAlign.start,
@@ -32,6 +36,6 @@ class ImageWidget extends StatelessWidget {
                   color: Colors.white),
             ))
       ],
-    ));
+    );
   }
 }
