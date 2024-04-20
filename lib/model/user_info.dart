@@ -1,24 +1,27 @@
-class UserInfo {
-  static const String collectionName = "info";
-  String? age;
-  String? gender;
-  String? id;
-  String? weight;
-  String? hypertension;
-  String? heartDisease;
-  String? smokingHistory;
-  String? bmi;
-  String? a1cTest;
-  String? bloodGlucoseLevel;
 
-  UserInfo({
+
+class MyUserInfo {
+  final String age;
+  final String gender;
+  final String id;
+  final String weight;
+  final String hypertension;
+  final String heartDisease;
+  final String smokingHistory;
+  final String bmi;
+  final String a1cTest;
+  final String bloodGlucoseLevel;
+  final String type;
+
+  MyUserInfo({
     required this.age,
     required this.gender,
-    this.id = "",
+    required this.id,
     required this.weight,
     required this.hypertension,
     required this.smokingHistory,
     required this.bmi,
+    required this.type,
     required this.a1cTest,
     required this.bloodGlucoseLevel,
     required this.heartDisease,
@@ -31,6 +34,7 @@ class UserInfo {
       "age": age,
       "weight": weight,
       "hypertension": hypertension,
+      "type": type,
       "heartDisease": heartDisease,
       "smokingHistory": smokingHistory,
       "bmi": bmi,
@@ -39,9 +43,10 @@ class UserInfo {
     };
   }
 
-  UserInfo.fromFireStore(Map<String, dynamic> data)
+  MyUserInfo.fromFireStore(Map<String, dynamic> data)
       : this(
-            id: data["id"] as String,
+            id: data["id"],
+            type: data['type'],
             gender: data["gender"],
             age: data["age"],
             weight: data["weight"],
