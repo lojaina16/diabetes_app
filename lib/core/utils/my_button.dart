@@ -16,7 +16,7 @@ class MyButton extends StatelessWidget {
     this.height = 0.057,
     this.width = 1,
     this.buttonColor,
-    this.radius = 8,
+    this.radius = 16,
     this.textColor,
     this.fontSize = 18,
     this.fontWeight,

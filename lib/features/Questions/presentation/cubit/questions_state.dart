@@ -14,9 +14,10 @@ class QuestionsSelectType extends QuestionsState {}
 class QuestionsPostTypeLoading extends QuestionsState {}
 
 class QuestionsPostTypeSuccessfully extends QuestionsState {
-  final bool isHave;
 
-  const QuestionsPostTypeSuccessfully({required this.isHave});
+  const QuestionsPostTypeSuccessfully();
 }
+class QuestionsSelectGender extends QuestionsState {}
 
 class QuestionsPostTypeError extends QuestionsState {}
+class QuestionsAnswersTOqUESTIONS extends QuestionsState {}

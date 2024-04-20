@@ -1,4 +1,3 @@
-
 import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/utils/color_manager.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +9,7 @@ class AuthTextForm extends StatelessWidget {
   final String? Function(String?)? validator;
   final String? hintText;
   final TextEditingController? controller;
+  final TextInputAction? textInputAction;
   const AuthTextForm({
     super.key,
     required this.icon,
@@ -18,6 +18,7 @@ class AuthTextForm extends StatelessWidget {
     this.validator,
     this.hintText,
     this.controller,
+    this.textInputAction = TextInputAction.next
   });
 
   @override
@@ -29,9 +30,15 @@ class AuthTextForm extends StatelessWidget {
         controller: controller,
         style: Theme.of(context).textTheme.bodyMedium,
         obscureText: isPassword,
-        validator: validator,
+        validator: validator ??
+            (v) {
+              if (v?.isEmpty ?? true) {
+                return "This field is Empty";
+              }
+              return null;
+            },
         textInputAction:
-            isPassword ? TextInputAction.done : TextInputAction.next,
+            isPassword ? TextInputAction.done : textInputAction,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(8),
           border: const OutlineInputBorder(),

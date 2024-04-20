@@ -1,3 +1,4 @@
+import 'package:diabetes/core/extensions/theme_on_context.dart';
 import 'package:diabetes/features/Auth/cubit/auth_cubit.dart';
 import 'package:diabetes/features/Auth/cubit/auth_state.dart';
 import 'package:diabetes/core/extensions/navigeation_on_context.dart';
@@ -24,8 +25,9 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
-      value:
-          const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark),
+      value: SystemUiOverlayStyle(
+          statusBarIconBrightness:
+              context.isDarkMode ? Brightness.light : Brightness.dark),
       child: Scaffold(
         body: BlocConsumer<AuthCubit, AuthState>(
           builder: (context, state) {

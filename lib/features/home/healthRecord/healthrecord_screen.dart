@@ -1,15 +1,15 @@
+import 'package:diabetes/core/utils/color_manager.dart';
+import 'package:diabetes/features/home/cubit/home_cubit.dart';
+import 'package:diabetes/features/home/cubit/home_cubit_state.dart';
+import 'package:diabetes/features/home/healthRecord/widget/record.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HealthRecord extends StatefulWidget {
+class HealthRecord extends StatelessWidget {
   const HealthRecord({super.key});
 
   static const String routeName = "HealthRecordScreen";
 
-  @override
-  State<HealthRecord> createState() => _HealthRecordState();
-}
-
-class _HealthRecordState extends State<HealthRecord> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,163 +32,63 @@ class _HealthRecordState extends State<HealthRecord> {
                     fontWeight: FontWeight.bold)),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Card(
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Colors.white70, width: 1),
-                  borderRadius: BorderRadius.circular(10),
+        body: BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            final cubit = HomeCubit.get(context);
+            final info = cubit.userInfo;
+            return ListView(
+              padding: const EdgeInsets.all(16),
+              physics: const BouncingScrollPhysics(),
+              primary: true,
+              children: [
+                Card(
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(color: Colors.white70, width: 1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: ListTile(
+                    title: Text("Condition:${info?.type}"),
+                    isThreeLine: true,
+                    subtitle: Text("Blood Type: O+  \n"
+                        "Weight: ${info?.weight} kg\n"
+                        "Gender: ${info?.gender}\n"
+                        "Age: ${info?.age}"),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.edit),
+                      onPressed: () {},
+                    ),
+                  ),
                 ),
-                margin: const EdgeInsets.all(30),
-                child: ListTile(
-                  title: const Text("Condition: Type 2"),
-                  isThreeLine: true,
-                  subtitle: const Text("Blood Type: O+  \n"
-                      "Weight: 55 kg\n"
-                      "Gender: Female\n"
-                      "Age: 21"),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: () {},
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    RecordStatus(
+                      text: "Blood Sugar Level",
+                      value: info?.bloodGlucoseLevel,
+                      prefix: "mg/dl",
+                      color: AppColors.blue,
+                    ),
+                    const SizedBox(
+                      width: 13,
+                    ),
+                    RecordStatus(
+                      color: AppColors.green,
+                      text: "your Target Goal",
+                      value: info?.bloodGlucoseLevel,
+                      prefix: "mg/dl",
+                    ),
+                  ],
                 ),
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.all(5),
-                      padding: const EdgeInsets.all(10),
-                      decoration: ShapeDecoration(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          color: const Color(0xff5F6583FF)),
-                      child: Column(
-                        children: [
-                          const Text(
-                            "Blood Sugar Level",
-                            style: TextStyle(fontWeight: FontWeight.w500),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.all(5),
-                            height: 150,
-                            width: 150,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              border: Border.all(
-                                width: 7,
-                                color: const Color(0xff5063BF),
-                                style: BorderStyle.solid,
-                              ),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "140 mg/dl",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xff5063BF)),
-                              ),
-                            ),
-                          ),
-                          ElevatedButton(
-                              onPressed: () {}, child: const Text("Change"))
-                        ],
-                      ),
-                    ),
-                  ),
-                  const VerticalDivider(thickness: 5),
-                  Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.all(5),
-                      padding: const EdgeInsets.all(10),
-                      decoration: ShapeDecoration(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          color: const Color(0xff5F6583FF)),
-                      child: Column(
-                        children: [
-                          const Text(
-                            "Your Target Goal",
-                            style: TextStyle(fontWeight: FontWeight.w500),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.all(5),
-                            height: 150,
-                            width: 150,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              border: Border.all(
-                                width: 7,
-                                color: Colors.green,
-                                style: BorderStyle.solid,
-                              ),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "80 mg/dl",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xff5063BF)),
-                              ),
-                            ),
-                          ),
-                          ElevatedButton(
-                              onPressed: () {}, child: const Text("Change"))
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.all(5),
-                      padding: const EdgeInsets.all(10),
-                      decoration: ShapeDecoration(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          color: const Color(0xff5F6583FF)),
-                      child: Column(
-                        children: [
-                          const Text(
-                            "HbA1c Test",
-                            style: TextStyle(fontWeight: FontWeight.w500),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.all(5),
-                            height: 150,
-                            width: 150,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              border: Border.all(
-                                width: 7,
-                                color: Colors.orange,
-                                style: BorderStyle.solid,
-                              ),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                " 6.5 % ",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xff5063BF),
-                                    fontSize: 18),
-                              ),
-                            ),
-                          ),
-                          ElevatedButton(
-                              onPressed: () {}, child: const Text("Change"))
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+                RecordStatus(
+                  color: AppColors.yellow,
+                  text: "HbA1c Test",
+                  value: info?.a1cTest,
+                  prefix: "",
+                ),
+              ],
+            );
+          },
         ));
   }
 }

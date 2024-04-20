@@ -13,6 +13,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init;
   UserData.uid = CacheHelper.getData(key: "uid");
+  UserData.theme = CacheHelper.getData(key: "theme");
+
   UserData.debatesType = CacheHelper.getData(key: "debatesType");
 
   Bloc.observer = MyBlocObserver();

@@ -1,11 +1,10 @@
 import 'package:diabetes/core/extensions/navigeation_on_context.dart';
 import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/utils/my_button.dart';
+import 'package:diabetes/features/Settings/presentation/pages/setting.dart';
 import 'package:diabetes/features/home/cubit/home_cubit.dart';
 import 'package:diabetes/model/user_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({
@@ -51,6 +50,7 @@ class HomeDrawer extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   context.pop;
+                  context.nextPage(SettingPage.route);
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
@@ -100,9 +100,9 @@ class HomeDrawer extends StatelessWidget {
               const Spacer(),
               MyButton(
                   text: "Log Out",
-                  onTap: () async{
+                  onTap: () async {
                     context.pop;
-                  
+
                     cubit.logOut();
                   })
             ],

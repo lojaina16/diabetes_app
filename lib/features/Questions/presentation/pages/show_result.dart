@@ -2,7 +2,7 @@ import 'package:diabetes/core/extensions/navigeation_on_context.dart';
 import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/utils/color_manager.dart';
 import 'package:diabetes/core/utils/my_button.dart';
-import 'package:diabetes/features/home/pages/home.dart';
+import 'package:diabetes/features/Questions/presentation/pages/insert_user_info.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -15,7 +15,8 @@ class ShowResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Scaffold(
+      body: Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -40,11 +41,12 @@ class ShowResult extends StatelessWidget {
                 text: "Next",
                 radius: 16,
                 onTap: () {
-                  context.nextPageWitheRemove(HomeScreen.routeName);
+                  context.nextPageWitheRemove(UserInfoPage.route);
                 }),
           )
         ],
       ),
+    ),
     );
   }
 }

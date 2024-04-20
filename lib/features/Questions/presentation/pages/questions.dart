@@ -1,10 +1,12 @@
-import 'package:diabetes/core/extensions/dialog_on_context.dart';
+import 'package:diabetes/core/extensions/navigeation_on_context.dart';
 import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/extensions/snack_bar_on_context.dart';
+import 'package:diabetes/core/utils/app_string.dart';
 import 'package:diabetes/core/utils/color_manager.dart';
 import 'package:diabetes/core/utils/loading.dart';
 import 'package:diabetes/core/utils/my_button.dart';
 import 'package:diabetes/features/Questions/presentation/cubit/questions_cubit.dart';
+import 'package:diabetes/features/Questions/presentation/pages/detect_diabetes.dart';
 import 'package:diabetes/features/Questions/presentation/pages/show_result.dart';
 import 'package:diabetes/features/Questions/presentation/widgets/diabetes_item.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +20,7 @@ class Questions extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: BlocConsumer<QuestionsCubit, QuestionsState>(
+        body: BlocBuilder<QuestionsCubit, QuestionsState>(
           builder: (context, state) {
             final cubit = QuestionsCubit.get(context);
             return Loading(
@@ -47,14 +49,14 @@ class Questions extends StatelessWidget {
                     child: ListView.builder(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       itemBuilder: (context, index) {
-                        final text = cubit.debatesType[index];
+                        final text = AppString.debatesType[index];
                         return DiabetesItem(
                           cubit: cubit,
                           text: text,
                           index: index,
                         );
                       },
-                      itemCount: cubit.debatesType.length,
+                      itemCount: AppString.debatesType.length,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                     ),
@@ -70,9 +72,13 @@ class Questions extends StatelessWidget {
                     onTap: () async {
                       if (cubit.debatesIndex != null) {
                         if (cubit.debatesIndex == 3) {
-                          context.dialog(const Dialog.fullscreen());
+                          context.nextPage(DetectDiabetes.route);
                         } else {
-                          cubit.postType();
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ShowResult(
+                              positive: cubit.debatesIndex != 4,
+                            ),
+                          ));
                         }
                       } else {
                         context.showSnack("please Select Type First ",
@@ -87,15 +93,6 @@ class Questions extends StatelessWidget {
                 ],
               ),
             );
-          },
-          listener: (BuildContext context, QuestionsState state) {
-            if (state is QuestionsPostTypeSuccessfully) {
-              context.dialog(Dialog.fullscreen(
-                child: ShowResult(
-                  positive: state.isHave,
-                ),
-              ));
-            }
           },
         ),
       ),
