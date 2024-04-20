@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "881671348163",
+    "project_id": "diabetes-app-eecf8",
+    "storage_bucket": "diabetes-app-eecf8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881671348163:android:99c42b35c3270dd209e776",
+        "android_client_info": {
+          "package_name": "com.example.diabetes_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881671348163-ekg9680es2st42msm4vkidjvelv1afsv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.diabetes_app",
+            "certificate_hash": "50ffeb88e35d85d35d5e7d8814d433786a6f9c47"
+          }
+        },
+        {
+          "client_id": "881671348163-ekq0hcc294051pa7r9ve7btk02d9nrri.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoG76ZnimY62Grb5wmsK7XuB1ENUQFf3w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881671348163-ekq0hcc294051pa7r9ve7btk02d9nrri.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "881671348163-pvgtl9bh7q78b7qkqs4a1ckjh2iiqes1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.diabetesApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881671348163:android:327875b2165b0b2309e776",
+        "android_client_info": {
+          "package_name": "com.example.dibates"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881671348163-ekq0hcc294051pa7r9ve7btk02d9nrri.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoG76ZnimY62Grb5wmsK7XuB1ENUQFf3w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881671348163-ekq0hcc294051pa7r9ve7btk02d9nrri.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "881671348163-pvgtl9bh7q78b7qkqs4a1ckjh2iiqes1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.diabetesApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

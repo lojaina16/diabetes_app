@@ -1,23 +1,28 @@
-import 'package:diabetes_app/questionScreens/femaleTypeQuestion.dart';
-import 'package:diabetes_app/questionScreens/quesions_screen.dart';
-import 'package:diabetes_app/questionScreens/questions2_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:diabetes/app.dart';
+import 'package:diabetes/bloc_observer.dart';
+import 'package:diabetes/core/cache_helper.dart';
+import 'package:diabetes/model/user_data.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
-  runApp(MyApp());
-}
+import 'firebase_options.dart';
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: Question.routeName,
-      routes: {
-        Question.routeName: (context) => Question(),
-        Question2.routeName: (context) => Question2(),
-        FemaleQuestions.routeName: (context) => FemaleQuestions()
-      },
-    );
-  }
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CacheHelper.init;
+  UserData.uid = CacheHelper.getData(key: "uid");
+  UserData.theme = CacheHelper.getData(key: "theme");
+
+  UserData.debatesType = CacheHelper.getData(key: "debatesType");
+
+  Bloc.observer = MyBlocObserver();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FirebaseFirestore.instance.settings =
+      const Settings(cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
+
+  runApp(const MyApp());
 }

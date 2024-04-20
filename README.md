@@ -1,4 +1,4 @@
-# diabetes_app
+# diabetes
 
 A new Flutter project.
 
