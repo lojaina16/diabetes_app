@@ -33,7 +33,7 @@ class UserInfoPage extends StatelessWidget {
                 primary: true,
                 children: [
                   SizedBox(
-                    height: context.height * 0.05,
+                    height: context.height * 0.02,
                   ),
                   AuthTextForm(
                     controller: cubit.age,
@@ -53,23 +53,35 @@ class UserInfoPage extends StatelessWidget {
                     textInputType: TextInputType.number,
                     hintText: "Enter Your bloodGlucoseLevel",
                   ),
-                  AuthTextForm(
-                    controller: cubit.heartDisease,
-                    icon: Icons.heart_broken_rounded,
-                    textInputType: TextInputType.text,
-                    hintText: "Enter Your heartDisease",
+                  DropdownAddress(
+                    items: const [
+                      "Yes",
+                      'No',
+                    ],
+                    hint: "Do you have a heart disease?",
+                    changeHint: cubit.heartDisease,
+                    onChanged: (value) {
+                      cubit.selectHeartDisease(value);
+                    },
                   ),
-                  AuthTextForm(
-                    controller: cubit.smokingHistory,
-                    icon: Icons.smoking_rooms,
-                    textInputType: TextInputType.text,
-                    hintText: "Enter Your smokingHistory",
+                  DropdownAddress(
+                    items: cubit.smokingAnswer,
+                    hint: "Smoking History",
+                    changeHint: cubit.smoking,
+                    onChanged: (value) {
+                      cubit.selectSmoking(value);
+                    },
                   ),
-                  AuthTextForm(
-                    controller: cubit.hypertension,
-                    icon: Icons.fact_check_sharp,
-                    textInputType: TextInputType.number,
-                    hintText: "Enter Your hypertension",
+                  DropdownAddress(
+                    items: const [
+                      "Yes",
+                      'No',
+                    ],
+                    hint: "Do you have hypertension?",
+                    changeHint: cubit.hypertension,
+                    onChanged: (value) {
+                      cubit.selectHypertension(value);
+                    },
                   ),
                   AuthTextForm(
                     controller: cubit.weight,
@@ -84,20 +96,16 @@ class UserInfoPage extends StatelessWidget {
                     hintText: "Enter Your bmi",
                     textInputAction: TextInputAction.done,
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                    child: DropdownAddress(
-                      items: const [
-                        "Male",
-                        'Female',
-                      ],
-                      hint: "Gender",
-                      changeHint: cubit.gender,
-                      onChanged: (value) {
-                        cubit.selectGender(value);
-                      },
-                    ),
+                  DropdownAddress(
+                    items: const [
+                      "Male",
+                      'Female',
+                    ],
+                    hint: "Gender",
+                    changeHint: cubit.gender,
+                    onChanged: (value) {
+                      cubit.selectGender(value);
+                    },
                   ),
                   const SizedBox(
                     height: 8,

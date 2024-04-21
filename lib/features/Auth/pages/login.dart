@@ -66,6 +66,15 @@ class LoginScreen extends StatelessWidget {
                       hintText: 'Enter your password',
                       isPassword: true,
                       icon: Icons.lock,
+                      obscureText: cubit.obscure,
+                      suffixIcon: InkWell(
+                        onTap: () {
+                          cubit.changeSuffix();
+                        },
+                        child: Icon(!cubit.obscure
+                            ? Icons.remove_red_eye
+                            : Icons.visibility_off),
+                      ),
                       textInputType: TextInputType.visiblePassword,
                       validator: (text) {
                         if (text == null || text.trim().isEmpty) {

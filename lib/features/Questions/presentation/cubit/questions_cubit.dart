@@ -17,20 +17,37 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   final TextEditingController age = TextEditingController();
   final TextEditingController weight = TextEditingController();
-  final TextEditingController hypertension = TextEditingController();
   final TextEditingController bmi = TextEditingController();
   final TextEditingController a1cTest = TextEditingController();
   final TextEditingController bloodGlucoseLevel = TextEditingController();
-  final TextEditingController heartDisease = TextEditingController();
-  final TextEditingController smokingHistory = TextEditingController();
-    final formKey = GlobalKey<FormState>();
-
+  final formKey = GlobalKey<FormState>();
+  List<String> smokingAnswer = ["Never", "Former", "Current"];
+  String? smoking;
+  void selectSmoking(String? value) {
+    emit(QuestionsInitial());
+    smoking = value;
+    emit(QuestionsSelectGender());
+  }
 
   int? debatesIndex;
   void selectType(int index) {
     emit(QuestionsInitial());
     debatesIndex = index;
     emit(QuestionsSelectType());
+  }
+
+  String? hypertension;
+  void selectHypertension(String? value) {
+    emit(QuestionsInitial());
+    hypertension = value;
+    emit(QuestionsSelectGender());
+  }
+
+  String? heartDisease;
+  void selectHeartDisease(String? value) {
+    emit(QuestionsInitial());
+    heartDisease = value;
+    emit(QuestionsSelectGender());
   }
 
   String? gender;
@@ -50,13 +67,13 @@ class QuestionsCubit extends Cubit<QuestionsState> {
           gender: gender.toString(),
           id: id,
           weight: weight.text,
-          hypertension: hypertension.text,
-          smokingHistory: smokingHistory.text,
+          hypertension: hypertension.toString().contains("Yes"),
+          smokingHistory: smoking.toString(),
           bmi: bmi.text,
           type: type,
           a1cTest: a1cTest.text,
           bloodGlucoseLevel: bloodGlucoseLevel.text,
-          heartDisease: heartDisease.text);
+          heartDisease: heartDisease.toString().contains("Yes"));
       await firebaseFirestore
           .collection("users")
           .doc(UserData.uid)

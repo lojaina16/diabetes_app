@@ -10,16 +10,17 @@ class AuthTextForm extends StatelessWidget {
   final String? hintText;
   final TextEditingController? controller;
   final TextInputAction? textInputAction;
-  const AuthTextForm({
-    super.key,
-    required this.icon,
-    this.isPassword = false,
-    required this.textInputType,
-    this.validator,
-    this.hintText,
-    this.controller,
-    this.textInputAction = TextInputAction.next
-  });
+  final bool obscureText;
+  final Widget? suffixIcon;
+  const AuthTextForm(
+      {super.key,
+      required this.icon,
+      this.isPassword = false,
+      required this.textInputType,
+      this.validator,
+      this.hintText,
+      this.controller,
+      this.textInputAction = TextInputAction.next,  this.obscureText=false, this.suffixIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class AuthTextForm extends StatelessWidget {
         keyboardType: textInputType,
         controller: controller,
         style: Theme.of(context).textTheme.bodyMedium,
-        obscureText: isPassword,
+        obscureText: obscureText,
         validator: validator ??
             (v) {
               if (v?.isEmpty ?? true) {
@@ -37,11 +38,11 @@ class AuthTextForm extends StatelessWidget {
               }
               return null;
             },
-        textInputAction:
-            isPassword ? TextInputAction.done : textInputAction,
+        textInputAction: isPassword ? TextInputAction.done : textInputAction,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(8),
           border: const OutlineInputBorder(),
+          suffixIcon: suffixIcon,
           constraints: BoxConstraints(minHeight: context.height * 0.06),
           isDense: true,
           hintText: hintText,

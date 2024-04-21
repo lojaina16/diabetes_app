@@ -23,5 +23,6 @@ class AuthSingUpError extends AuthState {
 
   AuthSingUpError({required this.error});
 }
+class AuthChangeSuffix extends AuthState{}
 
 

@@ -28,11 +28,10 @@ class RegisterScreen extends StatelessWidget {
         if (state is AuthSingUpError) {
           context.showSnack(state.error, isError: true);
         } else if (state is AuthSingUpSuccessfully) {
-          await HomeCubit.get(context)
-              .getUserData()
-              .whenComplete(() => context.nextPageWitheRemove(UserData.debatesType != null
-                      ? HomeScreen.routeName
-                      : Questions.route));
+          await HomeCubit.get(context).getUserData().whenComplete(() =>
+              context.nextPageWitheRemove(UserData.debatesType != null
+                  ? HomeScreen.routeName
+                  : Questions.route));
         }
       },
       builder: (context, state) {
@@ -93,6 +92,15 @@ class RegisterScreen extends StatelessWidget {
                   textInputType: TextInputType.visiblePassword,
                   icon: Icons.lock,
                   isPassword: true,
+                  obscureText: cubit.obscureSingUp,
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      cubit.changeSuffixSingUp();
+                    },
+                    child: Icon(!cubit.obscureSingUp
+                        ? Icons.remove_red_eye
+                        : Icons.visibility_off),
+                  ),
                   validator: (text) {
                     if (text == null || text.trim().isEmpty) {
                       return 'please enter password';

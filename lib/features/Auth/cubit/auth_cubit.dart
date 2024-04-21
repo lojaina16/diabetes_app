@@ -77,7 +77,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthSingUpSuccessfully());
       }
     } catch (error) {
-       debugPrint(error.toString());
+      debugPrint(error.toString());
       emit(AuthSingUpError(error: error.toString()));
     }
   }
@@ -114,12 +114,12 @@ class AuthCubit extends Cubit<AuthState> {
       case "email-already-in-use":
         return "The account already exists for that email.";
 
-      case "user-not-found"|| "invalid-credential":
+      case "user-not-found" || "invalid-credential":
         return "No user found for that email.";
 
       case "wrong-password":
         return "Wrong password provided for that user.";
-      case "invalid-email" :
+      case "invalid-email":
         return "The email address is badly formatted";
       default:
         return "Server Damage";
@@ -130,5 +130,16 @@ class AuthCubit extends Cubit<AuthState> {
     firebaseFirestore.collection("users").doc(model.uid).set(model.toMap());
   }
 
-  
+  bool obscure = false;
+  void changeSuffix() {
+    emit(AuthInitial());
+    obscure = !obscure;
+    emit(AuthChangeSuffix());
+  }
+  bool obscureSingUp = false;
+  void changeSuffixSingUp() {
+    emit(AuthInitial());
+    obscureSingUp = !obscureSingUp;
+    emit(AuthChangeSuffix());
+  }
 }
