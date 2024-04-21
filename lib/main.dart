@@ -6,16 +6,19 @@ import 'package:diabetes/model/user_data.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
 
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  tz.initializeTimeZones();
   await CacheHelper.init;
   UserData.uid = CacheHelper.getData(key: "uid");
   UserData.theme = CacheHelper.getData(key: "theme");
 
   UserData.debatesType = CacheHelper.getData(key: "debatesType");
+  onDidReceiveNotificationResponse;
 
   Bloc.observer = MyBlocObserver();
   await Firebase.initializeApp(

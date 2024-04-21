@@ -1,6 +1,7 @@
 import 'package:diabetes/features/Auth/pages/login.dart';
 import 'package:diabetes/features/Auth/pages/register.dart';
 import 'package:diabetes/features/Emergency/presentation/pages/emergency_call_screen.dart';
+import 'package:diabetes/features/Medication/presentation/pages/medication_page.dart';
 import 'package:diabetes/features/Questions/presentation/pages/detect_diabetes.dart';
 import 'package:diabetes/features/Questions/presentation/pages/insert_user_info.dart';
 import 'package:diabetes/features/Questions/presentation/pages/questions.dart';
@@ -25,5 +26,6 @@ class Routes {
     SettingPage.route:(context) => const SettingPage(),
     ThemeModeSettings.route:(context) => const ThemeModeSettings(),
     UserInfoPage.route:(context) => const UserInfoPage(),
+    MedicationPage.route:(context) => const MedicationPage()
   };
 }

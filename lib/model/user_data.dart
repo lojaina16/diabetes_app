@@ -1,4 +1,5 @@
 import 'package:diabetes/core/cache_helper.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class UserData {
   static String? uid;
@@ -12,3 +13,4 @@ class UserData {
     return CacheHelper.clear;
   }
 }
+void Function(NotificationResponse)? onDidReceiveNotificationResponse;

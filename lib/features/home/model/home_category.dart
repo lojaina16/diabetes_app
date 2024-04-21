@@ -1,4 +1,5 @@
 import 'package:diabetes/features/Emergency/presentation/pages/emergency_call_screen.dart';
+import 'package:diabetes/features/Medication/presentation/pages/medication_page.dart';
 import 'package:diabetes/features/home/healthRecord/healthrecord_screen.dart';
 
 class HomeCategory {
@@ -26,7 +27,7 @@ class HomeCategory {
         image: "plan", route: EmergencyCall.route, text: "Nutrition Plan "),
     HomeCategory(
         image: "medication",
-        route: EmergencyCall.route,
-      text: "Medication Follow-up")
+        route: MedicationPage.route,
+        text: "Medication Follow-up")
   ];
 }

@@ -3,6 +3,7 @@ import 'package:diabetes/core/theme/dark_theme.dart';
 import 'package:diabetes/core/theme/light_theme.dart';
 import 'package:diabetes/features/Auth/cubit/auth_cubit.dart';
 import 'package:diabetes/features/Emergency/presentation/cubit/emergency_cubit.dart';
+import 'package:diabetes/features/Medication/presentation/cubit/medication_cubit.dart';
 import 'package:diabetes/features/Questions/presentation/cubit/questions_cubit.dart';
 import 'package:diabetes/features/Questions/presentation/pages/questions.dart';
 import 'package:diabetes/features/Settings/presentation/cubit/settings_cubit.dart';
@@ -33,9 +34,14 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SettingsCubit(),
         ),
-          BlocProvider(
+        BlocProvider(
           create: (context) => EmergencyCubit()..getPhones(),
-        )
+        ),
+        BlocProvider(
+          create: (context) => MedicationCubit()
+            ..getReminder()
+            ..initialize(),
+        ),
       ],
       child: BlocBuilder<SettingsCubit, SettingsState>(
         builder: (context, state) {
