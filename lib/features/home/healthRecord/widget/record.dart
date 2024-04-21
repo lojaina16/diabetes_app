@@ -7,11 +7,13 @@ class RecordStatus extends StatelessWidget {
   final String? value;
   final String prefix;
   final Color color;
+  final Function? onTap;
   const RecordStatus({
     super.key,
     required this.text,
     required this.value,
-    required this.prefix, required this.color,
+    required this.prefix,
+    required this.color, this.onTap,
   });
 
   @override
@@ -53,7 +55,8 @@ class RecordStatus extends StatelessWidget {
               ],
             ),
           ),
-          MyButton(text: "Change", onTap: () {})
+          if(onTap!=null)
+          MyButton(text: "Change", onTap:onTap?? () {})
         ],
       ),
     );

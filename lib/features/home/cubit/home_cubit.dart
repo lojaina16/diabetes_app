@@ -5,7 +5,7 @@ import 'package:diabetes/model/user_data.dart';
 import 'package:diabetes/model/user_info.dart';
 import 'package:diabetes/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeCubit extends Cubit<HomeState> {
@@ -13,6 +13,8 @@ class HomeCubit extends Cubit<HomeState> {
   static HomeCubit get(context) => BlocProvider.of(context);
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final TextEditingController controller = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   UserModel? userModel;
   MyUserInfo? userInfo;
@@ -54,6 +56,25 @@ class HomeCubit extends Cubit<HomeState> {
     } on FirebaseAuthException catch (e) {
       debugPrint(e.toString());
       emit(HomeSingOutError());
+    }
+  }
+
+  Future update(String name, String value) async {
+    emit(HomeUpdateUserDataLoading());
+    try {
+      await firebaseFirestore
+          .collection("users")
+          .doc(UserData.uid)
+          .collection("UserInfo")
+          .doc(userInfo?.id)
+          .update({name: value});
+      await getUserData();
+      controller.clear();
+
+      emit(HomeUpdateUserDataSuccessfully());
+    } on FirebaseException catch (e) {
+      debugPrint(e.toString());
+      emit(HomeUpdateUserDataError());
     }
   }
 }

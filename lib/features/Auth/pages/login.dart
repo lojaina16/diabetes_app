@@ -1,4 +1,5 @@
 import 'package:diabetes/core/extensions/theme_on_context.dart';
+import 'package:diabetes/core/utils/clipper.dart';
 import 'package:diabetes/features/Auth/cubit/auth_cubit.dart';
 import 'package:diabetes/features/Auth/cubit/auth_state.dart';
 import 'package:diabetes/core/extensions/navigeation_on_context.dart';
@@ -38,80 +39,90 @@ class LoginScreen extends StatelessWidget {
                 key: cubit.formKeyLogin,
                 child: ListView(
                   physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   children: [
-                    SizedBox(height: context.height * 0.3),
-                    Text(
-                      'Log in',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    SizedBox(height: context.height * 0.03),
-                    AuthTextForm(
-                      controller: cubit.emailController,
-                      hintText: 'Enter your email',
-                      icon: Icons.email,
-                      textInputType: TextInputType.emailAddress,
-                      validator: (text) {
-                        if (text == null || text.trim().isEmpty) {
-                          return 'please enter email';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    AuthTextForm(
-                      controller: cubit.passwordController,
-                      hintText: 'Enter your password',
-                      isPassword: true,
-                      icon: Icons.lock,
-                      obscureText: cubit.obscure,
-                      suffixIcon: InkWell(
-                        onTap: () {
-                          cubit.changeSuffix();
-                        },
-                        child: Icon(!cubit.obscure
-                            ? Icons.remove_red_eye
-                            : Icons.visibility_off),
-                      ),
-                      textInputType: TextInputType.visiblePassword,
-                      validator: (text) {
-                        if (text == null || text.trim().isEmpty) {
-                          return 'please enter password';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: context.height * 0.1),
-                    MyButton(
-                      radius: 16,
-                      height: 0.06,
-                      onTap: () {
-                        if (cubit.formKeyLogin.currentState?.validate() ??
-                            false) {
-                          cubit.login();
-                        }
-                      },
-                      text: "Log in",
-                    ),
-                    SizedBox(height: context.height * 0.18),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Don't have an account?",
-                            style: Theme.of(context).textTheme.bodySmall),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                  context, RegisterScreen.routeName);
+                    SizedBox(
+                        width: context.width,
+                        height: context.height * 0.3,
+                        child: HeaderWidget(context.height * 0.3)),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Log in',
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                          SizedBox(height: context.height * 0.03),
+                          AuthTextForm(
+                            controller: cubit.emailController,
+                            hintText: 'Enter your email',
+                            icon: Icons.email,
+                            textInputType: TextInputType.emailAddress,
+                            validator: (text) {
+                              if (text == null || text.trim().isEmpty) {
+                                return 'please enter email';
+                              }
+                              return null;
                             },
-                            child: const Text(
-                              'Create Now',
-                              style: TextStyle(fontSize: 18),
-                            ))
-                      ],
-                    ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          AuthTextForm(
+                            controller: cubit.passwordController,
+                            hintText: 'Enter your password',
+                            isPassword: true,
+                            icon: Icons.lock,
+                            obscureText: cubit.obscure,
+                            suffixIcon: InkWell(
+                              onTap: () {
+                                cubit.changeSuffix();
+                              },
+                              child: Icon(!cubit.obscure
+                                  ? Icons.remove_red_eye
+                                  : Icons.visibility_off),
+                            ),
+                            textInputType: TextInputType.visiblePassword,
+                            validator: (text) {
+                              if (text == null || text.trim().isEmpty) {
+                                return 'please enter password';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: context.height * 0.1),
+                          MyButton(
+                            radius: 16,
+                            height: 0.06,
+                            onTap: () {
+                              if (cubit.formKeyLogin.currentState?.validate() ??
+                                  false) {
+                                cubit.login();
+                              }
+                            },
+                            text: "Log in",
+                          ),
+                          SizedBox(height: context.height * 0.14),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Don't have an account?",
+                                  style: Theme.of(context).textTheme.bodySmall),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, RegisterScreen.routeName);
+                                  },
+                                  child: const Text(
+                                    'Create Now',
+                                    style: TextStyle(fontSize: 18),
+                                  ))
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),

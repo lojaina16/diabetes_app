@@ -1,7 +1,9 @@
+import 'package:diabetes/core/extensions/dialog_on_context.dart';
 import 'package:diabetes/core/utils/color_manager.dart';
 import 'package:diabetes/features/home/cubit/home_cubit.dart';
 import 'package:diabetes/features/home/cubit/home_cubit_state.dart';
 import 'package:diabetes/features/home/healthRecord/widget/record.dart';
+import 'package:diabetes/features/home/healthRecord/widget/update_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -55,7 +57,13 @@ class HealthRecord extends StatelessWidget {
                         "Age: ${info?.age}"),
                     trailing: IconButton(
                       icon: const Icon(Icons.edit),
-                      onPressed: () {},
+                      onPressed: () {
+                        context.dialog(
+                          const UpdateDialog(
+                            text: 'weight',
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),
@@ -68,6 +76,13 @@ class HealthRecord extends StatelessWidget {
                       value: info?.bloodGlucoseLevel,
                       prefix: "mg/dl",
                       color: AppColors.blue,
+                      onTap: () {
+                        context.dialog(
+                          const UpdateDialog(
+                            text: 'bloodGlucoseLevel',
+                          ),
+                        );
+                      },
                     ),
                     const SizedBox(
                       width: 13,
@@ -85,6 +100,13 @@ class HealthRecord extends StatelessWidget {
                   text: "HbA1c Test",
                   value: info?.a1cTest,
                   prefix: "",
+                  onTap: () {
+                    context.dialog(
+                      const UpdateDialog(
+                        text: 'a1cTest',
+                      ),
+                    );
+                  },
                 ),
               ],
             );
@@ -92,3 +114,4 @@ class HealthRecord extends StatelessWidget {
         ));
   }
 }
+

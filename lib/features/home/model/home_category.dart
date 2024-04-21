@@ -1,4 +1,4 @@
-import 'package:diabetes/features/home/emergencyCall_screen.dart';
+import 'package:diabetes/features/Emergency/presentation/pages/emergency_call_screen.dart';
 import 'package:diabetes/features/home/healthRecord/healthrecord_screen.dart';
 
 class HomeCategory {
@@ -12,7 +12,7 @@ class HomeCategory {
   static const List<HomeCategory> category = [
     HomeCategory(
         image: "emergency",
-        route: EmergencyCall.routeName,
+        route: EmergencyCall.route,
         text: "Emergency Calls"),
     HomeCategory(
         image: "health", route: HealthRecord.routeName, text: "Health Records"),
@@ -21,12 +21,12 @@ class HomeCategory {
         route: HealthRecord.routeName,
         text: "Physical Activates"),
     HomeCategory(
-        image: "dr", route: EmergencyCall.routeName, text: "Ask Your Doctor"),
+        image: "dr", route: EmergencyCall.route, text: "Ask Your Doctor"),
     HomeCategory(
-        image: "plan", route: EmergencyCall.routeName, text: "Nutrition Plan "),
+        image: "plan", route: EmergencyCall.route, text: "Nutrition Plan "),
     HomeCategory(
         image: "medication",
-        route: EmergencyCall.routeName,
+        route: EmergencyCall.route,
       text: "Medication Follow-up")
   ];
 }
