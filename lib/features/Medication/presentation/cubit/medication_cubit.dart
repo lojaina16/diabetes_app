@@ -53,6 +53,10 @@ class MedicationCubit extends Cubit<MedicationState> {
       android:
           AndroidNotificationDetails('your channel id', 'your channel name',
               channelDescription: 'your channel description',
+              enableLights: true,
+              autoCancel: false,
+              enableVibration: true,
+              indeterminate: true,
               importance: Importance.max,
               priority: Priority.high,
               // sound: RawResourceAndroidNotificationSound('notification'),
@@ -60,6 +64,7 @@ class MedicationCubit extends Cubit<MedicationState> {
               ticker: 'ticker'));
 
   DateTime scheduled = DateTime.now();
+
   bool schedule = false;
   void selectReminder(reminder) {
     emit(MedicationInitial());
@@ -68,15 +73,18 @@ class MedicationCubit extends Cubit<MedicationState> {
     emit(MedicationAddReminder());
   }
 
-  Future showNotifyByTime(
-      {required String title,
-      required String body,
-      required DateTime scheduled,
-      String? payload,
-      int id = 0}) async {
+  Future showNotifyByTime({
+    required String title,
+    required String body,
+    required DateTime scheduled,
+    required int id,
+    String? payload,
+  }) async {
     await flutterLocalNotificationsPlugin.zonedSchedule(id, title, body,
         tz.TZDateTime.from(scheduled, tz.local), notificationDetails,
         payload: payload,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        matchDateTimeComponents: DateTimeComponents.time,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);
   }
@@ -109,8 +117,11 @@ class MedicationCubit extends Cubit<MedicationState> {
     emit(MedicationLoading());
     try {
       final String id = const Uuid().v4();
-      final model =
-          MedicationModel(id: id, time: scheduled, title: controller.text);
+      final model = MedicationModel(
+          id: id,
+          notifyId: id.hashCode,
+          time: scheduled,
+          title: controller.text);
       firebaseFirestore
           .collection("users")
           .doc(UserData.uid)
@@ -118,10 +129,11 @@ class MedicationCubit extends Cubit<MedicationState> {
           .doc(id)
           .set(model.toMap());
       showNotifyByTime(
-        title: 'MedicationS',
-        body: model.title,
-        scheduled: scheduled,
-      );
+          title: 'Take Your Medicine',
+          body: model.title,
+          scheduled: scheduled,
+          id: id.hashCode,
+          payload: model.id);
       getReminder();
       emit(MedicationAddReminderSuccessfully());
     } on FirebaseException catch (e) {
@@ -129,6 +141,29 @@ class MedicationCubit extends Cubit<MedicationState> {
         print(e.message.toString());
       }
       emit(MedicationAddReminderError());
+    }
+  }
+
+  Future delete(String id, int notificationId) async {
+    emit(MedicationLoading());
+    try {
+      await flutterLocalNotificationsPlugin.cancel(notificationId);
+      await firebaseFirestore
+          .collection("users")
+          .doc(UserData.uid)
+          .collection("MedicationS")
+          .doc(id)
+          .delete();
+      med.removeWhere(
+        (element) => element.id == id,
+      );
+
+      emit(MedicationDeleteSuccessfully());
+    } on FirebaseException catch (e) {
+      if (kDebugMode) {
+        print(e.message.toString());
+      }
+      emit(MedicationDeleteError());
     }
   }
 }

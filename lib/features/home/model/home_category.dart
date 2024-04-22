@@ -21,8 +21,7 @@ class HomeCategory {
         image: "activity",
         route: HealthRecord.routeName,
         text: "Physical Activates"),
-    HomeCategory(
-        image: "dr", route: EmergencyCall.route, text: "Ask Your Doctor"),
+    
     HomeCategory(
         image: "plan", route: EmergencyCall.route, text: "Nutrition Plan "),
     HomeCategory(

@@ -2,6 +2,7 @@ import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/extensions/time_on_date_time.dart';
 import 'package:diabetes/core/utils/color_manager.dart';
 import 'package:diabetes/features/Medication/data/models/medication_model.dart';
+import 'package:diabetes/features/Medication/presentation/cubit/medication_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
 
@@ -10,11 +11,13 @@ class MedicationCard extends StatelessWidget {
 
   final int index;
   final MedicationModel item;
+  final MedicationCubit cubit;
   const MedicationCard({
     super.key,
     required this.swipeActionController,
     required this.index,
     required this.item,
+    required this.cubit,
   });
 
   @override
@@ -61,11 +64,13 @@ class MedicationCard extends StatelessWidget {
             color: AppColors.error,
             backgroundRadius: 15,
             widthSpace: context.width * 0.18,
-            onTap: (handler) async {}),
+            onTap: (handler) async {
+              cubit.delete(item.id, item.notifyId);
+            }),
       ],
       child: Card(
         margin: const EdgeInsets.all(16),
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         shape: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.white),
           borderRadius: BorderRadius.circular(8),
@@ -97,6 +102,9 @@ class MedicationCard extends StatelessWidget {
                         Icons.timer,
                         color: AppColors.primary,
                       ),
+                      const SizedBox(
+                        width: 8,
+                      ),
                       Text(
                         date.chatFormat,
                         style: Theme.of(context).textTheme.bodyMedium,
@@ -106,17 +114,18 @@ class MedicationCard extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: BoxDecoration(
-                    color: AppColors.primary,
-                    borderRadius: BorderRadius.circular(8)),
-                child: const Icon(
-                  Icons.check,
-                  color: Colors.white,
-                ),
-              )
+              if (DateTime.now().isAfter(item.time.toDate()))
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(8)),
+                  child: const Icon(
+                    Icons.check,
+                    color: Colors.white,
+                  ),
+                )
             ],
           ),
         ),

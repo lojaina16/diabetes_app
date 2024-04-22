@@ -8,44 +8,19 @@ abstract class MedicationState extends Equatable {
 }
 
 class MedicationInitial extends MedicationState {}
+
 class MedicationAddReminder extends MedicationState {}
 
-
-
-
-
-
-
-
-
-
+class MedicationAddReminderSuccessfully extends MedicationState {}
 
 class MedicationLoading extends MedicationState {}
-class MedicationAddReminderSuccessfully extends MedicationState {}
-class MedicationAddReminderError extends MedicationState {}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 class MedicationGetReminderSuccessfully extends MedicationState {}
+
+class MedicationAddReminderError extends MedicationState {}
+
 class MedicationGetReminderError extends MedicationState {}
 
+class MedicationDeleteSuccessfully extends MedicationState {}
 
-
-
-
-
+class MedicationDeleteError extends MedicationState {}

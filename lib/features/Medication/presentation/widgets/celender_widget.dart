@@ -1,19 +1,28 @@
 import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/utils/color_manager.dart';
+import 'package:diabetes/features/Medication/presentation/cubit/medication_cubit.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 
 class CalenderWidget extends StatelessWidget {
+  final MedicationCubit cubit;
   const CalenderWidget({
     super.key,
+    required this.cubit,
   });
 
   @override
   Widget build(BuildContext context) {
     return EasyDateTimeLine(
-      initialDate: DateTime.now(),
+      initialDate: cubit.scheduled,
       onDateChange: (selectedDate) {
-        //`selectedDate` the new date selected.
+        cubit.selectReminder(DateTime(
+            selectedDate.year,
+            selectedDate.month,
+            selectedDate.day,
+            cubit.scheduled.hour,
+            cubit.scheduled.minute,
+            cubit.scheduled.second));
       },
       headerProps: const EasyHeaderProps(
         showHeader: false,
@@ -23,15 +32,27 @@ class CalenderWidget extends StatelessWidget {
       dayProps: EasyDayProps(
         todayStyle: DayStyle(
             borderRadius: 8,
+            dayStrStyle: Theme.of(context).textTheme.bodyMedium,
+            dayNumStyle:
+                Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 20),
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(8))),
+                color: Theme.of(context).cardColor,
+                borderRadius: BorderRadius.circular(8))),
         height: context.height * 0.11,
         inactiveDayStyle: DayStyle(
             borderRadius: 8,
+            dayStrStyle: Theme.of(context).textTheme.bodyMedium,
+            dayNumStyle:
+                Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 20),
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(8))),
-        disabledDayStyle: const DayStyle(
-            borderRadius: 8, decoration: BoxDecoration(color: Colors.white)),
+                color: Theme.of(context).cardColor,
+                borderRadius: BorderRadius.circular(8))),
+        disabledDayStyle: DayStyle(
+            borderRadius: 8,
+            dayStrStyle: Theme.of(context).textTheme.bodyMedium,
+            dayNumStyle:
+                Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 20),
+            decoration: BoxDecoration(color: Theme.of(context).cardColor)),
         dayStructure: DayStructure.dayStrDayNum,
         activeDayStyle: const DayStyle(
           decoration: BoxDecoration(
@@ -52,8 +73,11 @@ class CalenderWidget extends StatelessWidget {
 }
 
 class MyCalenderWidget extends StatelessWidget {
+  final MedicationCubit cubit;
+
   const MyCalenderWidget({
     super.key,
+    required this.cubit,
   });
 
   @override
@@ -70,7 +94,9 @@ class MyCalenderWidget extends StatelessWidget {
         Positioned(
             bottom: context.height * 0.04,
             width: context.width,
-            child: const CalenderWidget())
+            child: CalenderWidget(
+              cubit: cubit,
+            ))
       ],
     );
   }

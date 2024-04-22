@@ -47,15 +47,20 @@ class MedicationPage extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 primary: true,
                 children: [
-                  const MyCalenderWidget(),
+                  MyCalenderWidget(
+                    cubit: cubit,
+                  ),
                   ListView.builder(
                     itemBuilder: (context, index) {
                       final item = cubit.med[index];
-                      return MedicationCard(
-                        item: item,
-                        swipeActionController: cubit.swipeActionController,
-                        index: index,
-                      );
+                      if (cubit.scheduled.day == item.time.toDate().day) {
+                        return MedicationCard(
+                          item: item,
+                          swipeActionController: cubit.swipeActionController,
+                          index: index, cubit: cubit,
+                        );
+                      }
+                      return null;
                     },
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
