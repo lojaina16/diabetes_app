@@ -11,6 +11,7 @@ class MedicationInitial extends MedicationState {}
 
 class MedicationAddReminder extends MedicationState {}
 
+
 class MedicationAddReminderSuccessfully extends MedicationState {}
 
 class MedicationLoading extends MedicationState {}

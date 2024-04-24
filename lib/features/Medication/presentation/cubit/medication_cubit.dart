@@ -50,21 +50,27 @@ class MedicationCubit extends Cubit<MedicationState> {
   }
 
   NotificationDetails notificationDetails = const NotificationDetails(
-      android:
-          AndroidNotificationDetails('your channel id', 'your channel name',
-              channelDescription: 'your channel description',
-              enableLights: true,
-              autoCancel: false,
-              enableVibration: true,
-              indeterminate: true,
-              importance: Importance.max,
-              priority: Priority.high,
-              // sound: RawResourceAndroidNotificationSound('notification'),
-              playSound: true,
-              ticker: 'ticker'));
+      android: AndroidNotificationDetails(
+          'your channel id', 'your channel name',
+          channelDescription: 'your channel description',
+          enableLights: true,
+          autoCancel: false,
+          enableVibration: true,
+          indeterminate: true,
+          importance: Importance.max,
+          priority: Priority.high,
+          playSound: true,
+          ticker: 'ticker'));
+
+  DateTime dateDay = DateTime.now();
+  void selectDay(daySelect) {
+    emit(MedicationInitial());
+    dateDay = daySelect;
+
+    emit(MedicationAddReminder());
+  }
 
   DateTime scheduled = DateTime.now();
-
   bool schedule = false;
   void selectReminder(reminder) {
     emit(MedicationInitial());
@@ -83,8 +89,6 @@ class MedicationCubit extends Cubit<MedicationState> {
     await flutterLocalNotificationsPlugin.zonedSchedule(id, title, body,
         tz.TZDateTime.from(scheduled, tz.local), notificationDetails,
         payload: payload,
-        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-        matchDateTimeComponents: DateTimeComponents.time,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);
   }
@@ -96,6 +100,7 @@ class MedicationCubit extends Cubit<MedicationState> {
           .collection("users")
           .doc(UserData.uid)
           .collection("MedicationS")
+          .orderBy('time', descending: false)
           .get();
       if (coll.docs.isNotEmpty) {
         med.clear();
@@ -116,12 +121,12 @@ class MedicationCubit extends Cubit<MedicationState> {
   Future addReminder() async {
     emit(MedicationLoading());
     try {
+      final date = DateTime(dateDay.year, dateDay.month, dateDay.day,
+          scheduled.hour, scheduled.minute);
+
       final String id = const Uuid().v4();
       final model = MedicationModel(
-          id: id,
-          notifyId: id.hashCode,
-          time: scheduled,
-          title: controller.text);
+          id: id, notifyId: id.hashCode, time: date, title: controller.text);
       firebaseFirestore
           .collection("users")
           .doc(UserData.uid)
@@ -131,7 +136,7 @@ class MedicationCubit extends Cubit<MedicationState> {
       showNotifyByTime(
           title: 'Take Your Medicine',
           body: model.title,
-          scheduled: scheduled,
+          scheduled: date,
           id: id.hashCode,
           payload: model.id);
       getReminder();

@@ -6,7 +6,6 @@ import 'package:diabetes/features/Settings/presentation/widgets/profile_widget.d
 import 'package:diabetes/features/home/cubit/home_cubit.dart';
 import 'package:diabetes/features/home/cubit/home_cubit_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingPage extends StatelessWidget {

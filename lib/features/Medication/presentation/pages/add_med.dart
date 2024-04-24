@@ -20,8 +20,6 @@ class AddReminder extends StatelessWidget {
         child: BlocBuilder<MedicationCubit, MedicationState>(
           builder: (context, state) {
             final cubit = MedicationCubit.get(context);
-            var scheduled = cubit.scheduled;
-            var schedule = cubit.schedule;
 
             return Padding(
               padding: const EdgeInsets.all(16),
@@ -32,7 +30,8 @@ class AddReminder extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     PickTime(
-                        scheduled: scheduled, cubit: cubit, schedule: schedule),
+                      cubit: cubit,
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: AuthTextForm(

@@ -7,14 +7,10 @@ import 'package:flutter/material.dart';
 class PickTime extends StatelessWidget {
   const PickTime({
     super.key,
-    required this.scheduled,
     required this.cubit,
-    required this.schedule,
   });
 
-  final DateTime scheduled;
   final MedicationCubit cubit;
-  final bool schedule;
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +19,14 @@ class PickTime extends StatelessWidget {
       onTap: () async {
         final timePicked = await showTimePicker(
           context: context,
-          initialTime: TimeOfDay.fromDateTime(scheduled),
+          initialTime: TimeOfDay.fromDateTime(cubit.scheduled),
         );
 
         if (timePicked != null) {
           final timeScheduled = DateTime(
-            scheduled.year,
-            scheduled.month,
-            scheduled.day,
+            cubit.scheduled.year,
+            cubit.scheduled.month,
+            cubit.scheduled.day,
             timePicked.hour,
             timePicked.minute,
           );
@@ -38,8 +34,9 @@ class PickTime extends StatelessWidget {
         }
       },
       child: AnimatedCrossFade(
-        crossFadeState:
-            schedule ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+        crossFadeState: cubit.schedule
+            ? CrossFadeState.showSecond
+            : CrossFadeState.showFirst,
         secondChild: Container(
           width: context.width * 0.3,
           margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -51,7 +48,7 @@ class PickTime extends StatelessWidget {
                 color: AppColors.primary,
               )),
           child: Text(
-            scheduled.chatFormat,
+            cubit.scheduled.chatFormat,
             style: Theme.of(context)
                 .textTheme
                 .bodyMedium!

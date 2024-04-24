@@ -53,14 +53,16 @@ class MedicationPage extends StatelessWidget {
                   ListView.builder(
                     itemBuilder: (context, index) {
                       final item = cubit.med[index];
-                      if (cubit.scheduled.day == item.time.toDate().day) {
+
+                      if (cubit.dateDay.day == item.time.toDate().day) {
                         return MedicationCard(
                           item: item,
                           swipeActionController: cubit.swipeActionController,
-                          index: index, cubit: cubit,
+                          index: index,
+                          cubit: cubit,
                         );
                       }
-                      return null;
+                      return const SizedBox.shrink();
                     },
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),

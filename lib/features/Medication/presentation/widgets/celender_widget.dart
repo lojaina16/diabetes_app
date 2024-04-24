@@ -14,15 +14,9 @@ class CalenderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EasyDateTimeLine(
-      initialDate: cubit.scheduled,
+      initialDate: cubit.dateDay,
       onDateChange: (selectedDate) {
-        cubit.selectReminder(DateTime(
-            selectedDate.year,
-            selectedDate.month,
-            selectedDate.day,
-            cubit.scheduled.hour,
-            cubit.scheduled.minute,
-            cubit.scheduled.second));
+        cubit.selectDay(selectedDate);
       },
       headerProps: const EasyHeaderProps(
         showHeader: false,
