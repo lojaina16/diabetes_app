@@ -1,5 +1,6 @@
 import 'package:diabetes/features/Emergency/presentation/pages/emergency_call_screen.dart';
 import 'package:diabetes/features/Medication/presentation/pages/medication_page.dart';
+import 'package:diabetes/features/Nutrition/presentation/pages/nutrition_page.dart';
 import 'package:diabetes/features/home/healthRecord/healthrecord_screen.dart';
 
 class HomeCategory {
@@ -23,7 +24,7 @@ class HomeCategory {
         text: "Physical Activates"),
     
     HomeCategory(
-        image: "plan", route: EmergencyCall.route, text: "Nutrition Plan "),
+        image: "plan", route: NutritionPage.route, text: "Nutrition Plan "),
     HomeCategory(
         image: "medication",
         route: MedicationPage.route,
