@@ -1,9 +1,14 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:diabetes/core/api/dio_helper.dart';
 import 'package:diabetes/core/cache_helper.dart';
 import 'package:diabetes/core/utils/app_string.dart';
 import 'package:diabetes/model/user_data.dart';
 import 'package:diabetes/model/user_info.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
@@ -14,6 +19,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   QuestionsCubit() : super(QuestionsInitial());
   static QuestionsCubit get(context) => BlocProvider.of(context);
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  final dio = DioHelper(dio: Dio());
   final TextEditingController age = TextEditingController();
   final TextEditingController weight = TextEditingController();
   final TextEditingController bmi = TextEditingController();
@@ -60,30 +66,13 @@ class QuestionsCubit extends Cubit<QuestionsState> {
     emit(QuestionsPostTypeLoading());
     try {
       final type = AppString.debatesType[debatesIndex!];
-      final id = const Uuid().v4();
-      final MyUserInfo userInfo = MyUserInfo(
-          age: age.text,
-          gender: gender.toString(),
-          id: id,
-          weight: weight.text,
-          hypertension: hypertension.toString().contains("Yes"),
-          smokingHistory: smoking.toString(),
-          bmi: bmi.text,
-          type: type,
-          a1cTest: a1cTest.text,
-          bloodGlucoseLevel: bloodGlucoseLevel.text,
-          heartDisease: heartDisease.toString().contains("Yes"));
-      await firebaseFirestore
-          .collection("users")
-          .doc(UserData.uid)
-          .collection("UserInfo")
-          .doc(id)
-          .set(userInfo.toFireStore());
-      UserData.debatesType = type;
-      CacheHelper.saveData(key: "debatesType", value: type);
+
+      await saveData(type);
       emit(const QuestionsPostTypeSuccessfully());
     } on FirebaseException catch (error) {
-      debugPrint(error.message.toString());
+      if (kDebugMode) {
+        print(error.message.toString());
+      }
       emit(QuestionsPostTypeError());
     }
   }
@@ -93,5 +82,55 @@ class QuestionsCubit extends Cubit<QuestionsState> {
     emit(QuestionsInitial());
     questionsMap[que] = answer;
     emit(QuestionsAnswersTOqUESTIONS());
+  }
+
+  Future saveData(String type) async {
+    final id = const Uuid().v4();
+    final MyUserInfo userInfo = MyUserInfo(
+        age: age.text,
+        gender: gender.toString(),
+        id: id,
+        weight: weight.text,
+        hypertension: hypertension.toString().contains("Yes"),
+        smokingHistory: smoking.toString(),
+        bmi: bmi.text,
+        type: type,
+        a1cTest: a1cTest.text,
+        bloodGlucoseLevel: bloodGlucoseLevel.text,
+        heartDisease: heartDisease.toString().contains("Yes"));
+    await firebaseFirestore
+        .collection("users")
+        .doc(UserData.uid)
+        .collection("UserInfo")
+        .doc(id)
+        .set(userInfo.toFireStore());
+    UserData.debatesType = type;
+    CacheHelper.saveData(key: "debatesType", value: type);
+  }
+
+  Future detect() async {
+    emit(QuestionsDetectLoading());
+    final body = {
+      "gender": gender.toString().contains('F') ? 0 : 1,
+      "age": int.parse(age.text),
+      "hypertension": hypertension.toString().contains("Yes") ? 1 : 0,
+      "heart_disease": heartDisease.toString().contains("Yes") ? 1 : 0,
+      "smoking_history":
+          smokingAnswer.indexWhere((element) => element == smoking) + 1,
+      "bmi": double.parse(bmi.text),
+      "HbA1c_level": double.parse(a1cTest.text),
+      "blood_glucose_level": int.parse(bloodGlucoseLevel.text)
+    };
+   
+    final response =
+        await dio.post("https://test-ml-1.onrender.com/predict", body);
+    emit(response.fold(
+      (l) => QuestionsDetectError(l),
+      (r) {
+        final bool isDiabetes = r['diabetes_prediction'] == 1;
+        saveData(isDiabetes ? 'Type 1' : "I don’t have diabetes");
+        return QuestionsDetectSuccessfully(isDiabetes);
+      },
+    ));
   }
 }

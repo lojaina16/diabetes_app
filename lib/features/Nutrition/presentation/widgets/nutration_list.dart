@@ -1,3 +1,4 @@
+import 'package:diabetes/core/extensions/theme_on_context.dart';
 import 'package:diabetes/core/utils/color_manager.dart';
 import 'package:diabetes/features/Nutrition/entities/nutration_repo.dart';
 import 'package:diabetes/features/Nutrition/presentation/cubit/nutrition_cubit.dart';
@@ -28,7 +29,10 @@ class NutritionList extends StatelessWidget {
                 children: [
                   Text(
                     'Nutrition Value (perSaving)',
-                    style: TextStyle(color: AppColors.black2),
+                    style: TextStyle(
+                        color: !context.isDarkMode
+                            ? AppColors.black2
+                            : Colors.white),
                   ),
                   const Spacer(),
                   Icon(

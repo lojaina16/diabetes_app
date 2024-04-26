@@ -1,7 +1,9 @@
+import 'package:diabetes/core/extensions/theme_on_context.dart';
 import 'package:diabetes/core/utils/color_manager.dart';
 import 'package:diabetes/features/Nutrition/entities/nutration_repo.dart';
 import 'package:diabetes/features/Nutrition/presentation/cubit/nutrition_cubit.dart';
 import 'package:flutter/material.dart';
+
 class FoodDetailsHeadRow extends StatelessWidget {
   const FoodDetailsHeadRow({
     super.key,
@@ -20,8 +22,7 @@ class FoodDetailsHeadRow extends StatelessWidget {
         children: [
           FoodRowDetails(
             iconData: Icons.star,
-            text:
-                '${cubit.getRate(repo.totalRate, repo.rates.length * 5)}',
+            text: '${cubit.getRate(repo.totalRate, repo.rates.length * 5)}',
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -55,7 +56,7 @@ class FoodRowDetails extends StatelessWidget {
       children: [
         Icon(
           iconData,
-          color: AppColors.black2,
+          color: !context.isDarkMode ? AppColors.black2 : Colors.white,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),

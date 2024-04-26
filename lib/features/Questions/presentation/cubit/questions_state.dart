@@ -14,10 +14,25 @@ class QuestionsSelectType extends QuestionsState {}
 class QuestionsPostTypeLoading extends QuestionsState {}
 
 class QuestionsPostTypeSuccessfully extends QuestionsState {
-
   const QuestionsPostTypeSuccessfully();
 }
-class QuestionsSelectGender extends QuestionsState {}
 
 class QuestionsPostTypeError extends QuestionsState {}
+
+class QuestionsSelectGender extends QuestionsState {}
+
 class QuestionsAnswersTOqUESTIONS extends QuestionsState {}
+
+class QuestionsDetectLoading extends QuestionsState {}
+
+class QuestionsDetectSuccessfully extends QuestionsState {
+  final bool isDiabetes;
+
+  const QuestionsDetectSuccessfully(this.isDiabetes);
+}
+
+class QuestionsDetectError extends QuestionsState {
+  final String? error;
+
+  const QuestionsDetectError(this.error);
+}

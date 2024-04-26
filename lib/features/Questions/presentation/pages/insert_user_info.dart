@@ -1,9 +1,11 @@
 import 'package:diabetes/core/extensions/navigeation_on_context.dart';
 import 'package:diabetes/core/extensions/size_on_context.dart';
+import 'package:diabetes/core/extensions/snack_bar_on_context.dart';
 import 'package:diabetes/core/utils/loading.dart';
 import 'package:diabetes/core/utils/my_button.dart';
 import 'package:diabetes/features/Auth/widgets/custom_text_field.dart';
 import 'package:diabetes/features/Questions/presentation/cubit/questions_cubit.dart';
+import 'package:diabetes/features/Questions/presentation/pages/show_result.dart';
 import 'package:diabetes/features/Questions/presentation/widgets/drop_dawn.dart';
 import 'package:diabetes/features/home/pages/home.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +20,17 @@ class UserInfoPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("User Info"),
+        title: const Text(
+          "User Info",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: BlocConsumer<QuestionsCubit, QuestionsState>(
         builder: (context, state) {
           final cubit = QuestionsCubit.get(context);
           return Loading(
-            loading: state is QuestionsPostTypeLoading,
+            loading: state is QuestionsPostTypeLoading ||
+                state is QuestionsDetectLoading,
             child: Form(
               key: cubit.formKey,
               child: ListView(
@@ -114,7 +120,11 @@ class UserInfoPage extends StatelessWidget {
                       text: "Finish",
                       onTap: (() {
                         if (cubit.formKey.currentState?.validate() ?? false) {
-                          cubit.saveUserInfo();
+                          if (cubit.debatesIndex == 3) {
+                            cubit.detect();
+                          } else {
+                            cubit.saveUserInfo();
+                          }
                         }
                       }))
                 ],
@@ -125,6 +135,14 @@ class UserInfoPage extends StatelessWidget {
         listener: (BuildContext context, QuestionsState state) {
           if (state is QuestionsPostTypeSuccessfully) {
             context.nextPageWitheRemove(HomeScreen.routeName);
+          } else if (state is QuestionsDetectSuccessfully) {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (context) => ShowResult(positive: state.isDiabetes),
+                ),
+                (route) => false);
+          } else if (state is QuestionsDetectError) {
+            context.showSnack(state.error.toString());
           }
         },
       ),

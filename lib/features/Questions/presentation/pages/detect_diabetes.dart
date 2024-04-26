@@ -1,10 +1,11 @@
+import 'package:diabetes/core/extensions/navigeation_on_context.dart';
 import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/extensions/snack_bar_on_context.dart';
 import 'package:diabetes/core/utils/app_string.dart';
 import 'package:diabetes/core/utils/loading.dart';
 import 'package:diabetes/core/utils/my_button.dart';
 import 'package:diabetes/features/Questions/presentation/cubit/questions_cubit.dart';
-import 'package:diabetes/features/Questions/presentation/pages/show_result.dart';
+import 'package:diabetes/features/Questions/presentation/pages/insert_user_info.dart';
 import 'package:diabetes/features/Questions/presentation/widgets/quz_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,11 +53,7 @@ class DetectDiabetes extends StatelessWidget {
                     text: "Detect",
                     onTap: () {
                       if (cubit.questionsMap.length == 6) {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const ShowResult(
-                            positive: true,
-                          ),
-                        ));
+                        context.nextPage(UserInfoPage.route);
                       } else {
                         context.showSnack("Please Answers All Questions First ",
                             isError: true);

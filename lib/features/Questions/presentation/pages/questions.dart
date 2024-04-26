@@ -7,7 +7,7 @@ import 'package:diabetes/core/utils/loading.dart';
 import 'package:diabetes/core/utils/my_button.dart';
 import 'package:diabetes/features/Questions/presentation/cubit/questions_cubit.dart';
 import 'package:diabetes/features/Questions/presentation/pages/detect_diabetes.dart';
-import 'package:diabetes/features/Questions/presentation/pages/show_result.dart';
+import 'package:diabetes/features/Questions/presentation/pages/insert_user_info.dart';
 import 'package:diabetes/features/Questions/presentation/widgets/diabetes_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +20,7 @@ class Questions extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: BlocBuilder<QuestionsCubit, QuestionsState>(
+        body: BlocConsumer<QuestionsCubit, QuestionsState>(
           builder: (context, state) {
             final cubit = QuestionsCubit.get(context);
             return Loading(
@@ -74,11 +74,7 @@ class Questions extends StatelessWidget {
                         if (cubit.debatesIndex == 3) {
                           context.nextPage(DetectDiabetes.route);
                         } else {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ShowResult(
-                              positive: cubit.debatesIndex != 4,
-                            ),
-                          ));
+                          context.nextPage(UserInfoPage.route);
                         }
                       } else {
                         context.showSnack("please Select Type First ",
@@ -93,6 +89,9 @@ class Questions extends StatelessWidget {
                 ],
               ),
             );
+          },
+          listener: (BuildContext context, QuestionsState state) {
+            
           },
         ),
       ),

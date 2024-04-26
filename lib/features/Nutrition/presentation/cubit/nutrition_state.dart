@@ -9,12 +9,17 @@ abstract class NutritionState extends Equatable {
 
 class NutritionInitial extends NutritionState {}
 
-class NutritionGetFoodLoading extends NutritionState {}
 class NutritionChangeNutrition extends NutritionState {}
 
 class NutritionChangeIngredient extends NutritionState{}
 
 
+class NutritionGetFoodLoading extends NutritionState {}
 class NutritionGetFoodSuccessfully extends NutritionState {}
 class NutritionGetFoodError extends NutritionState {}
 
+class NutritionSelectStart extends NutritionState {}
+
+class NutritionRateRecipeLoading extends NutritionState {}
+class NutritionRateRecipeSuccessfully extends NutritionState {}
+class NutritionRateRecipeError extends NutritionState {}

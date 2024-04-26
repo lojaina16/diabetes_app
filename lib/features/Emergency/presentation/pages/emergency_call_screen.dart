@@ -1,4 +1,5 @@
 import 'package:diabetes/core/extensions/dialog_on_context.dart';
+import 'package:diabetes/core/extensions/navigeation_on_context.dart';
 import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/utils/color_manager.dart';
 import 'package:diabetes/core/utils/loading.dart';
@@ -7,6 +8,7 @@ import 'package:diabetes/features/Emergency/presentation/cubit/emergency_cubit.d
 import 'package:diabetes/features/Emergency/presentation/widgets/emergency_dialog.dart';
 import 'package:diabetes/features/Emergency/presentation/widgets/emergency_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EmergencyCall extends StatelessWidget {
@@ -43,9 +45,12 @@ class EmergencyCall extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         child: Row(
                           children: [
-                            const Icon(
-                              Icons.arrow_back_ios,
-                              color: Colors.white,
+                            GestureDetector(
+                              onTap: () => context.pop,
+                              child: const Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                              ),
                             ),
                             SizedBox(
                               width: context.width * 0.15,
@@ -98,4 +103,3 @@ class EmergencyCall extends StatelessWidget {
     );
   }
 }
-

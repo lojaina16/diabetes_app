@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:diabetes/features/Nutrition/entities/nutration_repo.dart';
 import 'package:diabetes/features/Nutrition/model/nutations_model.dart';
+import 'package:diabetes/model/user_data.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,5 +50,72 @@ class NutritionCubit extends Cubit<NutritionState> {
     emit(NutritionInitial());
     changeIngredient = !changeIngredient;
     emit(NutritionChangeIngredient());
+  }
+
+  int rate = 0;
+  void selectStar(int star, {String? id}) {
+    emit(NutritionInitial());
+    rate = star;
+    if (id != null) {
+      allRates[id] = star;
+    }
+    emit(NutritionSelectStart());
+  }
+
+  String get rateName {
+    switch (rate) {
+      case 5:
+        return 'Awesome';
+      case 4:
+        return 'Good';
+      case 3:
+        return 'popular';
+      case 2:
+        return 'weak';
+      default:
+        return 'Bad';
+    }
+  }
+
+  final Map<String, int> allRates = {};
+
+  Future rateRecipe(String id) async {
+    emit(NutritionRateRecipeLoading());
+    try {
+      final bool check = allRates.containsKey(id);
+      if (check) {
+        final myRate = allRates[id];
+        final isIncrement = myRate! < rate;
+        if (isIncrement) {
+          await firebaseFirestore.collection('food').doc(id).update({
+            "TotalRate": FieldValue.increment(rate-myRate),
+            "rates": FieldValue.arrayUnion([
+              {"rate": rate.toString(), "userId": UserData.uid}
+            ])
+          });
+        }else{
+           await firebaseFirestore.collection('food').doc(id).update({
+          "TotalRate": FieldValue.increment(-rate),
+          "rates": FieldValue.arrayRemove([
+            {"rate": rate.toString(), "userId": UserData.uid}
+          ])
+        });
+        }
+      } else {
+        await firebaseFirestore.collection('food').doc(id).update({
+          "TotalRate": FieldValue.increment(rate),
+          "rates": FieldValue.arrayUnion([
+            {"rate": rate.toString(), "userId": UserData.uid}
+          ])
+        });
+      }
+
+      emit(NutritionRateRecipeSuccessfully());
+    } on FirebaseException catch (e) {
+      if (kDebugMode) {
+        print(e.message.toString());
+      }
+      emit(NutritionRateRecipeError());
+    }
   }
 }

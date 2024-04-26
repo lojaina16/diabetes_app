@@ -60,7 +60,10 @@ class NutritionDetails extends StatelessWidget {
                       ),
                     ),
                     InstructionList(repo: repo),
-                    const RateCard()
+                    RateCard(
+                      repo: repo,
+                      cubit: cubit,
+                    )
                   ],
                 ),
               ),
