@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:diabetes/core/api/dio_helper.dart';
+import 'package:diabetes/core/api/end_points.dart';
 import 'package:diabetes/core/cache_helper.dart';
 import 'package:diabetes/core/utils/app_string.dart';
 import 'package:diabetes/model/user_data.dart';
 import 'package:diabetes/model/user_info.dart';
-import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   QuestionsCubit() : super(QuestionsInitial());
   static QuestionsCubit get(context) => BlocProvider.of(context);
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  final dio = DioHelper(dio: Dio());
+  final dio = DioHelper();
   final TextEditingController age = TextEditingController();
   final TextEditingController weight = TextEditingController();
   final TextEditingController bmi = TextEditingController();
@@ -84,6 +84,20 @@ class QuestionsCubit extends Cubit<QuestionsState> {
     emit(QuestionsAnswersTOqUESTIONS());
   }
 
+  void clear() {
+    age.clear();
+    weight.clear();
+    bmi.clear();
+    a1cTest.clear();
+    bloodGlucoseLevel.clear();
+    smoking = null;
+    debatesIndex=null;
+    hypertension = null;
+    heartDisease = null;
+    gender = null;
+    questionsMap.clear();
+  }
+
   Future saveData(String type) async {
     final id = const Uuid().v4();
     final MyUserInfo userInfo = MyUserInfo(
@@ -106,6 +120,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
         .set(userInfo.toFireStore());
     UserData.debatesType = type;
     CacheHelper.saveData(key: "debatesType", value: type);
+    clear();
   }
 
   Future detect() async {
@@ -121,9 +136,8 @@ class QuestionsCubit extends Cubit<QuestionsState> {
       "HbA1c_level": double.parse(a1cTest.text),
       "blood_glucose_level": int.parse(bloodGlucoseLevel.text)
     };
-   
-    final response =
-        await dio.post("https://test-ml-1.onrender.com/predict", body);
+
+    final response = await dio.post(EndPoints.detectAiModelUrl, body);
     emit(response.fold(
       (l) => QuestionsDetectError(l),
       (r) {

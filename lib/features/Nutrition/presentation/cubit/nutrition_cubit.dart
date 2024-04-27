@@ -21,7 +21,13 @@ class NutritionCubit extends Cubit<NutritionState> {
 
       if (collection.docs.isNotEmpty) {
         for (var element in collection.docs) {
-          nutations.add(NutationsModel.fromJson(element.data()));
+          final NutationsRepo recipe = NutationsModel.fromJson(element.data());
+          nutations.add(recipe);
+          for (var element in recipe.rates) {
+            if (element.userId == UserData.uid) {
+              allRates[recipe.id] = int.parse(element.rate);
+            }
+          }
         }
       }
       emit(NutritionGetFoodSuccessfully());
@@ -53,12 +59,12 @@ class NutritionCubit extends Cubit<NutritionState> {
   }
 
   int rate = 0;
-  void selectStar(int star, {String? id}) {
+  void selectStar(
+    int star,
+  ) {
     emit(NutritionInitial());
     rate = star;
-    if (id != null) {
-      allRates[id] = star;
-    }
+
     emit(NutritionSelectStart());
   }
 
@@ -82,33 +88,14 @@ class NutritionCubit extends Cubit<NutritionState> {
   Future rateRecipe(String id) async {
     emit(NutritionRateRecipeLoading());
     try {
-      final bool check = allRates.containsKey(id);
-      if (check) {
-        final myRate = allRates[id];
-        final isIncrement = myRate! < rate;
-        if (isIncrement) {
-          await firebaseFirestore.collection('food').doc(id).update({
-            "TotalRate": FieldValue.increment(rate-myRate),
-            "rates": FieldValue.arrayUnion([
-              {"rate": rate.toString(), "userId": UserData.uid}
-            ])
-          });
-        }else{
-           await firebaseFirestore.collection('food').doc(id).update({
-          "TotalRate": FieldValue.increment(-rate),
-          "rates": FieldValue.arrayRemove([
-            {"rate": rate.toString(), "userId": UserData.uid}
-          ])
-        });
-        }
-      } else {
-        await firebaseFirestore.collection('food').doc(id).update({
-          "TotalRate": FieldValue.increment(rate),
-          "rates": FieldValue.arrayUnion([
-            {"rate": rate.toString(), "userId": UserData.uid}
-          ])
-        });
-      }
+      await deleteRate(id);
+      await firebaseFirestore.collection('food').doc(id).update({
+        "TotalRate": FieldValue.increment(rate),
+        "rates": FieldValue.arrayUnion([
+          {"rate": rate.toString(), "userId": UserData.uid}
+        ])
+      });
+      allRates[id] = rate;
 
       emit(NutritionRateRecipeSuccessfully());
     } on FirebaseException catch (e) {
@@ -116,6 +103,19 @@ class NutritionCubit extends Cubit<NutritionState> {
         print(e.message.toString());
       }
       emit(NutritionRateRecipeError());
+    }
+  }
+
+  Future deleteRate(String id) async {
+    final bool check = allRates.containsKey(id);
+    if (check) {
+      final myRate = allRates[id];
+      await firebaseFirestore.collection('food').doc(id).update({
+        "TotalRate": FieldValue.increment(-myRate!),
+        "rates": FieldValue.arrayRemove([
+          {"rate": myRate.toString(), "userId": UserData.uid}
+        ])
+      });
     }
   }
 }

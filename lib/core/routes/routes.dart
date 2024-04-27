@@ -8,7 +8,9 @@ import 'package:diabetes/features/Questions/presentation/pages/insert_user_info.
 import 'package:diabetes/features/Questions/presentation/pages/questions.dart';
 import 'package:diabetes/features/Settings/presentation/pages/setting.dart';
 import 'package:diabetes/features/Settings/presentation/pages/theme.dart';
+import 'package:diabetes/features/WorkOut/presentation/pages/exercises_page.dart';
 import 'package:diabetes/features/home/healthRecord/healthrecord_screen.dart';
+import 'package:diabetes/features/home/pages/about.dart';
 import 'package:diabetes/features/home/pages/home.dart';
 import 'package:flutter/material.dart';
 
@@ -21,11 +23,13 @@ class Routes {
     HomeScreen.routeName: (context) => const HomeScreen(),
     HealthRecord.routeName: (context) => const HealthRecord(),
     EmergencyCall.route: (context) => const EmergencyCall(),
-    DetectDiabetes.route:(context) => const DetectDiabetes(),
-    SettingPage.route:(context) => const SettingPage(),
-    ThemeModeSettings.route:(context) => const ThemeModeSettings(),
-    UserInfoPage.route:(context) => const UserInfoPage(),
-    MedicationPage.route:(context) => const MedicationPage(),
-    NutritionPage.route:(context) => const NutritionPage(),
+    DetectDiabetes.route: (context) => const DetectDiabetes(),
+    SettingPage.route: (context) => const SettingPage(),
+    ThemeModeSettings.route: (context) => const ThemeModeSettings(),
+    UserInfoPage.route: (context) => const UserInfoPage(),
+    MedicationPage.route: (context) => const MedicationPage(),
+    NutritionPage.route: (context) => const NutritionPage(),
+    WorkOut.route: (context) => const WorkOut(),
+    About.route: (context) => const About()
   };
 }

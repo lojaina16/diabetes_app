@@ -1,25 +1,24 @@
 import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/utils/color_manager.dart';
-import 'package:diabetes/features/Nutrition/entities/nutration_repo.dart';
 import 'package:flutter/material.dart';
 class InstructionList extends StatelessWidget {
   const InstructionList({
     super.key,
-    required this.repo,
+    required this.instructions,
   });
 
-  final NutationsRepo repo;
+  final List<String> instructions;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       padding: const EdgeInsets.all(0),
-      itemCount: repo.instructions.length,
+      itemCount: instructions.length,
       addRepaintBoundaries: false,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        final item = repo.instructions[index];
+        final item = instructions[index];
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: Row(

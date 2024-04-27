@@ -3,6 +3,7 @@ import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/utils/my_button.dart';
 import 'package:diabetes/features/Settings/presentation/pages/setting.dart';
 import 'package:diabetes/features/home/cubit/home_cubit.dart';
+import 'package:diabetes/features/home/pages/about.dart';
 import 'package:diabetes/model/user_model.dart';
 import 'package:flutter/material.dart';
 
@@ -77,6 +78,7 @@ class HomeDrawer extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   context.pop;
+                   context.nextPage(About.route);
                 },
                 child: Row(
                   children: [

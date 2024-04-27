@@ -8,6 +8,7 @@ import 'package:diabetes/features/Nutrition/presentation/cubit/nutrition_cubit.d
 import 'package:diabetes/features/Questions/presentation/cubit/questions_cubit.dart';
 import 'package:diabetes/features/Questions/presentation/pages/questions.dart';
 import 'package:diabetes/features/Settings/presentation/cubit/settings_cubit.dart';
+import 'package:diabetes/features/WorkOut/presentation/cubit/workout_cubit.dart';
 import 'package:diabetes/features/home/cubit/home_cubit.dart';
 import 'package:diabetes/features/home/pages/home.dart';
 import 'package:diabetes/model/user_data.dart';
@@ -40,6 +41,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => NutritionCubit()..getFood(),
+        ),
+         BlocProvider(
+          create: (context) => WorkoutCubit()..getExercises(),
         ),
         BlocProvider(
           create: (context) => MedicationCubit()

@@ -1,24 +1,24 @@
 import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/utils/color_manager.dart';
 import 'package:diabetes/core/utils/my_image.dart';
-import 'package:diabetes/features/Nutrition/entities/nutration_repo.dart';
-import 'package:diabetes/features/Nutrition/presentation/pages/nutrition_detalis_page.dart';
+import 'package:diabetes/features/WorkOut/domain/entities/exercises_repo.dart';
+import 'package:diabetes/features/WorkOut/presentation/pages/exercises_details.dart';
 import 'package:flutter/material.dart';
 
-class FoodItem extends StatelessWidget {
-  const FoodItem({
+class ExercisesItem extends StatelessWidget {
+  const ExercisesItem({
     super.key,
     required this.item,
   });
 
-  final NutationsRepo item;
+  final ExercisesRepo item;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => NutritionDetails(
+          builder: (context) => ExercisesDetails(
             repo: item,
           ),
         ));
@@ -34,7 +34,7 @@ class FoodItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 MyNetworkImage(
-                  image: item.image,
+                  image: item.gifUrl,
                   height: context.height * 0.1,
                   width: context.width * 0.2,
                   fit: BoxFit.cover,
@@ -52,7 +52,7 @@ class FoodItem extends StatelessWidget {
                         item.name,
                         textAlign: TextAlign.start,
                         style:
-                            TextStyle(color: AppColors.primary, fontSize: 20),
+                            TextStyle(color: AppColors.primary, fontSize: 18),
                       ),
                     ),
                     const SizedBox(
@@ -60,12 +60,12 @@ class FoodItem extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Icon(Icons.timer, color: AppColors.grey),
+                        Icon(Icons.sports_bar, color: AppColors.grey),
                         const SizedBox(
                           width: 8,
                         ),
                         Text(
-                          item.time,
+                          item.bodyPart,
                           style: TextStyle(color: AppColors.grey, fontSize: 16),
                         )
                       ],

@@ -6,7 +6,8 @@ final ThemeData lightTheme = ThemeData(
     primaryColor: AppColors.primary,
     scaffoldBackgroundColor: AppColors.scaffoldColorLight,
     brightness: Brightness.light,
-    
+    colorScheme: ColorScheme.fromSeed(
+        seedColor: AppColors.primary, brightness: Brightness.light),
     bottomNavigationBarTheme:
         const BottomNavigationBarThemeData(backgroundColor: Colors.white),
     dialogTheme: const DialogTheme(

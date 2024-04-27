@@ -15,6 +15,7 @@ final ThemeData darkTheme = ThemeData(
     ),
     dividerColor: Colors.white,
     disabledColor: AppColors.black3,
+    colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary,brightness: Brightness.dark),
     cardTheme: CardTheme(
       elevation: 0,
       color: AppColors.black4,

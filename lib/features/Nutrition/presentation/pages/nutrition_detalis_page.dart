@@ -24,7 +24,6 @@ class NutritionDetails extends StatelessWidget {
         builder: (context, state) {
           final cubit = NutritionCubit.get(context);
           return ListView(
-            physics: const BouncingScrollPhysics(),
             primary: true,
             padding: const EdgeInsets.all(0),
             addRepaintBoundaries: false,
@@ -59,7 +58,9 @@ class NutritionDetails extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    InstructionList(repo: repo),
+                    InstructionList(
+                      instructions: repo.instructions,
+                    ),
                     RateCard(
                       repo: repo,
                       cubit: cubit,

@@ -7,6 +7,7 @@ import 'package:diabetes/features/Auth/widgets/custom_text_field.dart';
 import 'package:diabetes/features/Questions/presentation/cubit/questions_cubit.dart';
 import 'package:diabetes/features/Questions/presentation/pages/show_result.dart';
 import 'package:diabetes/features/Questions/presentation/widgets/drop_dawn.dart';
+import 'package:diabetes/features/home/cubit/home_cubit.dart';
 import 'package:diabetes/features/home/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -134,6 +135,7 @@ class UserInfoPage extends StatelessWidget {
         },
         listener: (BuildContext context, QuestionsState state) {
           if (state is QuestionsPostTypeSuccessfully) {
+              HomeCubit.get(context).getUserData();
             context.nextPageWitheRemove(HomeScreen.routeName);
           } else if (state is QuestionsDetectSuccessfully) {
             Navigator.of(context).pushAndRemoveUntil(

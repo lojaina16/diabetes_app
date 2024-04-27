@@ -2,7 +2,6 @@ import 'package:diabetes/core/utils/color_manager.dart';
 import 'package:diabetes/features/Nutrition/entities/nutration_repo.dart';
 import 'package:diabetes/features/Nutrition/presentation/cubit/nutrition_cubit.dart';
 import 'package:diabetes/features/Nutrition/presentation/pages/rate_page.dart';
-import 'package:diabetes/model/user_data.dart';
 import 'package:flutter/material.dart';
 
 class RateCard extends StatelessWidget {
@@ -18,10 +17,8 @@ class RateCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        for (var element in repo.rates) {
-          if (element.userId == UserData.uid) {
-            cubit.selectStar(int.parse(element.rate), id: repo.id);
-          }
+        if (cubit.allRates.containsKey(repo.id)) {
+          cubit.selectStar(cubit.allRates[repo.id] ?? 0);
         }
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => RatePage(
