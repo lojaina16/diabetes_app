@@ -12,7 +12,7 @@ platform :android do
    
     firebase_app_distribution(
       app: "1:881671348163:android:99c42b35c3270dd209e776",
-      release_notes: "First Realses", 
+      release_notes: "App All Features Done Make Final Releases", 
       android_artifact_type: "APK", 
       android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk", 
       testers: "bigosm654@gmail.com, Merna202112145@gmail.com,nehaleltaweel7@gmail.com,faresseldeen1@gmail.com", 
