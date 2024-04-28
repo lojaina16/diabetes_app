@@ -6,6 +6,7 @@ import 'package:diabetes/features/Nutrition/presentation/pages/nutrition_page.da
 import 'package:diabetes/features/Questions/presentation/pages/detect_diabetes.dart';
 import 'package:diabetes/features/Questions/presentation/pages/insert_user_info.dart';
 import 'package:diabetes/features/Questions/presentation/pages/questions.dart';
+import 'package:diabetes/features/Questions/presentation/pages/questions_choose.dart';
 import 'package:diabetes/features/Settings/presentation/pages/setting.dart';
 import 'package:diabetes/features/Settings/presentation/pages/theme.dart';
 import 'package:diabetes/features/WorkOut/presentation/pages/exercises_page.dart';
@@ -30,6 +31,7 @@ class Routes {
     MedicationPage.route: (context) => const MedicationPage(),
     NutritionPage.route: (context) => const NutritionPage(),
     WorkOut.route: (context) => const WorkOut(),
-    About.route: (context) => const About()
+    About.route: (context) => const About(),
+    QuestionsChoses.route:(context) => const QuestionsChoses()
   };
 }

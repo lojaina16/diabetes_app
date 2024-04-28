@@ -20,12 +20,11 @@ class HomeCategory {
     HomeCategory(
         image: "health", route: HealthRecord.routeName, text: "Health Records"),
     HomeCategory(
-        image: "activity",
-        route: WorkOut.route,
-        text: "Physical Activates"),
-    
+        image: "activity", route: WorkOut.route, text: "Physical Activates"),
     HomeCategory(
-        image: "plan", route: NutritionPage.route, text: "Nutrition Plan "),
+        image: "plan",
+        route: NutritionPage.route,
+        text: " Nutrition Plan      "),
     HomeCategory(
         image: "medication",
         route: MedicationPage.route,

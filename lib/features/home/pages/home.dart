@@ -1,7 +1,6 @@
-import 'package:diabetes/features/Auth/pages/login.dart';
 import 'package:diabetes/core/extensions/navigeation_on_context.dart';
-import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/utils/loading.dart';
+import 'package:diabetes/features/Auth/pages/login.dart';
 import 'package:diabetes/features/home/cubit/home_cubit.dart';
 import 'package:diabetes/features/home/cubit/home_cubit_state.dart';
 import 'package:diabetes/features/home/model/home_category.dart';
@@ -50,7 +49,6 @@ class HomeScreen extends StatelessWidget {
             child: GridView.builder(
               physics: const BouncingScrollPhysics(),
               itemCount: HomeCategory.category.length,
-              padding: EdgeInsets.only(top: context.height * 0.05, right: 16),
               itemBuilder: (context, index) {
                 final category = HomeCategory.category[index];
                 return ImageWidget(
@@ -58,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                 );
               },
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  mainAxisSpacing: 8, crossAxisCount: 2),
+                  childAspectRatio: 2 / 3, crossAxisCount: 2),
             ),
           ),
         );

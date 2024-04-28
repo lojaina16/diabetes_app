@@ -13,7 +13,9 @@ class NutationsModel extends NutationsRepo {
       required super.ingredients,
       required super.nutritionFacts,
       required super.rates,
-      required super.totalRate, required super.calories});
+      required super.totalRate,
+      required super.calories,
+      required super.mealTime});
   factory NutationsModel.fromJson(Map<String, dynamic> json) {
     List<IngredientsModel> getIngredients() {
       final List<IngredientsModel> list = [];
@@ -49,6 +51,7 @@ class NutationsModel extends NutationsRepo {
       id: json['id'],
       name: json['name'],
       calories: json['Calories'],
+      mealTime: json['mealTime'],
       image: json['image'],
       time: json['time'],
       instructions: json['Instructions'].cast<String>(),

@@ -1,14 +1,14 @@
-import 'package:diabetes/core/extensions/theme_on_context.dart';
-import 'package:diabetes/core/utils/clipper.dart';
-import 'package:diabetes/features/Auth/cubit/auth_cubit.dart';
-import 'package:diabetes/features/Auth/cubit/auth_state.dart';
 import 'package:diabetes/core/extensions/navigeation_on_context.dart';
 import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/extensions/snack_bar_on_context.dart';
+import 'package:diabetes/core/extensions/theme_on_context.dart';
+import 'package:diabetes/core/utils/clipper.dart';
 import 'package:diabetes/core/utils/loading.dart';
 import 'package:diabetes/core/utils/my_button.dart';
+import 'package:diabetes/features/Auth/cubit/auth_cubit.dart';
+import 'package:diabetes/features/Auth/cubit/auth_state.dart';
 import 'package:diabetes/features/Auth/pages/register.dart';
-import 'package:diabetes/features/Questions/presentation/pages/questions.dart';
+import 'package:diabetes/features/Questions/presentation/pages/questions_choose.dart';
 import 'package:diabetes/features/home/cubit/home_cubit.dart';
 import 'package:diabetes/features/home/pages/home.dart';
 import 'package:diabetes/model/user_data.dart';
@@ -135,7 +135,7 @@ class LoginScreen extends StatelessWidget {
               await HomeCubit.get(context).getUserData().whenComplete(() =>
                   context.nextPageWitheRemove(UserData.debatesType != null
                       ? HomeScreen.routeName
-                      : Questions.route));
+                      : QuestionsChoses.route));
             }
           },
         ),

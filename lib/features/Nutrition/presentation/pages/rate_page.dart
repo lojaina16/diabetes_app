@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:diabetes/core/extensions/navigeation_on_context.dart';
 import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/extensions/snack_bar_on_context.dart';
 import 'package:diabetes/core/utils/color_manager.dart';
@@ -103,6 +104,7 @@ class RatePage extends StatelessWidget {
         },
         listener: (BuildContext context, NutritionState state) {
           if (state is NutritionRateRecipeSuccessfully) {
+            context.pop;
             context.showSnack('Successfully Rating this Recipe');
           }
         },

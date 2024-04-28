@@ -6,7 +6,7 @@ import 'package:diabetes/features/Emergency/presentation/cubit/emergency_cubit.d
 import 'package:diabetes/features/Medication/presentation/cubit/medication_cubit.dart';
 import 'package:diabetes/features/Nutrition/presentation/cubit/nutrition_cubit.dart';
 import 'package:diabetes/features/Questions/presentation/cubit/questions_cubit.dart';
-import 'package:diabetes/features/Questions/presentation/pages/questions.dart';
+import 'package:diabetes/features/Questions/presentation/pages/questions_choose.dart';
 import 'package:diabetes/features/Settings/presentation/cubit/settings_cubit.dart';
 import 'package:diabetes/features/WorkOut/presentation/cubit/workout_cubit.dart';
 import 'package:diabetes/features/home/cubit/home_cubit.dart';
@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
             initialRoute: UserData.uid != null && UserData.debatesType != null
                 ? HomeScreen.routeName
                 : UserData.uid != null && UserData.debatesType == null
-                    ? Questions.route
+                    ? QuestionsChoses.route
                     : LoginScreen.routeName,
             themeMode: cubit.themeMode,
             darkTheme: darkTheme,

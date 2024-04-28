@@ -31,7 +31,7 @@ class SettingPage extends StatelessWidget {
               SizedBox(
                 height: context.height * 0.07,
               ),
-              ShowProfileWidget(user: user),
+              ShowProfileWidget(user: user,info: cubit.userInfo,),
               SizedBox(
                 height: context.height * 0.07,
               ),

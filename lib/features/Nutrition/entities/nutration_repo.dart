@@ -14,6 +14,7 @@ class NutationsRepo extends Equatable {
   final List<NutritionFacts> nutritionFacts;
   final List<RateModel> rates;
   final int totalRate;
+  final String mealTime;
 
   const NutationsRepo(
       {required this.id,
@@ -25,7 +26,8 @@ class NutationsRepo extends Equatable {
       required this.ingredients,
       required this.nutritionFacts,
       required this.rates,
-      required this.totalRate});
+      required this.totalRate,
+      required this.mealTime});
 
   @override
   List<Object> get props => [
@@ -39,5 +41,6 @@ class NutationsRepo extends Equatable {
         nutritionFacts,
         rates,
         totalRate,
+        mealTime
       ];
 }

@@ -25,7 +25,7 @@ class NutritionPage extends StatelessWidget {
             loading: state is NutritionGetFoodLoading,
             child: ListView.builder(
               itemCount: food.length,
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
               physics: const BouncingScrollPhysics(),
               primary: true,
               itemBuilder: (context, index) {
@@ -39,4 +39,3 @@ class NutritionPage extends StatelessWidget {
     );
   }
 }
-

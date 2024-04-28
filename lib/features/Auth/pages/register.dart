@@ -7,7 +7,7 @@ import 'package:diabetes/core/utils/my_button.dart';
 import 'package:diabetes/features/Auth/cubit/auth_cubit.dart';
 import 'package:diabetes/features/Auth/cubit/auth_state.dart';
 import 'package:diabetes/features/Auth/widgets/google_button.dart';
-import 'package:diabetes/features/Questions/presentation/pages/questions.dart';
+import 'package:diabetes/features/Questions/presentation/pages/questions_choose.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,7 +26,7 @@ class RegisterScreen extends StatelessWidget {
         if (state is AuthSingUpError) {
           context.showSnack(state.error, isError: true);
         } else if (state is AuthSingUpSuccessfully) {
-          context.nextPageWitheRemove(Questions.route);
+          context.nextPageWitheRemove(QuestionsChoses.route);
         }
       },
       builder: (context, state) {

@@ -1,4 +1,3 @@
-import 'package:diabetes/core/utils/color_manager.dart';
 import 'package:diabetes/features/home/model/home_category.dart';
 import 'package:flutter/material.dart';
 
@@ -13,29 +12,35 @@ class ImageWidget extends StatelessWidget {
     final text = category.text;
     final route = category.route;
 
-    return Stack(
-      alignment: Alignment.bottomRight,
-      children: [
-        InkWell(
-          child: Image.asset(
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, route);
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset(
             "assets/images/$image.png",
           ),
-          onTap: () {
-            Navigator.pushNamed(context, route);
-          },
-        ),
-        Container(
-            padding: const EdgeInsets.all(5),
-            color: AppColors.black2.withOpacity(0.7),
-            child: Text(
-              text,
-              textAlign: TextAlign.start,
-              style: const TextStyle(
+          const SizedBox(
+            height: 8,
+          ),
+          Card(
+            color: Theme.of(context).cardColor,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                text,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 15,
-                  color: Colors.white),
-            ))
-      ],
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

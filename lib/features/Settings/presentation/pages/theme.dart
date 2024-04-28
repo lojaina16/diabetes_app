@@ -1,3 +1,4 @@
+import 'package:diabetes/core/extensions/navigeation_on_context.dart';
 import 'package:diabetes/core/extensions/snack_bar_on_context.dart';
 import 'package:diabetes/core/utils/my_button.dart';
 import 'package:diabetes/features/Settings/presentation/cubit/settings_cubit.dart';
@@ -43,6 +44,7 @@ class ThemeModeSettings extends StatelessWidget {
                   text: "Save",
                   onTap: () {
                     cubit.selectThemeDone();
+                    context.pop;
                     context.showSnack("Theme Save Successfully");
                   },
                   radius: 16,
