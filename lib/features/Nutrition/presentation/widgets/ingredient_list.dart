@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/extensions/theme_on_context.dart';
 import 'package:diabetes/core/utils/color_manager.dart';
 import 'package:diabetes/features/Nutrition/entities/nutration_repo.dart';
 import 'package:diabetes/features/Nutrition/presentation/cubit/nutrition_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 
 class IngredientList extends StatelessWidget {
   const IngredientList({
@@ -85,16 +88,20 @@ class IngredientList extends StatelessWidget {
                         const SizedBox(
                           width: 8,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(item.name),
-                            Text(
-                              '${item.ingredients}(${item.quantities})',
-                              style: TextStyle(
-                                  color: AppColors.grey, fontSize: 16),
-                            )
-                          ],
+                        ConstrainedBox(
+                          constraints:
+                              BoxConstraints(maxWidth: context.width * 0.62),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(item.name),
+                              Text(
+                                '${item.ingredients}(${item.quantities})',
+                                style: TextStyle(
+                                    color: AppColors.grey, fontSize: 16),
+                              )
+                            ],
+                          ),
                         )
                       ],
                     );

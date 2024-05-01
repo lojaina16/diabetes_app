@@ -21,7 +21,6 @@ class QuestionsPostTypeError extends QuestionsState {}
 
 class QuestionsSelectGender extends QuestionsState {}
 
-class QuestionsAnswersTOqUESTIONS extends QuestionsState {}
 
 class QuestionsDetectLoading extends QuestionsState {}
 

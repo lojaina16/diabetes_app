@@ -3,6 +3,7 @@ import 'package:diabetes/core/utils/color_manager.dart';
 import 'package:diabetes/features/Emergency/data/models/emergency_model.dart';
 import 'package:diabetes/features/Emergency/presentation/cubit/emergency_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EmergencyItem extends StatelessWidget {
@@ -48,6 +49,27 @@ class EmergencyItem extends StatelessWidget {
               ),
             ),
             const Spacer(),
+            GestureDetector(
+              onTap: () async {
+                const String msg = "Please Help me ";
+                final phoneNumber = Uri.parse('sms:+20${item.phone}?body=$msg');
+                if (await canLaunchUrl(phoneNumber)) {
+                  await launchUrl(phoneNumber);
+                } else {
+                  // ignore: use_build_context_synchronously
+                  context.showSnack('Could not launch $phoneNumber',
+                      isError: true);
+                }
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Icon(
+                  Icons.sms,
+                  size: 20,
+                  color: AppColors.error,
+                ),
+              ),
+            ),
             InkWell(
               onTap: () {
                 cubit.delete(item.id);

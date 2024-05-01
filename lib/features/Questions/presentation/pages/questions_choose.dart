@@ -2,7 +2,7 @@ import 'package:diabetes/core/extensions/navigeation_on_context.dart';
 import 'package:diabetes/core/utils/color_manager.dart';
 import 'package:diabetes/core/utils/my_button.dart';
 import 'package:diabetes/features/Questions/presentation/cubit/questions_cubit.dart';
-import 'package:diabetes/features/Questions/presentation/pages/detect_diabetes.dart';
+import 'package:diabetes/features/Questions/presentation/pages/insert_user_info.dart';
 import 'package:diabetes/features/Questions/presentation/pages/questions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,9 +50,8 @@ class QuestionsChoses extends StatelessWidget {
                     MyButton(
                       text: 'i Don\'t know',
                       onTap: () {
-                        cubit.selectType(3);
-
-                        context.nextPage(DetectDiabetes.route);
+                        cubit.selectType(null);
+                        context.nextPage(UserInfoPage.route);
                       },
                       width: 0.4,
                     )

@@ -30,10 +30,11 @@ class HomeDrawer extends StatelessWidget {
             children: [
               CircleAvatar(
                   radius: 50,
-                  backgroundImage: AssetImage(
-                      cubit.userInfo!.gender.contains('F')
+                  backgroundImage: AssetImage(cubit.userInfo?.gender != null
+                      ? cubit.userInfo!.gender.contains('F')
                           ? "assets/images/girl.png"
-                          : "assets/images/boy.png")),
+                          : "assets/images/boy.png"
+                      : "")),
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Text(

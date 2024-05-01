@@ -49,6 +49,7 @@ class EmergencyCubit extends Cubit<EmergencyState> {
           .doc(id)
           .set(model.toMap());
       phones.add(model);
+      controller.clear();
       emit(EmergencyAddPhoneSuccessfully());
     } on FirebaseException catch (e) {
       debugPrint(e.message.toString());

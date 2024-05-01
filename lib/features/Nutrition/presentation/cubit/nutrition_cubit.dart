@@ -21,7 +21,9 @@ class NutritionCubit extends Cubit<NutritionState> {
 
       if (collection.docs.isNotEmpty) {
         for (var element in collection.docs) {
+          debugPrint('element: $element');
           final NutationsRepo recipe = NutationsModel.fromJson(element.data());
+          debugPrint('recipe: $recipe');
           nutations.add(recipe);
           for (var element in recipe.rates) {
             if (element.userId == UserData.uid) {

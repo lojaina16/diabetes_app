@@ -6,7 +6,6 @@ import 'package:diabetes/core/utils/color_manager.dart';
 import 'package:diabetes/core/utils/loading.dart';
 import 'package:diabetes/core/utils/my_button.dart';
 import 'package:diabetes/features/Questions/presentation/cubit/questions_cubit.dart';
-import 'package:diabetes/features/Questions/presentation/pages/detect_diabetes.dart';
 import 'package:diabetes/features/Questions/presentation/pages/insert_user_info.dart';
 import 'package:diabetes/features/Questions/presentation/widgets/diabetes_item.dart';
 import 'package:flutter/material.dart';
@@ -71,11 +70,7 @@ class Questions extends StatelessWidget {
                         : Colors.black,
                     onTap: () async {
                       if (cubit.debatesIndex != null) {
-                        if (cubit.debatesIndex == 3) {
-                          context.nextPage(DetectDiabetes.route);
-                        } else {
-                          context.nextPage(UserInfoPage.route);
-                        }
+                        context.nextPage(UserInfoPage.route);
                       } else {
                         context.showSnack("please Select Type First ",
                             isError: true);
@@ -90,9 +85,7 @@ class Questions extends StatelessWidget {
               ),
             );
           },
-          listener: (BuildContext context, QuestionsState state) {
-            
-          },
+          listener: (BuildContext context, QuestionsState state) {},
         ),
       ),
     );

@@ -5,9 +5,9 @@ class MyUserInfo {
   final String gender;
   final String id;
   final String weight;
-  final bool hypertension;
-  final bool heartDisease;
-  final String smokingHistory;
+  final bool? hypertension;
+  final bool ?heartDisease;
+  final String? smokingHistory;
   final String bmi;
   final String a1cTest;
   final String bloodGlucoseLevel;

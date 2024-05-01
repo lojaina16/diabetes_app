@@ -29,6 +29,7 @@ class UserInfoPage extends StatelessWidget {
       body: BlocConsumer<QuestionsCubit, QuestionsState>(
         builder: (context, state) {
           final cubit = QuestionsCubit.get(context);
+          final isDetect = cubit.debatesIndex == null;
           return Loading(
             loading: state is QuestionsPostTypeLoading ||
                 state is QuestionsDetectLoading,
@@ -47,54 +48,61 @@ class UserInfoPage extends StatelessWidget {
                     icon: Icons.calendar_today_rounded,
                     textInputType: TextInputType.number,
                     hintText: "Enter Your Age",
+                    isDetect: isDetect,
                   ),
                   AuthTextForm(
                     controller: cubit.a1cTest,
                     icon: Icons.text_format,
                     textInputType: TextInputType.number,
                     hintText: "Enter Your a1cTest",
+                    isDetect: isDetect,
                   ),
                   AuthTextForm(
                     controller: cubit.bloodGlucoseLevel,
                     icon: Icons.leaderboard,
                     textInputType: TextInputType.number,
                     hintText: "Enter Your bloodGlucoseLevel",
+                    isDetect: isDetect,
                   ),
-                  DropdownAddress(
-                    items: const [
-                      "Yes",
-                      'No',
-                    ],
-                    hint: "Do you have a heart disease?",
-                    changeHint: cubit.heartDisease,
-                    onChanged: (value) {
-                      cubit.selectHeartDisease(value);
-                    },
-                  ),
-                  DropdownAddress(
-                    items: cubit.smokingAnswer,
-                    hint: "Smoking History",
-                    changeHint: cubit.smoking,
-                    onChanged: (value) {
-                      cubit.selectSmoking(value);
-                    },
-                  ),
-                  DropdownAddress(
-                    items: const [
-                      "Yes",
-                      'No',
-                    ],
-                    hint: "Do you have hypertension?",
-                    changeHint: cubit.hypertension,
-                    onChanged: (value) {
-                      cubit.selectHypertension(value);
-                    },
-                  ),
+                  if (cubit.debatesIndex == null)
+                    DropdownAddress(
+                      items: const [
+                        "Yes",
+                        'No',
+                      ],
+                      hint: "Do you have a heart disease?",
+                      changeHint: cubit.heartDisease,
+                      onChanged: (value) {
+                        cubit.selectHeartDisease(value);
+                      },
+                    ),
+                  if (cubit.debatesIndex == null)
+                    DropdownAddress(
+                      items: cubit.smokingAnswer,
+                      hint: "Smoking History",
+                      changeHint: cubit.smoking,
+                      onChanged: (value) {
+                        cubit.selectSmoking(value);
+                      },
+                    ),
+                  if (cubit.debatesIndex == null)
+                    DropdownAddress(
+                      items: const [
+                        "Yes",
+                        'No',
+                      ],
+                      hint: "Do you have hypertension?",
+                      changeHint: cubit.hypertension,
+                      onChanged: (value) {
+                        cubit.selectHypertension(value);
+                      },
+                    ),
                   AuthTextForm(
                     controller: cubit.weight,
                     icon: Icons.line_weight,
                     textInputType: TextInputType.number,
                     hintText: "Enter Your weight",
+                    isDetect: isDetect,
                   ),
                   AuthTextForm(
                     controller: cubit.bmi,
@@ -102,6 +110,7 @@ class UserInfoPage extends StatelessWidget {
                     textInputType: TextInputType.number,
                     hintText: "Enter Your bmi",
                     textInputAction: TextInputAction.done,
+                    isDetect: isDetect,
                   ),
                   DropdownAddress(
                     items: const [
@@ -114,14 +123,14 @@ class UserInfoPage extends StatelessWidget {
                       cubit.selectGender(value);
                     },
                   ),
-                  const SizedBox(
-                    height: 8,
+                  SizedBox(
+                    height: isDetect ? 8 : context.height * 0.13,
                   ),
                   MyButton(
-                      text: "Finish",
+                      text: !isDetect ? "Finish" : "Detect",
                       onTap: (() {
                         if (cubit.formKey.currentState?.validate() ?? false) {
-                          if (cubit.debatesIndex == 3) {
+                          if (cubit.debatesIndex == null) {
                             cubit.detect();
                           } else {
                             cubit.saveUserInfo();
@@ -135,7 +144,7 @@ class UserInfoPage extends StatelessWidget {
         },
         listener: (BuildContext context, QuestionsState state) {
           if (state is QuestionsPostTypeSuccessfully) {
-              HomeCubit.get(context).getUserData();
+            HomeCubit.get(context).getUserData();
             context.nextPageWitheRemove(HomeScreen.routeName);
           } else if (state is QuestionsDetectSuccessfully) {
             Navigator.of(context).pushAndRemoveUntil(

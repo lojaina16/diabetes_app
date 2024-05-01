@@ -12,6 +12,7 @@ class AuthTextForm extends StatelessWidget {
   final TextInputAction? textInputAction;
   final bool obscureText;
   final Widget? suffixIcon;
+  final bool isDetect;
   const AuthTextForm(
       {super.key,
       required this.icon,
@@ -20,12 +21,16 @@ class AuthTextForm extends StatelessWidget {
       this.validator,
       this.hintText,
       this.controller,
-      this.textInputAction = TextInputAction.next,  this.obscureText=false, this.suffixIcon});
+      this.textInputAction = TextInputAction.next,
+      this.obscureText = false,
+      this.suffixIcon,
+       this.isDetect=false});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding:
+          EdgeInsets.symmetric(horizontal: 8.0, vertical: isDetect ? 8 : 16),
       child: TextFormField(
         keyboardType: textInputType,
         controller: controller,

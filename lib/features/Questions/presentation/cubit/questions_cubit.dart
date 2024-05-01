@@ -35,7 +35,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   }
 
   int? debatesIndex;
-  void selectType(int index) {
+  void selectType(int? index) {
     emit(QuestionsInitial());
     debatesIndex = index;
     emit(QuestionsSelectType());
@@ -77,13 +77,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
     }
   }
 
-  final Map<String, bool> questionsMap = {};
-  void answerQuestions(String que, bool answer) {
-    emit(QuestionsInitial());
-    questionsMap[que] = answer;
-    emit(QuestionsAnswersTOqUESTIONS());
-  }
-
+ 
   void clear() {
     age.clear();
     weight.clear();
@@ -95,7 +89,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
     hypertension = null;
     heartDisease = null;
     gender = null;
-    questionsMap.clear();
+    
   }
 
   Future saveData(String type) async {

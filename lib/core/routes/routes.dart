@@ -3,7 +3,6 @@ import 'package:diabetes/features/Auth/pages/register.dart';
 import 'package:diabetes/features/Emergency/presentation/pages/emergency_call_screen.dart';
 import 'package:diabetes/features/Medication/presentation/pages/medication_page.dart';
 import 'package:diabetes/features/Nutrition/presentation/pages/nutrition_page.dart';
-import 'package:diabetes/features/Questions/presentation/pages/detect_diabetes.dart';
 import 'package:diabetes/features/Questions/presentation/pages/insert_user_info.dart';
 import 'package:diabetes/features/Questions/presentation/pages/questions.dart';
 import 'package:diabetes/features/Questions/presentation/pages/questions_choose.dart';
@@ -24,7 +23,6 @@ class Routes {
     HomeScreen.routeName: (context) => const HomeScreen(),
     HealthRecord.routeName: (context) => const HealthRecord(),
     EmergencyCall.route: (context) => const EmergencyCall(),
-    DetectDiabetes.route: (context) => const DetectDiabetes(),
     SettingPage.route: (context) => const SettingPage(),
     ThemeModeSettings.route: (context) => const ThemeModeSettings(),
     UserInfoPage.route: (context) => const UserInfoPage(),
