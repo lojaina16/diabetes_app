@@ -5,8 +5,6 @@ import 'package:diabetes/core/utils/color_manager.dart';
 import 'package:diabetes/features/Nutrition/entities/nutration_repo.dart';
 import 'package:diabetes/features/Nutrition/presentation/cubit/nutrition_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 class IngredientList extends StatelessWidget {
   const IngredientList({

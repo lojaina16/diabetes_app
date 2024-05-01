@@ -8,7 +8,6 @@ import 'package:diabetes/features/Emergency/presentation/cubit/emergency_cubit.d
 import 'package:diabetes/features/Emergency/presentation/widgets/emergency_dialog.dart';
 import 'package:diabetes/features/Emergency/presentation/widgets/emergency_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EmergencyCall extends StatelessWidget {

@@ -3,7 +3,6 @@ import 'package:diabetes/core/utils/color_manager.dart';
 import 'package:diabetes/features/Emergency/data/models/emergency_model.dart';
 import 'package:diabetes/features/Emergency/presentation/cubit/emergency_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EmergencyItem extends StatelessWidget {

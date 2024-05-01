@@ -34,73 +34,72 @@ class FoodItem extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ))),
-          const SizedBox(
-            width: 4,
-          ),
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => NutritionDetails(
-                    repo: item,
-                  ),
-                ));
-              },
-              child: Expanded(
-                child: Card(
-                  color: Theme.of(context).cardColor,
-                  surfaceTintColor: Colors.transparent,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        MyNetworkImage(
-                          image: item.image,
-                          height: context.height * 0.1,
-                          width: context.width * 0.2,
-                          fit: BoxFit.cover,
-                        ),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ConstrainedBox(
-                              constraints: BoxConstraints(
-                                  maxWidth: context.width * 0.57),
-                              child: Text(
-                                item.name,
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    color: AppColors.primary, fontSize: 20),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => NutritionDetails(
+                  repo: item,
+                ),
+              ));
+            },
+            child: SizedBox(
+              width: context.width * 0.86,
+              child: Card(
+                color: Theme.of(context).cardColor,
+                surfaceTintColor: Colors.transparent,
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      MyNetworkImage(
+                        image: item.image,
+                        height: context.height * 0.1,
+                        width: context.width * 0.2,
+                        fit: BoxFit.cover,
+                      ),
+                      const SizedBox(
+                        width: 16,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ConstrainedBox(
+                            constraints:
+                                BoxConstraints(maxWidth: context.width * 0.57),
+                            child: Text(
+                              item.name,
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  color: AppColors.primary, fontSize: 20),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Row(
+                            children: [
+                              Icon(Icons.timer, color: AppColors.grey),
+                              const SizedBox(
+                                width: 8,
                               ),
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Row(
-                              children: [
-                                Icon(Icons.timer, color: AppColors.grey),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                Text(
-                                  item.time,
-                                  style: TextStyle(
-                                      color: AppColors.grey, fontSize: 16),
-                                )
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
+                              Text(
+                                item.time,
+                                style: TextStyle(
+                                    color: AppColors.grey, fontSize: 16),
+                              )
+                            ],
+                          )
+                        ],
+                      )
+                    ],
                   ),
                 ),
               ),
             ),
+          ),
+          const SizedBox(
+            width: 4,
           ),
         ],
       ),
