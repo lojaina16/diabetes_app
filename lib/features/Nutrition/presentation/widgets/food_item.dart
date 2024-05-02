@@ -66,10 +66,12 @@ class FoodItem extends StatelessWidget {
                         children: [
                           ConstrainedBox(
                             constraints:
-                                BoxConstraints(maxWidth: context.width * 0.5),
+                                BoxConstraints(maxWidth: context.width * 0.52),
                             child: Text(
                               item.name,
+                              maxLines: 2,
                               textAlign: TextAlign.start,
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   color: AppColors.primary, fontSize: 17),
                             ),

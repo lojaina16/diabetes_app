@@ -7,6 +7,7 @@ import 'package:diabetes/core/utils/loading.dart';
 import 'package:diabetes/core/utils/my_button.dart';
 import 'package:diabetes/features/Nutrition/entities/nutration_repo.dart';
 import 'package:diabetes/features/Nutrition/presentation/cubit/nutrition_cubit.dart';
+import 'package:diabetes/features/Nutrition/presentation/widgets/rate_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -108,61 +109,6 @@ class RatePage extends StatelessWidget {
             context.showSnack('Successfully Rating this Recipe');
           }
         },
-      ),
-    );
-  }
-}
-
-class RateStarsList extends StatelessWidget {
-  const RateStarsList({
-    super.key,
-    required this.cubit,
-  });
-
-  final NutritionCubit cubit;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        height: context.height * 0.07,
-        child: ListView.builder(
-          itemCount: 5,
-          shrinkWrap: true,
-          padding: const EdgeInsets.all(0),
-          scrollDirection: Axis.horizontal,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onDoubleTap: () {
-                if (index == 0) {
-                  cubit.selectStar(0);
-                }
-              },
-              onTap: () {
-                cubit.selectStar(index + 1);
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
-                child: AnimatedCrossFade(
-                    duration: const Duration(milliseconds: 550),
-                    crossFadeState: cubit.rate > index
-                        ? CrossFadeState.showSecond
-                        : CrossFadeState.showFirst,
-                    firstChild: Icon(
-                      Icons.star_outline_sharp,
-                      size: 40,
-                      color: AppColors.grey,
-                    ),
-                    secondChild: const Icon(
-                      Icons.star,
-                      size: 40,
-                      color: Colors.orange,
-                    )),
-              ),
-            );
-          },
-        ),
       ),
     );
   }

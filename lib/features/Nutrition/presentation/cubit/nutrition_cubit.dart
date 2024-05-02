@@ -42,6 +42,7 @@ class NutritionCubit extends Cubit<NutritionState> {
   double getRate(int total, int totalUserRate) {
     double rate = 0.0;
     rate = (total / totalUserRate) * 5;
+
     return rate;
   }
 

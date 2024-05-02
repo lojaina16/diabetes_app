@@ -22,7 +22,11 @@ class FoodDetailsHeadRow extends StatelessWidget {
         children: [
           FoodRowDetails(
             iconData: Icons.star,
-            text: cubit.getRate(repo.totalRate, repo.rates.length * 5).toStringAsFixed(1),
+            text: repo.totalRate > 0
+                ? cubit
+                    .getRate(repo.totalRate, repo.rates.length * 5)
+                    .toStringAsFixed(1)
+                : "0.0",
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),

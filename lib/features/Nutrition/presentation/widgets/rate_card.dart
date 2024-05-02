@@ -17,9 +17,8 @@ class RateCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (cubit.allRates.containsKey(repo.id)) {
-          cubit.selectStar(cubit.allRates[repo.id] ?? 0);
-        }
+        cubit.selectStar(cubit.allRates[repo.id] ?? 0);
+
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => RatePage(
             repo: repo,
