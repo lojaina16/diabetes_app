@@ -13,6 +13,7 @@ class AuthTextForm extends StatelessWidget {
   final bool obscureText;
   final Widget? suffixIcon;
   final bool isDetect;
+  final void Function(String)? onChanged;
   const AuthTextForm(
       {super.key,
       required this.icon,
@@ -24,7 +25,7 @@ class AuthTextForm extends StatelessWidget {
       this.textInputAction = TextInputAction.next,
       this.obscureText = false,
       this.suffixIcon,
-       this.isDetect=false});
+      this.isDetect = false, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +34,7 @@ class AuthTextForm extends StatelessWidget {
           EdgeInsets.symmetric(horizontal: 8.0, vertical: isDetect ? 8 : 16),
       child: TextFormField(
         keyboardType: textInputType,
+        onChanged:onChanged ,
         controller: controller,
         style: Theme.of(context).textTheme.bodyMedium,
         obscureText: obscureText,
@@ -57,6 +59,47 @@ class AuthTextForm extends StatelessWidget {
               ?.copyWith(color: Colors.red),
           prefixIcon: Icon(
             icon,
+            color: AppColors.grey,
+            size: 19,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class TextFormOnlyShowText extends StatelessWidget {
+  final String? hintText;
+
+  final bool isDetect;
+  const TextFormOnlyShowText({super.key, this.hintText, this.isDetect = false});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding:
+          EdgeInsets.symmetric(horizontal: 8.0, vertical: isDetect ? 8 : 16),
+      child: TextFormField(
+        style: Theme.of(context).textTheme.bodyMedium,
+        readOnly: true,
+        validator: (v) {
+          if (v?.isEmpty ?? true) {
+            return "This field is Empty";
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.all(8),
+          border: const OutlineInputBorder(),
+          constraints: BoxConstraints(minHeight: context.height * 0.06),
+          isDense: true,
+          hintText: hintText,
+          errorStyle: Theme.of(context)
+              .textTheme
+              .bodySmall
+              ?.copyWith(color: Colors.red),
+          prefixIcon: Icon(
+            Icons.calculate,
             color: AppColors.grey,
             size: 19,
           ),

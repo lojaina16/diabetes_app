@@ -1,6 +1,7 @@
 import 'package:diabetes/core/extensions/navigeation_on_context.dart';
 import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/extensions/snack_bar_on_context.dart';
+import 'package:diabetes/core/utils/app_string.dart';
 import 'package:diabetes/core/utils/loading.dart';
 import 'package:diabetes/core/utils/my_button.dart';
 import 'package:diabetes/features/Auth/widgets/custom_text_field.dart';
@@ -56,6 +57,19 @@ class UserInfoPage extends StatelessWidget {
                     textInputType: TextInputType.number,
                     hintText: "Enter Your a1cTest",
                     isDetect: isDetect,
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        showMenu(
+                            context: context,
+                            position: RelativeRect.fill,
+                            items: [
+                              const PopupMenuItem(child: Text(AppString.a1Test))
+                            ]);
+                      },
+                      child: const Icon(
+                        Icons.info_outline,
+                      ),
+                    ),
                   ),
                   AuthTextForm(
                     controller: cubit.bloodGlucoseLevel,
@@ -98,18 +112,26 @@ class UserInfoPage extends StatelessWidget {
                       },
                     ),
                   AuthTextForm(
-                    controller: cubit.weight,
-                    icon: Icons.line_weight,
+                    controller: cubit.height,
+                    icon: Icons.height,
                     textInputType: TextInputType.number,
-                    hintText: "Enter Your weight",
+                    hintText: "Enter Your height",
                     isDetect: isDetect,
+                    onChanged: (p0) {
+                      cubit.calcBmi();
+                    },
                   ),
                   AuthTextForm(
-                    controller: cubit.bmi,
-                    icon: Icons.calculate,
-                    textInputType: TextInputType.number,
-                    hintText: "Enter Your bmi",
-                    textInputAction: TextInputAction.done,
+                      controller: cubit.weight,
+                      icon: Icons.line_weight,
+                      textInputType: TextInputType.number,
+                      hintText: "Enter Your weight",
+                      isDetect: isDetect,
+                      onChanged: (p0) {
+                        cubit.calcBmi();
+                      }),
+                  TextFormOnlyShowText(
+                    hintText: cubit.bmi ?? "Enter Your bmi",
                     isDetect: isDetect,
                   ),
                   DropdownAddress(
@@ -124,7 +146,7 @@ class UserInfoPage extends StatelessWidget {
                     },
                   ),
                   SizedBox(
-                    height: isDetect ? 8 : context.height * 0.13,
+                    height: isDetect ? 8 : context.height * 0.02,
                   ),
                   MyButton(
                       text: !isDetect ? "Finish" : "Detect",

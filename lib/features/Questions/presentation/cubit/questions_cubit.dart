@@ -22,7 +22,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   final dio = DioHelper();
   final TextEditingController age = TextEditingController();
   final TextEditingController weight = TextEditingController();
-  final TextEditingController bmi = TextEditingController();
+  final TextEditingController height = TextEditingController();
   final TextEditingController a1cTest = TextEditingController();
   final TextEditingController bloodGlucoseLevel = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -77,19 +77,19 @@ class QuestionsCubit extends Cubit<QuestionsState> {
     }
   }
 
- 
+  String? bmi;
   void clear() {
     age.clear();
     weight.clear();
-    bmi.clear();
+    bmi = null;
+    height.clear();
     a1cTest.clear();
     bloodGlucoseLevel.clear();
     smoking = null;
-    debatesIndex=null;
+    debatesIndex = null;
     hypertension = null;
     heartDisease = null;
     gender = null;
-    
   }
 
   Future saveData(String type) async {
@@ -101,7 +101,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
         weight: weight.text,
         hypertension: hypertension.toString().contains("Yes"),
         smokingHistory: smoking.toString(),
-        bmi: bmi.text,
+        bmi: bmi.toString(),
         type: type,
         a1cTest: a1cTest.text,
         bloodGlucoseLevel: bloodGlucoseLevel.text,
@@ -126,7 +126,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
       "heart_disease": heartDisease.toString().contains("Yes") ? 1 : 0,
       "smoking_history":
           smokingAnswer.indexWhere((element) => element == smoking) + 1,
-      "bmi": double.parse(bmi.text),
+      "bmi": double.parse(bmi.toString()),
       "HbA1c_level": double.parse(a1cTest.text),
       "blood_glucose_level": int.parse(bloodGlucoseLevel.text)
     };
@@ -140,5 +140,16 @@ class QuestionsCubit extends Cubit<QuestionsState> {
         return QuestionsDetectSuccessfully(isDiabetes);
       },
     ));
+  }
+  void calcBmi() {
+    emit(QuestionsInitial());
+    if (height.text.isNotEmpty&&weight.text.isNotEmpty) {
+      bmi = (double.parse(weight.text) /
+          (double.parse(height.text) * double.parse(height.text)) *
+          10000)
+          .toStringAsFixed(2);
+      
+    }
+    emit(QuestionsCalcBmi());
   }
 }

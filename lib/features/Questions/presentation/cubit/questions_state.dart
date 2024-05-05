@@ -35,3 +35,4 @@ class QuestionsDetectError extends QuestionsState {
 
   const QuestionsDetectError(this.error);
 }
+class QuestionsCalcBmi extends QuestionsState {}
