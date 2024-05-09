@@ -25,7 +25,8 @@ class AuthTextForm extends StatelessWidget {
       this.textInputAction = TextInputAction.next,
       this.obscureText = false,
       this.suffixIcon,
-      this.isDetect = false, this.onChanged});
+      this.isDetect = false,
+      this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class AuthTextForm extends StatelessWidget {
           EdgeInsets.symmetric(horizontal: 8.0, vertical: isDetect ? 8 : 16),
       child: TextFormField(
         keyboardType: textInputType,
-        onChanged:onChanged ,
+        onChanged: onChanged,
         controller: controller,
         style: Theme.of(context).textTheme.bodyMedium,
         obscureText: obscureText,
@@ -79,15 +80,9 @@ class TextFormOnlyShowText extends StatelessWidget {
     return Padding(
       padding:
           EdgeInsets.symmetric(horizontal: 8.0, vertical: isDetect ? 8 : 16),
-      child: TextFormField(
+      child: TextField(
         style: Theme.of(context).textTheme.bodyMedium,
         readOnly: true,
-        validator: (v) {
-          if (v?.isEmpty ?? true) {
-            return "This field is Empty";
-          }
-          return null;
-        },
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(8),
           border: const OutlineInputBorder(),
