@@ -120,7 +120,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   Future detect() async {
     emit(QuestionsDetectLoading());
     final body = {
-      "gender": gender.toString().contains('F') ? 0 : 1,
+      "gender": gender.toString().contains('F') ? 1: 0,
       "age": int.parse(age.text),
       "hypertension": hypertension.toString().contains("Yes") ? 1 : 0,
       "heart_disease": heartDisease.toString().contains("Yes") ? 1 : 0,
