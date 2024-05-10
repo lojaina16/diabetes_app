@@ -15,7 +15,7 @@ platform :android do
       release_notes: "App All Features Done Make Final Releases", 
       android_artifact_type: "APK", 
       android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk", 
-      testers: "bigosm654@gmail.com, Merna202112145@gmail.com,nehaleltaweel7@gmail.com,faresseldeen1@gmail.com,lojymoataz81@gmail.com,nancy202112280@gmail.com", 
+      testers: "bigosm654@gmail.com, Merna202112145@gmail.com,nehaleltaweel7@gmail.com,faresseldeen1@gmail.com,lojymoataz81@gmail.com,nancy202112280@gmail.com,Heshambassem202108646@gmail.com,norhan202121668@gmail.com", 
       firebase_cli_token:"1//03CwXG9fweivHCgYIARAAGAMSNwF-L9IrFJalc7738psPoZC5IfsxI3MhQ0oCJSLiCATP-0iEQiYQbHZQEflgyD46DBSzH1h6Drw", 
       
     )
