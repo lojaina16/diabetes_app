@@ -3,6 +3,7 @@ import 'package:diabetes/core/extensions/size_on_context.dart';
 import 'package:diabetes/core/extensions/snack_bar_on_context.dart';
 import 'package:diabetes/core/extensions/theme_on_context.dart';
 import 'package:diabetes/core/utils/clipper.dart';
+import 'package:diabetes/core/utils/color_manager.dart';
 import 'package:diabetes/core/utils/loading.dart';
 import 'package:diabetes/core/utils/my_button.dart';
 import 'package:diabetes/features/Auth/cubit/auth_cubit.dart';
@@ -27,6 +28,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnnotatedRegion(
       value: SystemUiOverlayStyle(
+          statusBarColor: AppColors.primary,
           statusBarIconBrightness:
               context.isDarkMode ? Brightness.light : Brightness.dark),
       child: Scaffold(

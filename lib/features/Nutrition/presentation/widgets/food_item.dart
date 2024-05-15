@@ -43,7 +43,7 @@ class FoodItem extends StatelessWidget {
               ));
             },
             child: SizedBox(
-              width: context.width * 0.86,
+              width: context.width * 0.85,
               child: Card(
                 color: Theme.of(context).cardColor,
                 surfaceTintColor: Colors.transparent,
@@ -66,7 +66,7 @@ class FoodItem extends StatelessWidget {
                         children: [
                           ConstrainedBox(
                             constraints:
-                                BoxConstraints(maxWidth: context.width * 0.52),
+                                BoxConstraints(maxWidth: context.width * 0.5),
                             child: Text(
                               item.name,
                               maxLines: 2,

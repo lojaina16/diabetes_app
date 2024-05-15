@@ -41,6 +41,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.5
+  flutter_launcher_icons: ^0.13.1
   flutter_local_notifications: ^17.1.0
   flutter_native_splash: ^2.4.0
   flutter_svg: ^2.0.10+1
@@ -73,3 +74,7 @@ flutter_native_splash:
   background_image_android: assets\images\splash.png
   background_image_dark_android: assets\images\splash_dark.png
   ios: false
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: false
+  image_path: "assets/images/splash.png"

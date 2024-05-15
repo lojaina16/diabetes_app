@@ -1,11 +1,13 @@
 import 'package:diabetes/core/extensions/navigeation_on_context.dart';
 import 'package:diabetes/core/extensions/size_on_context.dart';
+import 'package:diabetes/core/extensions/snack_bar_on_context.dart';
 import 'package:diabetes/core/utils/my_button.dart';
 import 'package:diabetes/features/Settings/presentation/pages/setting.dart';
 import 'package:diabetes/features/home/cubit/home_cubit.dart';
 import 'package:diabetes/features/home/pages/about.dart';
 import 'package:diabetes/model/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({
@@ -76,6 +78,43 @@ class HomeDrawer extends StatelessWidget {
                     ],
                   ),
                 ),
+              ),
+              GestureDetector(
+                onTap: () async {
+                  context.pop;
+                  final link = Uri.parse(
+                      'https://docs.google.com/document/d/1A76Qviw_m_mv8xi1AH8gMB1vSpQltk40YeM8K93EO8U/edit?usp=sharing');
+                  if (await canLaunchUrl(link)) {
+                    await launchUrl(link);
+                  } else {
+                    // ignore: use_build_context_synchronously
+                    context.showSnack('Could not launch $link', isError: true);
+                  }
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.privacy_tip,
+                        color: Color(0xff7588E4),
+                        size: 30,
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Text("Privacy Policy",
+                          style: TextStyle(
+                              color:
+                                  Theme.of(context).textTheme.bodyMedium?.color,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
               ),
               GestureDetector(
                 onTap: () {
